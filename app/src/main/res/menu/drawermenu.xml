@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:title=""
+        android:id="@+id/di"/>
+
+    <item android:title="MyProfil"
+        android:id="@+id/prof"
+        android:icon="@drawable/ic_person_white_24dp"/>
+    <item android:title="Scan"
+        android:id="@+id/scan"
+        android:icon="@drawable/scan"/>
+
+
+    <group android:id="@+id/group_settings_id">
+        <item android:title="Settings"
+            android:id="@+id/set"
+            android:icon="@drawable/seting"/>
+        <item android:title="Logout"
+            android:id="@+id/keluar"
+            android:icon="@drawable/imglogout"/>
+    </group>
+</menu>
