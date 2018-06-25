@@ -13,11 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.rest.Router;
-
 import java.io.File;
 
 import okhttp3.MediaType;
@@ -79,7 +77,6 @@ public class Setting extends Fragment {
 
     public void onRequsetPermissionResult(int requestCode,
                                           String permission[], int[] grantResults){
-
     }
 
     private void uploadFile(Uri fileUri){
@@ -87,19 +84,19 @@ public class Setting extends Fragment {
 
         RequestBody descriptionpart = RequestBody.create(MultipartBody.FORM, name.getText().toString());
 
-        File originalFIle =FileUtils.getFile(this, fileUri);
-        RequestBody filePart = RequestBody.create(MediaType.parse(getContentResolver().getType(fileUri)),
-                                FileUtils.getFile(this,fileUri);
+        File originalFile =  FileUtils.getFile(this, fileUri);
 
-        MultipartBody.Part file = MultipartBody.Part.createFormData("photo", originalFIle.getName(), filePart);
+        RequestBody filePart = RequestBody.create(MediaType.parse(getContentResolver().getType(fileUri)),originalFile;
+
+        MultipartBody.Part file = MultipartBody.Part.createFormData("photo", originalFile.getName(), filePart);
 
 
-        //retrofit2.Retrofit.Builder builder = new retrofit2.Retrofit.Builder()
-          //      .baseUrl(URL)
-            //    .addConverterFactory(GsonConverterFactory.create());
-        // Retrofit retrofit = builder.build();
-       // Router client  = retrofit.create(Router.class);
-       // Call<User> call = client.Login(user);
-       // call.enqueue(new Callback<User>() {
+        retrofit2.Retrofit.Builder builder = new retrofit2.Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create());
+         Retrofit retrofit = builder.build();
+        Router client  = retrofit.create(Router.class);
+        Call<Upload> call = client.Login(user);
+        call.enqueue(new Callback<User>() {
     }
 }
