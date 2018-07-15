@@ -17,7 +17,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.model.Usr;
+import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
+import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -25,6 +29,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.irhabi.retrobarbershop.newmasuklogin.ScanFragment.QRcodeWidth;
 import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
@@ -41,7 +49,7 @@ public class Profil extends Fragment {
     private final long startTime = 30 * 1000;
     private final long interval = 1 * 1000;
     private Button btnStart;
-    private TextView text;
+    private TextView text, nameretro, userretro;
     private SessionManager sessi;
 
     public Profil(){
@@ -66,49 +74,75 @@ public class Profil extends Fragment {
         barber = (ImageView)view.findViewById(R.id.codeQR);
         btnStart = (Button) view.findViewById(R.id.buttonStart);
         countDownTimer = new MyCountDownTimer(startTime, interval);
+        nameretro = (TextView)view.findViewById(R.id.Barbermenname);
+        userretro = (TextView)view.findViewById(R.id.nohp);
+        BarbermenPhoto = (ImageView)view.findViewById(R.id.proffoto);
+        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        int idDetail = Integer.parseInt(id);
+        Call<Usr> call = service.retro(idDetail);
+        call.enqueue(new Callback<Usr>() {
+            @Override
+            public void onResponse(Call<Usr> call, Response<Usr> response) {
+                Toast.makeText(getActivity(),response.body().getname(), Toast.LENGTH_LONG).show();
+                nameretro.setText(response.body().getname());
+                userretro.setText(response.body().getUser());
+
+                String[] kf = response.body().getnamefoto().split("\\.");
+                String first = kf[0];
+                Log.d("DEBUG ", "BARU " + first);
+                Glide
+                        .with(getActivity())
+                        .load(URL + "upload/" + first)
+                        .into(BarbermenPhoto);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Usr> call, Throwable t) {
+                Toast.makeText(getActivity(), "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         try {
             bitmap = TextToImageEncode(usr + " " + usrgrup + " " + la + " "+ lo);
             barber.setImageBitmap(bitmap);
 
-        } catch (WriterException e) {
+        }catch (WriterException e) {
             e.printStackTrace();
         }
-        BarbermenPhoto = (ImageView)view.findViewById(R.id.proffoto);
-        String image = usersesion.get(SessionManager.KEY_IMAGE);
-        if (image == null){
-            Glide
-                    .with(this)
-                    .load(URL + "upload/" + 111)
-                    .into(BarbermenPhoto);
-            text.setText(text.getText() + String.valueOf(startTime / 1000));
-            if (!timerHasStarted) {
-                countDownTimer.start();
-                timerHasStarted = true;
-                String a = text.getText().toString();
-                if (a.equals("20")) {
-                    BarbermenPhoto.setImageResource(R.drawable.retroo);
-                }
-            }
-        }else {
-
-            String[] kf = image.split("\\.");
-            String first = kf[0];
-            Log.d("DEBUG ", "BARU " + first);
-            Glide
-                    .with(this)
-                    .load(URL + "upload/" + first)
-                    .into(BarbermenPhoto);
-
-            text.setText(text.getText() + String.valueOf(startTime / 1000));
-            if (!timerHasStarted) {
-                countDownTimer.start();
-                timerHasStarted = true;
-            }
+        text.setText(text.getText() + String.valueOf(startTime / 1000));
+        if (!timerHasStarted) {
+            countDownTimer.start();
+            timerHasStarted = true;
         }
+
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), KonekMaps.class);
+                startActivity(i);
+            }
+        });
         return view;
     }
 
+//    public void barcodeAgain(String usr, String usrgrup, String la,
+//                             String lo, TextView tx){
+//        try {
+//            tx.setText(tx.getText() + String.valueOf(startTime / 1000));
+//
+//            countDownTimer.start();
+//            timerHasStarted = true;
+//
+//            bitmap = TextToImageEncode(usr + " " + usrgrup + " " + la + " "+ lo);
+//            barber.setImageBitmap(bitmap);
+//
+//        } catch (WriterException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;

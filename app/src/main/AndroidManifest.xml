@@ -69,6 +69,11 @@
             android:label="Retro Barbershop"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Maps.KonekMaps"
+            android:label="Retro Barbershop"
+            android:theme="@style/AppTheme.Fullscreen"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".newmasuklogin.Setting"
             android:screenOrientation="portrait"/>

@@ -21,6 +21,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+
+import com.example.irhabi.retrobarbershop.MapsActivity;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
@@ -63,6 +65,10 @@ public class MainL extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.scan) {
                     Intent gf = new Intent(MainL.this, ScanFragment.class);
+                    startActivity(gf);
+                }
+                if (item.getItemId() == R.id.lokasi) {
+                    Intent gf = new Intent(MainL.this, MapsActivity.class);
                     startActivity(gf);
                 }
                 if (item.getItemId() == R.id.keluar) {

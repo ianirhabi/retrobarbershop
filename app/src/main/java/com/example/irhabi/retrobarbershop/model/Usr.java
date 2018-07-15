@@ -2,27 +2,33 @@ package com.example.irhabi.retrobarbershop.model;
 
 
 public class Usr {
-    @com.google.gson.annotations.SerializedName("id")
+    @com.google.gson.annotations.SerializedName("Id")
     private int Id;
-    @com.google.gson.annotations.SerializedName("usergroup")
+    @com.google.gson.annotations.SerializedName("usergup")
     private String  usergrup;
-    @com.google.gson.annotations.SerializedName("user_retro")
+    @com.google.gson.annotations.SerializedName("User")
     private String User;
-    @com.google.gson.annotations.SerializedName("password_retro")
+    @com.google.gson.annotations.SerializedName("Name")
+    private String name;
+    @com.google.gson.annotations.SerializedName("Pass")
     private String Pass ;
-    @com.google.gson.annotations.SerializedName("nama_foto")
+    @com.google.gson.annotations.SerializedName("NamaFoto")
     private String foto ;
-    @com.google.gson.annotations.SerializedName("latitude")
+    @com.google.gson.annotations.SerializedName("Latitude")
     private String lati ;
-    @com.google.gson.annotations.SerializedName("longtitude")
+    @com.google.gson.annotations.SerializedName("Longtitude")
     private String longt ;
 
 
-    public Usr(int id, String User, String Pass, String usrgrup){
+    public Usr(int id, String User, String name, String Pass, String usrgrup
+    ,String latit, String longt){
         this.Id = id;
         this.User = User;
         this.Pass = Pass;
         this.usergrup = usrgrup;
+        this.lati = latit;
+        this.longt = longt;
+        this.name= name;
     }
     public int Getid(){
         return Id;
@@ -36,4 +42,11 @@ public class Usr {
     public String getUsergrup(){
         return usergrup;
     }
+    public String getname(){
+        return name;
+    }
+    public String getnamefoto(){
+        return foto;
+    }
+
 }

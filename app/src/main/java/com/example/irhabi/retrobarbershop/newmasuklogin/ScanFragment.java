@@ -8,11 +8,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
@@ -59,5 +61,14 @@ public class ScanFragment extends AppCompatActivity {
             // This is important, otherwise the result will not be passed to the fragment
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent i = new Intent(ScanFragment.this,KonekMaps.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

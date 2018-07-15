@@ -3,18 +3,18 @@ package com.example.irhabi.retrobarbershop.rest;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
+
 public class RetrofitInstance {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://api.myjson.com/";
-
     /**
      * Create an instance of Retrofit object
      * */
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

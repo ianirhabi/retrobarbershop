@@ -44,7 +44,7 @@
                     android:id="@+id/Barbermenname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Retro Barbershop"
+                    android:text="Loading..."
                     android:textColor="#179bb2"
                     android:textSize="24dp" />
 
@@ -52,18 +52,10 @@
                     android:id="@+id/nohp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+62 000000000"
+                    android:text="Loading..."
                     android:textColor="#7d7c10"
                     android:textSize="14dp" />
 
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Retro ID"
-                    android:textColor="#4c0373"
-                    android:textSize="14dp" />
             </LinearLayout>
         </LinearLayout>
 

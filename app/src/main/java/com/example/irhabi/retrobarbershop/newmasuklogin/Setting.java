@@ -16,12 +16,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.LoginActivity;
+import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Upload;
 import com.example.irhabi.retrobarbershop.rest.Router;
@@ -306,5 +308,13 @@ public class Setting extends AppCompatActivity {
     private RequestBody createPartFromString(String descriptionString) {
         return RequestBody.create(
                 okhttp3.MultipartBody.FORM, descriptionString);
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent i = new Intent(Setting.this,KonekMaps.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

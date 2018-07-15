@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -40,7 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
         prefManager = new PrefManager(this);
         if (session.isLoggedIn()== true)
         {
-            Intent i = new Intent(WelcomeActivity.this, MapsActivity.class);
+            Intent i = new Intent(WelcomeActivity.this, KonekMaps.class);
             startActivity(i);
         }
         // Checking for first time launch - before calling setContentView()

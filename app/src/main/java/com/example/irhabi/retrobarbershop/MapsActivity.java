@@ -23,6 +23,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -66,15 +68,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
         if (location!=null){
+            HashMap<String, String> usersesion = sesi.getUserDetails();
+            String la = usersesion.get(SessionManager.LATITUDE);
+            String lo = usersesion.get(SessionManager.LONGTITUDE);
+            double valuela = Double.parseDouble(la);
+            double valuelo = Double.parseDouble(lo);
             Toast.makeText(this, "Lokasi Ditemukan", Toast.LENGTH_SHORT).show();
-            LatLng MyLocation = new LatLng(location.getLatitude(), location.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(MyLocation).title("Latitude: "+location.getLatitude()).snippet("Longitude : "+location.getLongitude()));
+            LatLng MyLocation = new LatLng(valuela, valuelo);
+            mMap.addMarker(new MarkerOptions().position(MyLocation).title("Latitude: "+valuela).snippet("Longitude : "+valuelo));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MyLocation,13));
-            String la = String.valueOf(location.getLatitude());
-            String lo = String.valueOf(location.getLongitude());
-            sesi.createLongtiLati(la, lo);
-            Intent intent = new Intent(MapsActivity.this, MainL.class);
-            startActivity(intent);
         }else{
             Toast.makeText(this, "Lokasi Tidak Di temukan", Toast.LENGTH_SHORT).show();
         }

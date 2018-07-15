@@ -15,6 +15,10 @@
         <item android:title="Settings"
             android:id="@+id/set"
             android:icon="@drawable/seting"/>
+        <item
+            android:id="@+id/lokasi"
+            android:icon="@android:drawable/ic_dialog_map"
+            android:title="Lokasi" />
         <item android:title="Logout"
             android:id="@+id/keluar"
             android:icon="@drawable/imglogout"/>

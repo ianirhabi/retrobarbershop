@@ -24,5 +24,11 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="AppTheme.Fullscreen">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 
 </resources>
