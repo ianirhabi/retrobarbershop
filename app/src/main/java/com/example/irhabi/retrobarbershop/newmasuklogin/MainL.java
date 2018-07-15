@@ -51,8 +51,10 @@ public class MainL extends AppCompatActivity {
                 drawerLayout.closeDrawers();
 
                 if (item.getItemId() == R.id.set) {
-                    FragmentTransaction fragmentTransaction = FM.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new Setting()).commit();
+                    Intent i = new Intent(MainL.this,Setting.class);
+                    startActivity(i);
+                   // FragmentTransaction fragmentTransaction = FM.beginTransaction();
+                   // fragmentTransaction.replace(R.id.containerView, new Setting()).commit();
                 }
 
                 if (item.getItemId() == R.id.prof) {

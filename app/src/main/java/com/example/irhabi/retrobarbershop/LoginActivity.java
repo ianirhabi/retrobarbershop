@@ -48,7 +48,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.irhabi.retrobarbershop.AppConfig.URL;
+import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
 
 public class LoginActivity extends AppCompatActivity implements ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {

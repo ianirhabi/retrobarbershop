@@ -51,6 +51,8 @@
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
+    <string name="retro_status">Ketika Barcode Telah Keluar Segera Melakukan Scan. Tampilan Barcode Absen hanya 30 detik.
+        </string>
 
 
     <string name="main_copyright">\u00a9 Copyright 2018, retrobarbershop </string>

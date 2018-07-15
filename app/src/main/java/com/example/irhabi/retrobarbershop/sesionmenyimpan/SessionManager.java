@@ -45,6 +45,7 @@ public class SessionManager {
     public  static  final  String KEY_USERGRUP = "grup";
     public static  final String LONGTITUDE = "long";
     public static  final String LATITUDE = "lat";
+    public static  final String KEY_IMAGE = "IMAGE";
 
 
     // Constructor
@@ -72,7 +73,13 @@ public class SessionManager {
         editor.putString(LATITUDE, la);
         editor.commit();
     }
-
+    // hanya menyimpan email
+    public void createImage(String image){
+        // Storing login value as TRUE
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_IMAGE, image);
+        editor.commit();
+    }
     /**
      * Check login method wil check user login status
      * If false it will redirect user to login page
@@ -99,6 +106,7 @@ public class SessionManager {
         user.put(KEY_USERGRUP, pref.getString(KEY_USERGRUP, null));
         user.put(LONGTITUDE, pref.getString(LONGTITUDE, null));
         user.put(LATITUDE, pref.getString(LATITUDE, null));
+        user.put(KEY_IMAGE,pref.getString(KEY_IMAGE,null));
         return user;
     }
 
