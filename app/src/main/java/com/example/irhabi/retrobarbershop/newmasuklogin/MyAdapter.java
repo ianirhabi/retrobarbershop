@@ -16,7 +16,7 @@ public class MyAdapter extends FragmentPagerAdapter {
             case 0:
                 return new Profil();
             case 1:
-                return new Absen();
+                return new Absendata();
         }
         return null;
     }

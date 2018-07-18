@@ -251,7 +251,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                           loading = false;
                         }
                     } else{
-                        Toast.makeText(LoginActivity.this, "Tidak Berhasil Login" + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Tidak Berhasil Login " + response.body().getStatus(), Toast.LENGTH_SHORT).show();
                         if (loading) {
                           button.stopLoading();
                           loading = false;

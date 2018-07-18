@@ -6,7 +6,7 @@
 
 
     <TextView
-        android:layout_width="400dp"
+        android:layout_width="fill_parent"
         android:layout_height="400dp"
         android:text="LOADING DATA ..."
         android:textSize="40dp"

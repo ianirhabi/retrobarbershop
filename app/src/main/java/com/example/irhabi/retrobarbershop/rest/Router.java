@@ -1,6 +1,8 @@
 package com.example.irhabi.retrobarbershop.rest;
 
 
+import com.example.irhabi.retrobarbershop.model.Absen;
+import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.model.Upload;
 import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.model.Usr;
@@ -26,6 +28,9 @@ public interface Router {
 
     @GET("user/{id}")
     Call<Usr> retro(@Path("id") int Id);
+
+    @GET("absen/{id}")
+    Call<Absenarray> absenbarberman(@Path("id") int Id);
 
 
     @Multipart

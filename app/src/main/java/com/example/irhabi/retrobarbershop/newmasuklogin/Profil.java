@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
+
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Usr;
@@ -34,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.irhabi.retrobarbershop.newmasuklogin.ScanFragment.QRcodeWidth;
+
 import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
 
 public class Profil extends Fragment {
@@ -43,7 +42,6 @@ public class Profil extends Fragment {
     private SessionManager sesi;
     private String usr, usrgrup, id, lo, la;
     private ImageView barber, BarbermenPhoto;
-    Handler mHandler ;
     private boolean timerHasStarted = false;
     private CountDownTimer countDownTimer;
     private final long startTime = 30 * 1000;
@@ -94,8 +92,6 @@ public class Profil extends Fragment {
                         .with(getActivity())
                         .load(URL + "upload/" + first)
                         .into(BarbermenPhoto);
-
-
             }
 
             @Override
@@ -128,21 +124,6 @@ public class Profil extends Fragment {
         return view;
     }
 
-//    public void barcodeAgain(String usr, String usrgrup, String la,
-//                             String lo, TextView tx){
-//        try {
-//            tx.setText(tx.getText() + String.valueOf(startTime / 1000));
-//
-//            countDownTimer.start();
-//            timerHasStarted = true;
-//
-//            bitmap = TextToImageEncode(usr + " " + usrgrup + " " + la + " "+ lo);
-//            barber.setImageBitmap(bitmap);
-//
-//        } catch (WriterException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;
