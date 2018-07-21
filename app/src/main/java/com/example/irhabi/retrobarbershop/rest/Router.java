@@ -32,6 +32,8 @@ public interface Router {
     @GET("absen/{id}")
     Call<Absenarray> absenbarberman(@Path("id") int Id);
 
+    @POST("absen")
+    Call<Absen>post(@Body Absen a);
 
     @Multipart
     @POST("upload/android")

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 
 public class Absenarray{
+
+    @com.google.gson.annotations.SerializedName("data")
     private ArrayList<Absen> data;
 
     public ArrayList<Absen> getAbsenarray() {

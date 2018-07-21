@@ -36,7 +36,11 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        if (dataList == null){
+            return 0;
+        }else
+            return dataList.size();
+
     }
 
     class AbsenViewHolder extends RecyclerView.ViewHolder {

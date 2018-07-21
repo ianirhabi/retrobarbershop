@@ -27,6 +27,9 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -68,7 +71,7 @@ public class Profil extends Fragment {
         lo = usersesion.get(SessionManager.LONGTITUDE);
         int Barberid = Integer.parseInt(id);
         text = (TextView) view.findViewById(R.id.timer);
-        Toast.makeText(getActivity(),usr + " " + usrgrup + " " + Barberid +" " + la + " "+ lo, Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getActivity(),usr + " " + usrgrup + " " + Barberid +" " + la + " "+ lo, Toast.LENGTH_LONG).show();
         barber = (ImageView)view.findViewById(R.id.codeQR);
         btnStart = (Button) view.findViewById(R.id.buttonStart);
         countDownTimer = new MyCountDownTimer(startTime, interval);
@@ -101,7 +104,10 @@ public class Profil extends Fragment {
         });
 
         try {
-            bitmap = TextToImageEncode(usr + " " + usrgrup + " " + la + " "+ lo);
+            DateFormat dateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+
+            bitmap = TextToImageEncode(usr + " " + usrgrup + " " + la + " "+ lo + " " + dateFormat.format(date));
             barber.setImageBitmap(bitmap);
 
         }catch (WriterException e) {
