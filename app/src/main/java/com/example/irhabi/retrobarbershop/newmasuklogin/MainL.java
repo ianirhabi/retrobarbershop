@@ -22,7 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
-import com.example.irhabi.retrobarbershop.MapsActivity;
+import com.example.irhabi.retrobarbershop.error.MapsActivity;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 

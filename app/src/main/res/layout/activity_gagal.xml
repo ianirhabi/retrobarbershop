@@ -1,0 +1,17 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7151515"
+    android:theme="@style/AppTheme.Fullscreen">
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:text="GAGAL KIRIM ! :'(
+periksa koneksi Anda"
+        android:textSize="40dp"
+        android:textColor="@color/hijauu"
+        android:gravity="center"/>
+
+</android.support.constraint.ConstraintLayout>

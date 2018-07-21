@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 
+import com.example.irhabi.retrobarbershop.error.Gagal;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
@@ -29,6 +30,8 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +40,7 @@ public class ScanFragment extends AppCompatActivity {
     Bitmap bitmap ;
     public final static int QRcodeWidth = 350 ;
     private  Absen dataabsen;
+    private SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,28 +60,33 @@ public class ScanFragment extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
+                Toast.makeText(getApplicationContext(),result.getContents(), Toast.LENGTH_LONG).show();
                 Log.e("Scan*******", "Cancelled scan");
             } else {
+                Toast.makeText(getApplicationContext(),"deug berhasil " + result.getContents(), Toast.LENGTH_LONG).show();
                 Log.e("Scan", "Scanned");
                 String a = result.getContents() ;
                 String[] kf = a.split("\\s");
-                String fi = kf[1];
-                String sc = kf[2];
-                String th = kf[3];
-                String four = kf[4];
-                String six = kf[5];
-                String sev = kf[6];
-                String eight = kf[7];
-                // tv_qr_readTxt.setText(result.getContents());
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                String hari = kf[0];
+                String tanggal = kf [1];
+                String waktu = kf[2];
+                String hadir = kf[3];
+                String iduser = kf[4];
+                String lat = kf[5];
+                String lon = kf[6];
+                String usr = kf[7];
 
-                dataabsen = new Absen(fi, sc, th, four, six, sev, eight);
+                int id_user = Integer.parseInt(iduser);
+                dataabsen = new Absen(hari, tanggal, waktu, hadir,id_user , lat, lon, usr);
                 Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
                 Call<Absen> call = service.post(dataabsen);
                 call.enqueue(new Callback<Absen>() {
                     @Override
                     public void onResponse(Call<Absen> call, Response<Absen> response) {
                         Toast.makeText(ScanFragment.this, "Berhasil di kirim ke Server", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(ScanFragment.this,KonekMaps.class);
+                        startActivity(i);
+                        finish();
                     }
 
                     @Override
@@ -97,6 +106,7 @@ public class ScanFragment extends AppCompatActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {
             Intent i = new Intent(ScanFragment.this,KonekMaps.class);
             startActivity(i);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

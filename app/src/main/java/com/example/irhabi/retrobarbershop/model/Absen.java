@@ -1,6 +1,8 @@
 package com.example.irhabi.retrobarbershop.model;
 
 public class Absen{
+    @com.google.gson.annotations.SerializedName("user")
+    private String usr;
     @com.google.gson.annotations.SerializedName("Tanggal")
     private String tanggal;
     @com.google.gson.annotations.SerializedName("Waktu")
@@ -8,7 +10,7 @@ public class Absen{
     @com.google.gson.annotations.SerializedName("Hadir")
     private String hadir;
     @com.google.gson.annotations.SerializedName("ID_USER")
-    private String id_user;
+    private int id_user;
     @com.google.gson.annotations.SerializedName("Hari")
     private String hari;
     @com.google.gson.annotations.SerializedName("Lat")
@@ -16,15 +18,17 @@ public class Absen{
     @com.google.gson.annotations.SerializedName("Long")
     private String lon;
 
-    public Absen(String T, String W, String H,String J, String L,
-                 String K, String F){
-        this.tanggal = T;
-        this.waktu = W;
-        this.hadir = H;
-        this.id_user= J;
-        this.hari= L;
-        this.lat = K;
-        this.lon=F;
+    public Absen(String hari, String tanggal, String waktu, String hadir, int id_user,
+                 String lat, String lon, String usr){
+        this.tanggal = tanggal;
+        this.waktu = waktu;
+        this.hadir = hadir;
+        this.id_user= id_user;
+        this.hari= hari;
+        this.lat = lat;
+        this.lon = lon;
+        this.usr = usr;
+
     }
 
     public String gettangal(){
@@ -36,7 +40,7 @@ public class Absen{
     public String gethadir(){
         return hadir;
     }
-    public String getId_user(){return id_user;}
+    public int getId_user(){return id_user;}
     public  String getHari(){return hari;}
     public String getLat(){return lat;}
     public String getLon(){return lon;}

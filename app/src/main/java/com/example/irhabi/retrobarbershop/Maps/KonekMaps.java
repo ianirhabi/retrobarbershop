@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.PermissionRequest;
@@ -24,7 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.error.Gagal;
 import com.example.irhabi.retrobarbershop.newmasuklogin.MainL;
+import com.example.irhabi.retrobarbershop.newmasuklogin.ScanFragment;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -221,6 +224,7 @@ public class KonekMaps extends AppCompatActivity {
                                         "fixed here. Fix in Settings.";
                                 Log.e(TAG, errorMessage);
 
+
                                 Toast.makeText(KonekMaps.this, errorMessage, Toast.LENGTH_LONG).show();
                         }
 
@@ -335,4 +339,14 @@ public class KonekMaps extends AppCompatActivity {
         super.onStop();
 
     }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            moveTaskToBack(true);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 }

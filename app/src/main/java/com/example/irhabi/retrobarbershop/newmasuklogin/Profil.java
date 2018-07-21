@@ -69,7 +69,7 @@ public class Profil extends Fragment {
         id = usersesion.get(SessionManager.KEY_ID);
         la = usersesion.get(SessionManager.LATITUDE);
         lo = usersesion.get(SessionManager.LONGTITUDE);
-        int Barberid = Integer.parseInt(id);
+        final int Barberid = Integer.parseInt(id);
         text = (TextView) view.findViewById(R.id.timer);
       //  Toast.makeText(getActivity(),usr + " " + usrgrup + " " + Barberid +" " + la + " "+ lo, Toast.LENGTH_LONG).show();
         barber = (ImageView)view.findViewById(R.id.codeQR);
@@ -87,7 +87,6 @@ public class Profil extends Fragment {
                 Toast.makeText(getActivity(),response.body().getname(), Toast.LENGTH_LONG).show();
                 nameretro.setText(response.body().getname());
                 userretro.setText(response.body().getUser());
-
                 String[] kf = response.body().getnamefoto().split("\\.");
                 String first = kf[0];
                 Log.d("DEBUG ", "BARU " + first);
@@ -95,24 +94,29 @@ public class Profil extends Fragment {
                         .with(getActivity())
                         .load(URL + "upload/" + first)
                         .into(BarbermenPhoto);
+
+
+                try {
+                    DateFormat dateFormat = new SimpleDateFormat("EEEE dd-MM-yyyy HH:mm:ss");
+                    Date date = new Date();
+
+                    bitmap = TextToImageEncode(dateFormat.format(date)  + " hadir " + Barberid  +  " " + la + " "+ lo + " " + usr);
+                    barber.setImageBitmap(bitmap);
+
+                }catch (WriterException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onFailure(Call<Usr> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "GAGAL MENGAMBIL DATA DARI SERVER.... Pastikan Anda Terhubung dengan Internet" , Toast.LENGTH_SHORT).show();
+
+               // Toast.makeText(getActivity(), "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                barber.setImageResource(R.drawable.retroo);
             }
         });
 
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("EEEE yyyy/MM/dd HH:mm:ss");
-            Date date = new Date();
-
-            bitmap = TextToImageEncode(usr + " " + usrgrup + " " + la + " "+ lo + " " + dateFormat.format(date));
-            barber.setImageBitmap(bitmap);
-
-        }catch (WriterException e) {
-            e.printStackTrace();
-        }
         text.setText(text.getText() + String.valueOf(startTime / 1000));
         if (!timerHasStarted) {
             countDownTimer.start();

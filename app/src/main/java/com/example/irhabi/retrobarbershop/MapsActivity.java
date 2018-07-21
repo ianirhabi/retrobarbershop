@@ -73,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String lo = usersesion.get(SessionManager.LONGTITUDE);
             double valuela = Double.parseDouble(la);
             double valuelo = Double.parseDouble(lo);
-            Toast.makeText(this, "Lokasi Ditemukan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lokasi Ditemukan " + valuela + " " + valuelo , Toast.LENGTH_SHORT).show();
             LatLng MyLocation = new LatLng(valuela, valuelo);
             mMap.addMarker(new MarkerOptions().position(MyLocation).title("Latitude: "+valuela).snippet("Longitude : "+valuelo));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MyLocation,13));

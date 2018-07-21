@@ -51,11 +51,11 @@
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
-    <string name="retro_status">Ketika Barcode Telah Keluar Segera Melakukan Scan. Tampilan Barcode Absen hanya 30 detik.
+    <string name="retro_status">Pastikan Anda Terhubung Dengan Internet Saat Melakukan Pengambilan Absen. Tampilan Barcode Absen hanya 30 detik Dengan Menggunakan Koneksi Internet.
         </string>
 
 
-    <string name="main_copyright">\u00a9 Copyright 2018, retrobarbershop </string>
+    <string name="main_copyright">\u00a9 Copyright 2016, www.retrobarbershopindonesia.com </string>
 
     <string name="title_shop">Aktivitas</string>
     <string name="title_gifts">Nomor Antrian</string>
