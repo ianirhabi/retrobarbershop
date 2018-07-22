@@ -5,6 +5,7 @@ package com.example.irhabi.retrobarbershop.newmasuklogin;
  */
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 
@@ -23,6 +24,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -34,8 +37,13 @@ import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,7 +64,6 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     private  final Runnable m_Runnable = new Runnable() {
 
-
         @Override
         public void run() {
             Sendnotification();
@@ -69,12 +76,83 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
     @SuppressLint("ResourceAsColor")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final Calendar myCalendar = Calendar.getInstance();
 
         View view =inflater.inflate(R.layout.fragment_absen,container,false);
+        final EditText edittext= (EditText) view.findViewById(R.id.from);
+        final EditText edittextto= (EditText) view.findViewById(R.id.to);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+
+        edittext.setText(dateFormat.format(date));
+        edittextto.setText(dateFormat.format(date));
+        Takedata(dateFormat.format(date),dateFormat.format(date));
+
+        final DatePickerDialog.OnDateSetListener datefrom = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String totanggal = edittextto.getText().toString();
+                edittext.setText(sdf.format(myCalendar.getTime()));
+                String fromtanggal = edittext.getText().toString();
+                Toast.makeText(getContext(), "Anda Menampilkan Data Dari Tanggal " + fromtanggal + " Sampai Tanggal " + totanggal , Toast.LENGTH_LONG).show();
+
+                Takedata(fromtanggal,totanggal);
+            }
+        };
+
+        final DatePickerDialog.OnDateSetListener dateto = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String fromtanggal = edittext.getText().toString();
+
+                edittextto.setText(sdf.format(myCalendar.getTime()));
+                String totanggal = edittextto.getText().toString();
+                Toast.makeText(getContext(), "Anda Menampilkan Data Dari Tanggal " + fromtanggal + " Sampai Tanggal " + totanggal  , Toast.LENGTH_LONG).show();
+
+                Takedata(fromtanggal,totanggal);
+            }
+        };
+
+        edittext.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getActivity(), datefrom, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        edittextto.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getActivity(), dateto, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
 
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swype);
         swipeLayout.setOnRefreshListener(this);
-        Takedata();
         swipeLayout.setColorSchemeColors(android.R.color.holo_green_dark);
 //                android.R.color.holo_red_dark,
 //                android.R.color.holo_blue_dark,
@@ -94,7 +172,6 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
     }
 
     public void Sendnotification(){
-
         String id;
         sesi = new SessionManager(getActivity());
         HashMap<String, String> usersesion = sesi.getUserDetails();
@@ -115,7 +192,6 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
             }
         });
     }
-
 
     private void sendNotification(String title, String messageBody) {
         Intent intent = new Intent(getActivity(), Profil.class);
@@ -140,36 +216,35 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
     }
 
     @Override
-    public void onRefresh() {new Handler().postDelayed(new Runnable() {
-        @Override
-        public void run() {
-            swipeLayout.setRefreshing(false);
-            Takedata();
-        }
-
-    }, 1000);
-
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeLayout.setRefreshing(false);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                Takedata(dateFormat.format(date),dateFormat.format(date));
+            }
+        }, 1000);
     }
 
-    public void Takedata(){
+    public void Takedata(String from, String to){
         String id;
         sesi = new SessionManager(getActivity());
         HashMap<String, String> usersesion = sesi.getUserDetails();
         id = usersesion.get(SessionManager.KEY_ID);
         int idDetail = Integer.parseInt(id);
         Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
-        Call<Absenarray> call = service.absenbarberman(idDetail);
+        Call<Absenarray> call = service.rangedataabsen(idDetail,from, to );
         call.enqueue(new Callback<Absenarray>() {
             @Override
             public void onResponse(Call<Absenarray> call, Response<Absenarray> response) {
                 generateAbsen(response.body().getAbsenarray());
             }
-
             @Override
             public void onFailure(Call<Absenarray> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong...Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

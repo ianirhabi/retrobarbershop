@@ -84,7 +84,6 @@ public class Profil extends Fragment {
         call.enqueue(new Callback<Usr>() {
             @Override
             public void onResponse(Call<Usr> call, Response<Usr> response) {
-                Toast.makeText(getActivity(),response.body().getname(), Toast.LENGTH_LONG).show();
                 nameretro.setText(response.body().getname());
                 userretro.setText(response.body().getUser());
                 String[] kf = response.body().getnamefoto().split("\\.");
@@ -97,9 +96,8 @@ public class Profil extends Fragment {
 
 
                 try {
-                    DateFormat dateFormat = new SimpleDateFormat("EEEE dd-MM-yyyy HH:mm:ss");
+                    DateFormat dateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
                     Date date = new Date();
-
                     bitmap = TextToImageEncode(dateFormat.format(date)  + " hadir " + Barberid  +  " " + la + " "+ lo + " " + usr);
                     barber.setImageBitmap(bitmap);
 
@@ -110,9 +108,8 @@ public class Profil extends Fragment {
 
             @Override
             public void onFailure(Call<Usr> call, Throwable t) {
-                Toast.makeText(getActivity(), "GAGAL MENGAMBIL DATA DARI SERVER.... Pastikan Anda Terhubung dengan Internet" , Toast.LENGTH_SHORT).show();
-
-               // Toast.makeText(getActivity(), "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Something went wrong...Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 barber.setImageResource(R.drawable.retroo);
             }
         });

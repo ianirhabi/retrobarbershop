@@ -25,6 +25,10 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,18 +60,20 @@ public class ScanFragment extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),result.getContents(), Toast.LENGTH_LONG).show();
                 Log.e("Scan*******", "Cancelled scan");
             } else {
-                Toast.makeText(getApplicationContext(),"deug berhasil " + result.getContents(), Toast.LENGTH_LONG).show();
                 Log.e("Scan", "Scanned");
+                DateFormat dateFormat = new SimpleDateFormat("H:mm:ss");
+                Date date = new Date();
+
                 String a = result.getContents() ;
                 String[] kf = a.split("\\s");
                 String hari = kf[0];
                 String tanggal = kf [1];
-                String waktu = kf[2];
-                String hadir = kf[3];
-                String iduser = kf[4];
-                String lat = kf[5];
-                String lon = kf[6];
-                String usr = kf[7];
+                String waktu = dateFormat.format(date);
+                String hadir = kf[2];
+                String iduser = kf[3];
+                String lat = kf[4];
+                String lon = kf[5];
+                String usr = kf[6];
 
                 int id_user = Integer.parseInt(iduser);
                 dataabsen = new Absen(hari, tanggal, waktu, hadir,id_user , lat, lon, usr);
@@ -85,6 +91,9 @@ public class ScanFragment extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<Absen> call, Throwable t) {
                         Toast.makeText(ScanFragment.this, "Gagal Mengirim Ke Server", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(ScanFragment.this,KonekMaps.class);
+                        startActivity(i);
+                        finish();
                     }
                 });
 
