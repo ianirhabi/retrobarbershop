@@ -1,19 +1,17 @@
 package com.example.irhabi.retrobarbershop.newmasuklogin;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
+
 import android.content.Intent;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,7 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
-import com.example.irhabi.retrobarbershop.error.MapsActivity;
+import com.example.irhabi.retrobarbershop.MapsActivity;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 

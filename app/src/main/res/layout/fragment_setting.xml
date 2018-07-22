@@ -1,5 +1,7 @@
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -15,12 +17,17 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:hint="upload"
-         android:id="@+id/upload"/>
+         android:id="@+id/upload"
+         android:visibility="gone"/>
+
         <Button
+            android:id="@+id/TAKE"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="upload"
-            android:id="@+id/TAKE"/>
+            android:layout_height="350dp"
+            android:background="@android:drawable/ic_menu_upload"
+            android:hint="upload
+Foto
+Anda" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

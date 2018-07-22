@@ -1,6 +1,9 @@
 package com.example.irhabi.retrobarbershop.model;
-import com.google.gson.annotations.SerializedName;
 
+
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
 public class User {
 
     /**

@@ -1,12 +1,13 @@
 package com.example.irhabi.retrobarbershop.newmasuklogin;
 
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
+
 import android.Manifest;
-import android.app.Activity;
-import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,14 +23,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.irhabi.retrobarbershop.LoginActivity;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Upload;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
-
-import org.apache.commons.io.FileUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -39,10 +37,8 @@ import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,10 +46,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
-
-/**
- * created by codeIrhabi
- */
 
 public class Setting extends AppCompatActivity {
 

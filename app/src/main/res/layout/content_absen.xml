@@ -5,12 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.irhabi.retrobarbershop.newmasuklogin.Absen"
+    tools:context="com.example.irhabi.retrobarbershop.newmasuklogin.Absendata"
     tools:showIn="@layout/fragment_absen">
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swype"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_notice_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

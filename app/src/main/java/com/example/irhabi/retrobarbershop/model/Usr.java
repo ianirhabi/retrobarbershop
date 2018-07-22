@@ -1,10 +1,12 @@
 package com.example.irhabi.retrobarbershop.model;
 
-
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
 public class Usr {
     @com.google.gson.annotations.SerializedName("Id")
     private int Id;
-    @com.google.gson.annotations.SerializedName("usergup")
+    @com.google.gson.annotations.SerializedName("Usergup")
     private String  usergrup;
     @com.google.gson.annotations.SerializedName("User")
     private String User;

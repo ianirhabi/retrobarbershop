@@ -16,6 +16,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        debug {
+            keyAlias 'key2'
+            keyPassword 'ian123456'
+            storeFile file('/home/programmerjalanan/AndroidStudioProjects/RetroBarbershop/programerjalanan.jks')
+            storePassword('ian123456')
+        }
+    }
+
 }
 
 dependencies {
@@ -26,7 +36,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
 
-    implementation 'com.google.firebase:firebase-auth:12.0.1'
+    implementation 'com.google.firebase:firebase-auth:15.1.0'
+    implementation 'com.google.firebase:firebase-core:15.0.2'
 
     implementation 'com.android.support:design:26.1.0'
     // RecyclerView
@@ -38,6 +49,7 @@ dependencies {
     // volley http library
     implementation 'com.android.volley:volley:1.0.0'
     implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.google.firebase:firebase-messaging:17.0.0'
 
     // glide image library
     implementation 'com.github.bumptech.glide:glide:4.3.1'
@@ -50,6 +62,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 
+    //maps
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+
     // Rx
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.1.6'
@@ -58,8 +73,8 @@ dependencies {
 
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
-    implementation 'com.google.android.gms:play-services-maps:12.0.1'
-    implementation 'com.google.android.gms:play-services-location:12.0.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation "commons-io:commons-io:+"
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.karumi:dexter:4.2.0'

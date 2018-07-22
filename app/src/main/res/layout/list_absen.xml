@@ -27,10 +27,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="3dp" />
-
+        <TextView
+            android:id="@+id/hari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:padding="3dp"/>
         <!-- Text Notice FilePath -->
         <TextView
             android:id="@+id/kehadiran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:padding="3dp"/>
+        <TextView
+            android:id="@+id/notif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"

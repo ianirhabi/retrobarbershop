@@ -1,5 +1,8 @@
 package com.example.irhabi.retrobarbershop.model;
 
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
 public class Upload {
     @com.google.gson.annotations.SerializedName("upload")
     private String  uplod ;

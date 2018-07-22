@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,7 +52,6 @@ public class Profil extends Fragment {
     private final long interval = 1 * 1000;
     private Button btnStart;
     private TextView text, nameretro, userretro;
-    private SessionManager sessi;
 
     public Profil(){
         // Required empty public constructor
@@ -131,6 +131,7 @@ public class Profil extends Fragment {
                 startActivity(i);
             }
         });
+
         return view;
     }
 
@@ -185,4 +186,5 @@ public class Profil extends Fragment {
             text.setText("" + millisUntilFinished / 1000);
         }
     }
+
 }

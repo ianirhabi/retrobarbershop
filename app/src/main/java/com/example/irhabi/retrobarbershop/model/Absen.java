@@ -1,5 +1,8 @@
 package com.example.irhabi.retrobarbershop.model;
 
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
 public class Absen{
     @com.google.gson.annotations.SerializedName("user")
     private String usr;
@@ -17,6 +20,8 @@ public class Absen{
     private String lat;
     @com.google.gson.annotations.SerializedName("Long")
     private String lon;
+    @com.google.gson.annotations.SerializedName("Notif")
+    private String notif;
 
     public Absen(String hari, String tanggal, String waktu, String hadir, int id_user,
                  String lat, String lon, String usr){
@@ -44,5 +49,8 @@ public class Absen{
     public  String getHari(){return hari;}
     public String getLat(){return lat;}
     public String getLon(){return lon;}
+    public  String getNotif(){
+        return notif;
+    }
 
 }

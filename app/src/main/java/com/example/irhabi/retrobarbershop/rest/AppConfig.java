@@ -1,5 +1,9 @@
 package com.example.irhabi.retrobarbershop.rest;
 
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
+
 public class AppConfig {
 	// Server user login url
 	//public static String URL_LOGIN = "http://192.168.0.102/android_login_api/login.php";

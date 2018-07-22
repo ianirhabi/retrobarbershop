@@ -1,25 +1,19 @@
 package com.example.irhabi.retrobarbershop.newmasuklogin;
 
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
-
-import com.example.irhabi.retrobarbershop.error.Gagal;
 import com.example.irhabi.retrobarbershop.model.Absen;
-import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
@@ -30,7 +24,6 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -97,7 +90,6 @@ public class ScanFragment extends AppCompatActivity {
 
             }
         } else {
-            // This is important, otherwise the result will not be passed to the fragment
             super.onActivityResult(requestCode, resultCode, data);
         }
     }

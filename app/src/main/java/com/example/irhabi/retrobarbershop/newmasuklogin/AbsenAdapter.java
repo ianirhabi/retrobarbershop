@@ -1,12 +1,15 @@
 package com.example.irhabi.retrobarbershop.newmasuklogin;
 
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
 
 import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Absen;
 
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 
 public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHolder> {
 
-    private ArrayList<Absen> dataList; // akan get data dataList.get(position).getTitle()
+    private ArrayList<Absen> dataList;
 
     public AbsenAdapter(ArrayList<Absen> dataList) {
         this.dataList = dataList;
@@ -29,9 +32,11 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
 
     @Override
     public void onBindViewHolder(AbsenViewHolder holder, int position) {
-        holder.txtTanggal.setText(dataList.get(position).gettangal());
-        holder.txtWaktu.setText(dataList.get(position).getwaktu());
-        holder.txtKehadiran.setText(dataList.get(position).gethadir());
+        holder.txtTanggal.setText("Tanggal Pengambilan Absen : "+dataList.get(position).gettangal());
+        holder.txtWaktu.setText("Jam Masuk : " + dataList.get(position).getwaktu());
+        holder.txtHari.setText("Hari Masuk : " + dataList.get(position).getHari());
+        holder.txtKehadiran.setText("Kehadiran : " + dataList.get(position).gethadir());
+        holder.txtNotif.setText("Notif : " + dataList.get(position).getNotif());
     }
 
     @Override
@@ -40,18 +45,19 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
             return 0;
         }else
             return dataList.size();
-
     }
 
     class AbsenViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtTanggal, txtWaktu, txtKehadiran;
+        TextView txtTanggal, txtWaktu, txtKehadiran, txtHari, txtNotif;
 
         AbsenViewHolder(View itemView) {
             super(itemView);
+            txtHari = itemView.findViewById(R.id.hari);
             txtTanggal =  itemView.findViewById(R.id.tanggal_absen);
             txtWaktu =  itemView.findViewById(R.id.waktu);
             txtKehadiran =  itemView.findViewById(R.id.kehadiran);
+            txtNotif = itemView.findViewById(R.id.notif);
         }
     }
 }

@@ -1,6 +1,10 @@
 package com.example.irhabi.retrobarbershop.Maps;
 
 
+/**
+ * Created BY Progrmmer Jalan on January 2018
+ */
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -166,7 +170,6 @@ public class KonekMaps extends AppCompatActivity {
             sesi.createLongtiLati(la,lo);
             Intent i = new Intent(KonekMaps.this, MainL.class);
             startActivity(i);
-
         }else{
 
         }
