@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 
 import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
@@ -45,13 +47,14 @@ public class Profil extends Fragment {
     private Bitmap bitmap ;
     private SessionManager sesi;
     private String usr, usrgrup, id, lo, la;
-    private ImageView barber, BarbermenPhoto;
+    private ImageView barber, BarbermenPhoto, BarbermenPhoto1;
     private boolean timerHasStarted = false;
     private CountDownTimer countDownTimer;
     private final long startTime = 30 * 1000;
     private final long interval = 1 * 1000;
     private Button btnStart;
     private TextView text, nameretro, userretro;
+    PhotoViewAttacher photoAttacher;
 
     public Profil(){
         // Required empty public constructor
@@ -63,7 +66,7 @@ public class Profil extends Fragment {
         View view =inflater.inflate(R.layout.fragment_profil_dua,container,false);
 
         sesi = new SessionManager(getActivity());
-        HashMap<String, String> usersesion = sesi.getUserDetails();
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
         usr = usersesion.get(SessionManager.KEY_USER);
         usrgrup = usersesion.get(SessionManager.KEY_USERGRUP);
         id = usersesion.get(SessionManager.KEY_ID);
@@ -78,22 +81,42 @@ public class Profil extends Fragment {
         nameretro = (TextView)view.findViewById(R.id.Barbermenname);
         userretro = (TextView)view.findViewById(R.id.nohp);
         BarbermenPhoto = (ImageView)view.findViewById(R.id.proffoto);
+        BarbermenPhoto1 = (ImageView)view.findViewById(R.id.proffotobesar);
+
+
+
         Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
         int idDetail = Integer.parseInt(id);
         Call<Usr> call = service.retro(idDetail);
         call.enqueue(new Callback<Usr>() {
             @Override
-            public void onResponse(Call<Usr> call, Response<Usr> response) {
+            public void onResponse(Call<Usr> call, final Response<Usr> response) {
                 nameretro.setText(response.body().getname());
                 userretro.setText(response.body().getUser());
                 String[] kf = response.body().getnamefoto().split("\\.");
-                String first = kf[0];
+                final String first = kf[0];
                 Log.d("DEBUG ", "BARU " + first);
                 Glide
                         .with(getActivity())
                         .load(URL + "upload/" + first)
                         .into(BarbermenPhoto);
+                String Id = String.valueOf(response.body().Getid());
+                sesi.createLoginSession(response.body().getUser(),
+                        response.body().getUsergrup(),Id);
 
+                BarbermenPhoto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        BarbermenPhoto1.setVisibility(View.VISIBLE);
+                        Glide
+                                .with(getActivity())
+                                .load(URL + "upload/" + first)
+                                .into(BarbermenPhoto1);
+                        String Id = String.valueOf(response.body().Getid());
+                        sesi.createLoginSession(response.body().getUser(),
+                                response.body().getUsergrup(),Id);
+                    }
+                });
 
                 try {
                     DateFormat dateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");

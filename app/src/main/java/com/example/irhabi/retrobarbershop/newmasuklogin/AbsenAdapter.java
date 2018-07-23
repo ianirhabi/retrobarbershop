@@ -36,7 +36,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
         holder.txtWaktu.setText("Jam Masuk : " + dataList.get(position).getwaktu());
         holder.txtHari.setText("Hari Masuk : " + dataList.get(position).getHari());
         holder.txtKehadiran.setText("Kehadiran : " + dataList.get(position).gethadir());
-        holder.txtNotif.setText("Notif : " + dataList.get(position).getNotif());
+     //   holder.txtNotif.setText("Notif : " + dataList.get(position).getNotif());
     }
 
     @Override

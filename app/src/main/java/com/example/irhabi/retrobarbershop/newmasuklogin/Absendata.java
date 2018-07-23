@@ -66,7 +66,11 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
         @Override
         public void run() {
-            Sendnotification();
+            try {
+                Sendnotification();
+            }catch (Exception e){
+
+            }
             Absendata.this.mHandler.postDelayed(Absendata.this.m_Runnable,5000);
         }
     };
@@ -184,7 +188,15 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
             public void onResponse(Call<Usr> call, Response<Usr> response) {
                 if(response.body().getUsergrup().equals("2")) {
                     sendNotification("Notification", "Anda Berhasil Mengambil Absen");
+                    String Id = String.valueOf(response.body().Getid());
+                    sesi = new SessionManager(getActivity());
+                    sesi.createLoginSession(response.body().getUser(),
+                            response.body().getUsergrup(),Id);
                 }else{
+                    String Id = String.valueOf(response.body().Getid());
+                    sesi = new SessionManager(getActivity());
+                    sesi.createLoginSession(response.body().getUser(),
+                            response.body().getUsergrup(),Id);
                 }
             }
             @Override

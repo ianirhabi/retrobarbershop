@@ -8,17 +8,33 @@
         android:icon="@drawable/ic_person_white_24dp"/>
     <item android:title="Scan"
         android:id="@+id/scan"
-        android:icon="@drawable/scan"/>
+        android:icon="@drawable/scan"
+        android:visible="true"/>
 
 
     <group android:id="@+id/group_settings_id">
         <item android:title="Settings"
             android:id="@+id/set"
             android:icon="@drawable/seting"/>
+
         <item
             android:id="@+id/lokasi"
             android:icon="@android:drawable/ic_dialog_map"
             android:title="Lokasi" />
+
+        <item
+            android:id="@+id/antri"
+            android:icon="@drawable/antri"
+            android:title="No Antrian"
+            android:visible="false"/>
+
+
+        <item
+            android:id="@+id/style"
+            android:icon="@drawable/stylist"
+            android:title="Laporan Absen Stylish"
+            android:visible="false"/>
+
         <item android:title="Logout"
             android:id="@+id/keluar"
             android:icon="@drawable/imglogout"/>

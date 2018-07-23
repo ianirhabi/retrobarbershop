@@ -135,7 +135,6 @@ public class Barbermen extends AppCompatActivity {
         });
     }
 
-
     /**
      * RecyclerView item decoration - give equal margin around grid item
      */

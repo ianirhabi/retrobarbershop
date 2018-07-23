@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:textSize="70dp"
+        android:id="@+id/masuk"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swype"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <im.delight.android.webview.AdvancedWebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
+

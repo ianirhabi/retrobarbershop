@@ -18,7 +18,7 @@ import com.example.irhabi.retrobarbershop.R;
 import java.util.List;
 
 /**
- * Created by Ravi Tamada on 18/05/16.
+ * Created by Programmer Jalanan on 18/05/2018.
  */
 public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHolder> {
 
@@ -37,7 +37,6 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
-
 
     public AlbumsAdapter(Context mContext, List<Album> albumList) {
         this.mContext = mContext;
