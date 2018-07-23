@@ -186,37 +186,61 @@ public class Barbermen extends AppCompatActivity {
         int[] covers = new int[]{
                 R.drawable.anto,
                 R.drawable.arter,
-                R.drawable.jose};
+                R.drawable.jose,
+                R.drawable.stylist,
+                R.drawable.stylist,
+                R.drawable.stylist,
+                R.drawable.stylist,
+                R.drawable.stylist,
+                R.drawable.stylist,};
 
-        Album a = new Album("True Romance", 13, covers[0]);
+        Album a = new Album("Anto", 13, covers[0]);
         albumList.add(a);
 
-        a = new Album("Xscpae", 8, covers[1]);
+        a = new Album("Arter", 8, covers[1]);
         albumList.add(a);
 
-        a = new Album("Maroon 5", 11, covers[2]);
+        a = new Album("Jose", 11, covers[2]);
         albumList.add(a);
 
-        a = new Album("Born to Die", 12, covers[3]);
+        a = new Album("Belum Ada", 12, covers[3]);
         albumList.add(a);
 
-        a = new Album("Honeymoon", 14, covers[4]);
+        a = new Album("Belum Ada", 13, covers[4]);
         albumList.add(a);
 
-        a = new Album("I Need a Doctor", 1, covers[5]);
+        a = new Album("Belum Ada", 14, covers[5]);
         albumList.add(a);
 
-        a = new Album("Loud", 11, covers[6]);
+        a = new Album("Belum Ada", 15, covers[6]);
         albumList.add(a);
 
-        a = new Album("Legend", 14, covers[7]);
+        a = new Album("Belum Ada", 16, covers[7]);
         albumList.add(a);
 
-        a = new Album("Hello", 11, covers[8]);
+        a = new Album("Belum Ada", 17, covers[8]);
         albumList.add(a);
 
-        a = new Album("Greatest Hits", 17, covers[9]);
-        albumList.add(a);
+//        a = new Album("Born to Die", 12, covers[3]);
+//        albumList.add(a);
+//
+//        a = new Album("Honeymoon", 14, covers[4]);
+//        albumList.add(a);
+//
+//        a = new Album("I Need a Doctor", 1, covers[5]);
+//        albumList.add(a);
+//
+//        a = new Album("Loud", 11, covers[6]);
+//        albumList.add(a);
+//
+//        a = new Album("Legend", 14, covers[7]);
+//        albumList.add(a);
+//
+//        a = new Album("Hello", 11, covers[8]);
+//        albumList.add(a);
+//
+//        a = new Album("Greatest Hits", 17, covers[9]);
+//        albumList.add(a);
 
         adapter.notifyDataSetChanged();
     }
