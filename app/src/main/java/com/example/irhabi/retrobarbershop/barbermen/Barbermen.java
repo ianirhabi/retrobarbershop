@@ -57,7 +57,7 @@ public class Barbermen extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        prepareAlbums();
+        stylish();
 
         try {
             Glide.with(this).load(R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
@@ -180,4 +180,45 @@ public class Barbermen extends AppCompatActivity {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
+
+
+    private void stylish() {
+        int[] covers = new int[]{
+                R.drawable.anto,
+                R.drawable.arter,
+                R.drawable.jose};
+
+        Album a = new Album("True Romance", 13, covers[0]);
+        albumList.add(a);
+
+        a = new Album("Xscpae", 8, covers[1]);
+        albumList.add(a);
+
+        a = new Album("Maroon 5", 11, covers[2]);
+        albumList.add(a);
+
+        a = new Album("Born to Die", 12, covers[3]);
+        albumList.add(a);
+
+        a = new Album("Honeymoon", 14, covers[4]);
+        albumList.add(a);
+
+        a = new Album("I Need a Doctor", 1, covers[5]);
+        albumList.add(a);
+
+        a = new Album("Loud", 11, covers[6]);
+        albumList.add(a);
+
+        a = new Album("Legend", 14, covers[7]);
+        albumList.add(a);
+
+        a = new Album("Hello", 11, covers[8]);
+        albumList.add(a);
+
+        a = new Album("Greatest Hits", 17, covers[9]);
+        albumList.add(a);
+
+        adapter.notifyDataSetChanged();
+    }
+
 }
