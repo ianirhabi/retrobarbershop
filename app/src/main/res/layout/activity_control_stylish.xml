@@ -24,13 +24,14 @@
                 android:id="@+id/karyawan"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
-                android:hint="Stylish" />
+                android:hint="Stylish"
+                android:drawableLeft="@android:drawable/ic_partial_secure"/>
 
             <Button
                 android:id="@+id/rubahakun"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
-
+                android:drawableLeft="@drawable/settings"
                 android:hint="Edit Akun Stylish" />
         </LinearLayout>
 
@@ -44,7 +45,8 @@
                 android:id="@+id/penjualan"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:hint="Laporan Pemasukan Stylish" />
+                android:hint="Laporan Pemasukan Stylish"
+                android:drawableLeft="@android:drawable/ic_menu_agenda"/>
 
         </LinearLayout>
 
