@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
@@ -49,15 +50,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         usr = usersesion.get(SessionManager.KEY_USER);
         if (usr.equals("superadmin")){
-            String la =  usersesion.get(SessionManager.LATITUDEstylish);
-            String lo = usersesion.get(SessionManager.LONGTITUDEstylish);
-            Double latude = Double.parseDouble(la);
-            Double lotude = Double.parseDouble(lo);
-
-            LatLng sydney = new LatLng(latude, lotude);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Latitude : " + latude + " longtitude : "+ lotude ));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
+            try {
+                String la = usersesion.get(SessionManager.LATITUDEstylish);
+                String lo = usersesion.get(SessionManager.LONGTITUDEstylish);
+                Double latude = Double.parseDouble(la);
+                Double lotude = Double.parseDouble(lo);
+                LatLng sydney = new LatLng(latude, lotude);
+                mMap.addMarker(new MarkerOptions().position(sydney).title("Latitude : " + latude + " longtitude : " + lotude));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"tidak ada data ",Toast.LENGTH_LONG ).show();
+            }
         }else{
             String la =  usersesion.get(SessionManager.LATITUDE);
             String lo = usersesion.get(SessionManager.LONGTITUDE);

@@ -21,7 +21,7 @@ android {
         debug {
             keyAlias 'key2'
             keyPassword 'ian123456'
-            storeFile file('/home/programmerjalanan/AndroidStudioProjects/RetroBarbershop/programerjalanan.jks')
+            storeFile file('/home/programmerjalanan/AndroidStudioProjects/retrobarbershop/programerjalanan.jks')
             storePassword('ian123456')
         }
     }

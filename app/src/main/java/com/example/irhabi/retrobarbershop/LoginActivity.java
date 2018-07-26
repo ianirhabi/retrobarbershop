@@ -25,6 +25,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,7 @@ import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
 
 public class LoginActivity extends AppCompatActivity implements ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
-
+    private ImageView logingambar;
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        logingambar = (ImageView)findViewById(R.id.imagelogin);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         btnSignup = (Button) findViewById(R.id.btn_signup);
@@ -93,10 +95,14 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         btnReset = (Button) findViewById(R.id.btn_reset_password);
         checkLocationPermission();
 
+
+
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.annim_alpha);
+        final Animation rotate = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
 
+        logingambar.startAnimation(rotate);
 
 
         btnSignup.setOnClickListener(new View.OnClickListener() {

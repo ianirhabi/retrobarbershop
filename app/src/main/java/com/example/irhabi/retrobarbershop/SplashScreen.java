@@ -13,7 +13,7 @@ import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 public class SplashScreen extends Activity {
 	private ImageView image;
 	// Splash screen timer
-	private static int SPLASH_TIME_OUT = 5000;
+	private static int SPLASH_TIME_OUT = 8000;
 	private SessionManager session;
 
 	@Override

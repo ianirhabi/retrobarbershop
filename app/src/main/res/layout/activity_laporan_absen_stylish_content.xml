@@ -8,23 +8,30 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.irhabi.retrobarbershop.newmasuklogin.Absendata">
     <LinearLayout
+        android:gravity="center"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_height="70dp"
         android:background="@color/white">
         <EditText
             android:id="@+id/stylishfrom"
+            android:background="#7d7c10"
+            style="@style/ButtonText"
+            android:textSize="15dp"
             android:clickable="true"
             android:editable="false"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="fill_parent"
             android:hint="from"/>
         <EditText
             android:id="@+id/stylishto"
             android:clickable="true"
             android:editable="false"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            style="@style/ButtonText"
+            android:textSize="15dp"
+            android:layout_height="fill_parent"
+            android:background="@color/red"
             android:hint="to"/>
     </LinearLayout>
     <LinearLayout

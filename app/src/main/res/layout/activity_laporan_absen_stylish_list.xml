@@ -14,7 +14,6 @@
         android:layout_margin="10dp"
         android:orientation="vertical"
         android:padding="10dp">
-
         <!-- Text Notice Name -->
         <TextView
             android:id="@+id/tanggal_absen_stylish"

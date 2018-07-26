@@ -1,6 +1,5 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -98,10 +97,14 @@
         <Button
             android:id="@+id/buttonStart"
             android:layout_width="fill_parent"
+            style="@style/ButtonText"
+            android:width="300dp"
+            android:textSize="15dp"
+            android:background="@drawable/buttonhijau"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:text="Start" />
+            android:hint="Start Barcode Lagi" />
 
     </LinearLayout>
 <!--<LinearLayout-->

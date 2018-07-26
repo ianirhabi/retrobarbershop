@@ -11,7 +11,7 @@
     <string name="new_pass">New Password</string>
     <string name="title_activity_profile">Firebase</string>
     <string name="title_activity_login">Daftar</string>
-    <string name="hint_email">Email</string>
+    <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">Masuk</string>
@@ -65,7 +65,30 @@
     <string name="Lihat_Absen">Lihat Absen</string>
     <string name="maps">Lokasi Terakhir Pengambilan Absen</string>
     <string name="masukan_pass">Masukan Password</string>
-    <string name="masuka_em">Masukan Username</string>
+    <string name="masuka_em">username tidak boleh kosong</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="name_app">LearnGradientButton</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="merah">Merah</string>
+    <string name="biru">Biru</string>
+    <string name="hijau">Hijau</string>
+    <string name="oranye">Orannye</string>
+    <string name="ungu">Ungu</string>
+    <string name="hitam">Hitam</string>
+
+    <style name="ButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
 
 </resources>

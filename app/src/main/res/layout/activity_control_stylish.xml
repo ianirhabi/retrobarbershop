@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/white"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
@@ -23,14 +24,22 @@
             <Button
                 android:id="@+id/karyawan"
                 android:layout_width="150dp"
+                style="@style/ButtonText"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_merah"
                 android:layout_height="100dp"
-                android:hint="Stylish"
-                android:drawableLeft="@android:drawable/ic_partial_secure"/>
+                android:textSize="17dp"
+                android:drawableLeft="@android:drawable/ic_partial_secure"
+                android:hint="Stylish Absen" />
 
             <Button
                 android:id="@+id/rubahakun"
                 android:layout_width="150dp"
+                style="@style/ButtonText"
+                android:layout_alignParentRight="true"
                 android:layout_height="100dp"
+                android:textSize="17dp"
+                android:background="@drawable/buttonhijau"
                 android:drawableLeft="@drawable/settings"
                 android:hint="Edit Akun Stylish" />
         </LinearLayout>
@@ -40,17 +49,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal">
-
             <Button
                 android:id="@+id/penjualan"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:hint="Laporan Pemasukan Stylish"
-                android:drawableLeft="@android:drawable/ic_menu_agenda"/>
-
+                android:drawableLeft="@android:drawable/ic_menu_agenda"
+                style="@style/ButtonText"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/buttonHijau"
+                android:layout_height="70dp"
+                android:layout_marginTop="15dp"
+                android:textSize="17dp"
+                android:background="@drawable/buttonorange"
+                android:hint="Laporan Pemasukan Stylish"/>
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/imageseperadmin"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:src="@drawable/retroo" />
