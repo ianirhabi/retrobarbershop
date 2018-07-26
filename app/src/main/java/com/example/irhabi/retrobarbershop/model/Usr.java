@@ -47,6 +47,12 @@ public class Usr {
     public String getname(){
         return name;
     }
+    public String getLat(){
+        return lati;
+    }
+    public String getLongt(){
+        return longt;
+    }
     public String getnamefoto(){
         return foto;
     }

@@ -1,7 +1,7 @@
 package com.example.irhabi.retrobarbershop.newmasuklogin;
 
 /**
- * Created BY Progrmmer Jalan on January 2018
+ * Created BY Programmer Jalanan on January 2018
  */
 
 import android.annotation.SuppressLint;
@@ -44,6 +44,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.zip.Inflater;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,8 +56,8 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
     private RecyclerView recyclerView;
     private SessionManager sesi;
     public  Handler mHandler;
-
     SwipeRefreshLayout layoutswipe;
+
     public  Absendata(){
         // Required empty public constructor
     }
@@ -235,6 +236,10 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
                 swipeLayout.setRefreshing(false);
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = new Date();
+                final EditText edittext= (EditText) getView().findViewById(R.id.from);
+                final EditText edittextto= (EditText) getView().findViewById(R.id.to);
+                edittext.setText(dateFormat.format(date));
+                edittextto.setText(dateFormat.format(date));
                 Takedata(dateFormat.format(date),dateFormat.format(date));
             }
         }, 1000);

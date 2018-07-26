@@ -6,6 +6,7 @@ package com.example.irhabi.retrobarbershop.rest;
 
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
+import com.example.irhabi.retrobarbershop.model.AlluserRespons;
 import com.example.irhabi.retrobarbershop.model.Upload;
 import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.model.Usr;
@@ -26,11 +27,13 @@ import retrofit2.http.Path;
 
 public interface Router {
 
-    @POST("user")
+    @POST("user/login")
     Call<User> Login(@Body User user);
 
     @GET("user/{id}")
     Call<Usr> retro(@Path("id") int Id);
+    @GET("user")
+    Call<AlluserRespons> getalluser();
 
     @GET("absen/{id}")
     Call<Absenarray> absenbarberman(@Path("id") int Id);

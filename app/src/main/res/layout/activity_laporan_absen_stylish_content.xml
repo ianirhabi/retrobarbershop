@@ -12,15 +12,15 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:background="@color/white">
-    <EditText
-        android:id="@+id/from"
-        android:clickable="true"
-        android:editable="false"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:hint="from"/>
         <EditText
-            android:id="@+id/to"
+            android:id="@+id/stylishfrom"
+            android:clickable="true"
+            android:editable="false"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:hint="from"/>
+        <EditText
+            android:id="@+id/stylishto"
             android:clickable="true"
             android:editable="false"
             android:layout_width="250dp"
@@ -34,15 +34,15 @@
         android:hint="Swipe Kebawah Untuk Menampilkan Data"
         android:layout_marginTop="50dp">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swype"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_notice_list"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swype"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_notice_list"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

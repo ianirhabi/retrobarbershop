@@ -36,6 +36,4 @@
             android:textSize="@dimen/slide_desc" />
 
     </LinearLayout>
-
-
 </RelativeLayout>

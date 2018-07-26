@@ -4,6 +4,7 @@
 
 package com.example.irhabi.retrobarbershop;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,7 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends Activity {
 
     private EditText namanya, nohpnya, emailnya, passwd;
     Button btnSignIn, btnResetPassword;
@@ -56,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -143,7 +144,7 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void simpanData(final String name, final String nohp, final String email, final String Password) {

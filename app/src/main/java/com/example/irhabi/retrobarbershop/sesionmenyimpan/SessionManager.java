@@ -46,7 +46,9 @@ public class SessionManager {
     public static  final String LONGTITUDE = "long";
     public static  final String LATITUDE = "lat";
     public static  final String KEY_IMAGE = "IMAGE";
-
+    public static  final String LONGTITUDEstylish = "nautral";
+    public static  final String LATITUDEstylish = "DIS";
+    public static  final String KEY_ID_STYLISH = "1";
 
     // Constructor
     public SessionManager(Context context){
@@ -56,7 +58,7 @@ public class SessionManager {
     }
 
     /**
-     * Create login session
+     * ciptakan login sesion
      * */
     // hanya menyimpan email
     public void createLoginSession(String user,String usrgrup, String id){
@@ -71,6 +73,20 @@ public class SessionManager {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(LONGTITUDE, lo);
         editor.putString(LATITUDE, la);
+        editor.commit();
+    }
+
+    public void createidStylish(String ID){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_ID_STYLISH, ID);
+        editor.commit();
+    }
+
+
+    public void createLongtiLatiStylish(String la, String lo){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(LONGTITUDEstylish, lo);
+        editor.putString(LATITUDEstylish, la);
         editor.commit();
     }
     // hanya menyimpan email
@@ -92,12 +108,11 @@ public class SessionManager {
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(i);
-            //((Activity)_context).finish();
         }
     }
 
     /**
-     * Get stored session data
+     *mendapatkan user by teknologi programmer jalanan
      * */
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
@@ -106,12 +121,15 @@ public class SessionManager {
         user.put(KEY_USERGRUP, pref.getString(KEY_USERGRUP, null));
         user.put(LONGTITUDE, pref.getString(LONGTITUDE, null));
         user.put(LATITUDE, pref.getString(LATITUDE, null));
+        user.put(LONGTITUDEstylish, pref.getString(LONGTITUDEstylish, null));
+        user.put(LATITUDEstylish, pref.getString(LATITUDEstylish, null));
+        user.put(KEY_ID_STYLISH,pref.getString(KEY_ID_STYLISH,null));
         user.put(KEY_IMAGE,pref.getString(KEY_IMAGE,null));
         return user;
     }
 
     /**
-     * Clear session details
+     * Hapus sesi by programmer jalanan
      * */
     public void logoutUser(){
         // Clearing all data from Shared Preferences

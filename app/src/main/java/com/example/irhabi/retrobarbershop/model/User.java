@@ -10,12 +10,12 @@ public class User {
      * harus sesuaikan dengan jsonnya
      */
 
-    private String Res ;
     private String username;
     private String password;
-    @com.google.gson.annotations.SerializedName("Usr")
-    private Usr usr ;
-
+    @com.google.gson.annotations.SerializedName("status")
+    private String status ;
+    @com.google.gson.annotations.SerializedName("data")
+    private Responsdata respons ;
 
 
     public User (String namaa, String passs){
@@ -23,13 +23,11 @@ public class User {
         this.password = passs;
     }
 
-    public String getsucs(){
-        return username ;
-    }
     public String getStatus(){
-        return Res;
+        return status;
     }
-    public Usr getUsr(){
-        return usr ;
+    public Responsdata getResponsdata(){
+        return respons;
     }
+
 }

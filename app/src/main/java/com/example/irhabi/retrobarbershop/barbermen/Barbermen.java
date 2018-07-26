@@ -1,5 +1,9 @@
 package com.example.irhabi.retrobarbershop.barbermen;
+/**
+ * Created by Programmer Jalanan  on 26/07/2018
+ */
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -10,32 +14,29 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.bumptech.glide.Glide;
+import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
+import com.example.irhabi.retrobarbershop.model.AlluserRespons;
+import com.example.irhabi.retrobarbershop.model.Usr;
+import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
+import com.example.irhabi.retrobarbershop.rest.Router;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class Barbermen extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
-    private List<Album> albumList;
-    private static final String TAG = Barbermen.class.getSimpleName();
-    private static final String URL = "https://bimsalabim.xyz/uploadandroid/mengambildata.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +47,7 @@ public class Barbermen extends AppCompatActivity {
 
         initCollapsingToolbar();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        albumList = new ArrayList<>();
-        adapter = new AlbumsAdapter(this, albumList);
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-
-        stylish();
+        getResponall();
 
         try {
             Glide.with(this).load(R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
@@ -67,6 +57,7 @@ public class Barbermen extends AppCompatActivity {
     }
 
     /**
+     * by Programmer Jalanan
      * Initializing collapsing toolbar
      * Will show and hide the toolbar title on scroll
      */
@@ -88,7 +79,7 @@ public class Barbermen extends AppCompatActivity {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                  //  collapsingToolbar.setTitle(getString(R.string.app_name));
+                    collapsingToolbar.setTitle(getString(R.string.app_name));
                     isShow = true;
                 } else if (isShow) {
                     collapsingToolbar.setTitle(" ");
@@ -99,43 +90,7 @@ public class Barbermen extends AppCompatActivity {
     }
 
     /**
-     * Adding few albums for testing
-     */
-    private void prepareAlbums() {
-        JsonArrayRequest request = new JsonArrayRequest(URL,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (response == null) {
-                            Toast.makeText(getApplicationContext(), "Couldn't fetch the menu! Pleas try again.", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-
-                        List<Album> recipes = new Gson().fromJson(response.toString(), new TypeToken<List<Album>>() {
-                        }.getType());
-
-                        // adding recipes to cart list
-                        albumList.clear();
-                        albumList.addAll(recipes);
-
-                        // refreshing recycler view
-                        adapter.notifyDataSetChanged();
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // error in getting json
-                Log.e(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-
-
-
-            }
-        });
-    }
-
-    /**
+     * by programmer jalanan
      * RecyclerView item decoration - give equal margin around grid item
      */
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -181,68 +136,35 @@ public class Barbermen extends AppCompatActivity {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
+    public void Generatealluser(ArrayList<Usr> Alluser){
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        adapter = new AlbumsAdapter(Alluser, Barbermen.this);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
 
-    private void stylish() {
-        int[] covers = new int[]{
-                R.drawable.anto,
-                R.drawable.arter,
-                R.drawable.jose,
-                R.drawable.stylist,
-                R.drawable.stylist,
-                R.drawable.stylist,
-                R.drawable.stylist,
-                R.drawable.stylist,
-                R.drawable.stylist,};
-
-        Album a = new Album("Anto", 13, covers[0]);
-        albumList.add(a);
-
-        a = new Album("Arter", 8, covers[1]);
-        albumList.add(a);
-
-        a = new Album("Jose", 11, covers[2]);
-        albumList.add(a);
-
-        a = new Album("Belum Ada", 12, covers[3]);
-        albumList.add(a);
-
-        a = new Album("Belum Ada", 13, covers[4]);
-        albumList.add(a);
-
-        a = new Album("Belum Ada", 14, covers[5]);
-        albumList.add(a);
-
-        a = new Album("Belum Ada", 15, covers[6]);
-        albumList.add(a);
-
-        a = new Album("Belum Ada", 16, covers[7]);
-        albumList.add(a);
-
-        a = new Album("Belum Ada", 17, covers[8]);
-        albumList.add(a);
-
-//        a = new Album("Born to Die", 12, covers[3]);
-//        albumList.add(a);
-//
-//        a = new Album("Honeymoon", 14, covers[4]);
-//        albumList.add(a);
-//
-//        a = new Album("I Need a Doctor", 1, covers[5]);
-//        albumList.add(a);
-//
-//        a = new Album("Loud", 11, covers[6]);
-//        albumList.add(a);
-//
-//        a = new Album("Legend", 14, covers[7]);
-//        albumList.add(a);
-//
-//        a = new Album("Hello", 11, covers[8]);
-//        albumList.add(a);
-//
-//        a = new Album("Greatest Hits", 17, covers[9]);
-//        albumList.add(a);
-
-        adapter.notifyDataSetChanged();
     }
 
+    public void getResponall(){
+        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        Call<AlluserRespons> call = service.getalluser();
+        call.enqueue(new Callback<AlluserRespons>() {
+            @Override
+            public void onResponse(Call<AlluserRespons> call, retrofit2.Response<AlluserRespons> response) {
+                Generatealluser(response.body().getALluser());
+            }
+            @Override
+            public void onFailure(Call<AlluserRespons> call, Throwable t) {
+                Toast.makeText(Barbermen.this, "Something went wrong...Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Intent i = new Intent(getApplicationContext(), KonekMaps.class);
+        startActivity(i);
+        return true;
+    }
 }

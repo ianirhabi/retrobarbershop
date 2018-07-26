@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +54,8 @@ public class Profil extends Fragment {
     private Button btnStart;
     private TextView text, nameretro, userretro;
     PhotoViewAttacher photoAttacher;
-
+    private ImageButton close;
+    private LinearLayout layout;
     public Profil(){
         // Required empty public constructor
     }
@@ -80,8 +83,6 @@ public class Profil extends Fragment {
         BarbermenPhoto = (ImageView)view.findViewById(R.id.proffoto);
         BarbermenPhoto1 = (ImageView)view.findViewById(R.id.proffotobesar);
 
-
-
         Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
         int idDetail = Integer.parseInt(id);
         Call<Usr> call = service.retro(idDetail);
@@ -94,7 +95,7 @@ public class Profil extends Fragment {
                 final String first = kf[0];
                 Log.d("DEBUG ", "BARU " + first);
                 Glide
-                        .with(getActivity())
+                        .with(Profil.this)
                         .load(URL + "upload/" + first)
                         .into(BarbermenPhoto);
                 String Id = String.valueOf(response.body().Getid());
@@ -112,6 +113,13 @@ public class Profil extends Fragment {
                         String Id = String.valueOf(response.body().Getid());
                         sesi.createLoginSession(response.body().getUser(),
                                 response.body().getUsergrup(),Id);
+                        BarbermenPhoto1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                BarbermenPhoto1.setVisibility(View.GONE);
+
+                            }
+                        });
                     }
                 });
 
@@ -151,7 +159,6 @@ public class Profil extends Fragment {
 
         return view;
     }
-
 
     Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;

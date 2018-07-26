@@ -1,7 +1,7 @@
 package com.example.irhabi.retrobarbershop.model;
 
 /**
- * Created BY Progrmmer Jalan on January 2018
+ * Created BY Progremmer Jalan on January 2018
  */
 public class Absen{
     @com.google.gson.annotations.SerializedName("user")

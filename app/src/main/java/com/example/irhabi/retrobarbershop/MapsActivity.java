@@ -1,8 +1,11 @@
 package com.example.irhabi.retrobarbershop;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
+import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,7 +20,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private SessionManager session ;
-
+    private String usr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
     /**
      * Manipulates the map once available.
@@ -44,14 +46,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         session = new SessionManager(getApplicationContext());
         HashMap<String, String> usersesion = session.getUserDetails();
-        String la =  usersesion.get(SessionManager.LATITUDE);
-        String lo = usersesion.get(SessionManager.LONGTITUDE);
 
-        Double latude = Double.parseDouble(la);
-        Double lotude = Double.parseDouble(lo);
+        usr = usersesion.get(SessionManager.KEY_USER);
+        if (usr.equals("superadmin")){
+            String la =  usersesion.get(SessionManager.LATITUDEstylish);
+            String lo = usersesion.get(SessionManager.LONGTITUDEstylish);
+            Double latude = Double.parseDouble(la);
+            Double lotude = Double.parseDouble(lo);
 
-        LatLng sydney = new LatLng(latude, lotude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Latitude : " + latude + " longtitude : "+ lotude ));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            LatLng sydney = new LatLng(latude, lotude);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Latitude : " + latude + " longtitude : "+ lotude ));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        }else{
+            String la =  usersesion.get(SessionManager.LATITUDE);
+            String lo = usersesion.get(SessionManager.LONGTITUDE);
+
+            Double latude = Double.parseDouble(la);
+            Double lotude = Double.parseDouble(lo);
+
+            LatLng sydney = new LatLng(latude, lotude);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Latitude : " + latude + " longtitude : "+ lotude ));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        }
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Intent i = new Intent(getApplicationContext(), KonekMaps.class);
+        startActivity(i);
+        return true;
     }
 }

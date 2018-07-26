@@ -1,5 +1,6 @@
 package com.example.irhabi.retrobarbershop;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,7 +23,7 @@ import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends Activity {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;

@@ -227,23 +227,11 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
             @Override
             public void onResponse(Call<User> call, Response<User> response ) {
                 try {
-                    if (response.body().getStatus().equals("Email 123")) {
-                        Toast.makeText(LoginActivity.this, "Anda berhasil masuk, status anda " + response.body().getStatus() + " " , Toast.LENGTH_SHORT).show();
-                        if (loading) {
-                          button.stopLoading();
-                          loading = false;
-                        }
-                    } else if(response.body().getStatus().equals("Email 222")) {
-                        Toast.makeText(LoginActivity.this, "Maaf Anda Salah Password" + response.body().getStatus(), Toast.LENGTH_SHORT).show();
-                        if (loading) {
-                          button.stopLoading();
-                          loading = false;
-                        }
-                    } else if(response.body().getStatus().equals("ok")){
-                        Integer id = new Integer(response.body().getUsr().Getid());
+                   if(response.body().getStatus().equals("sukses")){
+                        Integer id = new Integer(response.body().getResponsdata().getUsr().Getid());
                         String di = id.toString();
-                        session.createLoginSession(response.body().getUsr().getUser(),
-                                response.body().getUsr().getUsergrup(), di);
+                        session.createLoginSession(response.body().getResponsdata().getUsr().getUser(),
+                                response.body().getResponsdata().getUsr().getUsergrup(), di);
                         Intent v = new Intent(LoginActivity.this, KonekMaps.class);
                         startActivity(v);
                         if (loading) {
@@ -251,14 +239,14 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                           loading = false;
                         }
                     } else{
-                        Toast.makeText(LoginActivity.this, "Tidak Berhasil Login " + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Tidak Berhasil Login Status" + response.body().getStatus(), Toast.LENGTH_SHORT).show();
                         if (loading) {
                           button.stopLoading();
                           loading = false;
                         }
                     }
                 } catch (Exception e){
-                    Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Server Masih Dalam Perbaikan", Toast.LENGTH_SHORT).show();
                     if (loading) {
                           button.stopLoading();
                           loading = false;

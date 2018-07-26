@@ -62,8 +62,8 @@
     <string name="title_cart">Cart</string>
     <string name="title_profile">Profile</string>
 
-    <string name="action_add_favourite">Lihat Aktivitasnya</string>
-    <string name="action_play_next">Play Next</string>
+    <string name="Lihat_Absen">Lihat Absen</string>
+    <string name="maps">Lokasi Terakhir Pengambilan Absen</string>
     <string name="masukan_pass">Masukan Password</string>
     <string name="masuka_em">Masukan Username</string>
     <string name="title_activity_maps">Map</string>
