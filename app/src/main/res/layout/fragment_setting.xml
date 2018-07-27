@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <Button
@@ -59,6 +59,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
 
@@ -67,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="6dp"
-                android:textColor="@color/red"
+                android:textColor="@color/black"
                 android:hint="Masukan Password Lama"
                 android:id="@+id/Password" />
         <EditText
@@ -75,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red"
+            android:textColor="@color/black"
             android:hint="Masukan Password Baru"
             android:id="@+id/Passwordbaru" />
         <EditText
@@ -83,22 +84,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="6dp"
-            android:textColor="@color/red"
+            android:textColor="@color/black"
             android:hint="Masukan Password Baru Lagi"
             android:id="@+id/Passwordbarulagi" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/simpan"
-        style="@style/ButtonText"
-        android:textSize="15dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/buttomnbiru"
-        android:hint="Simpan Perubahan"/>
+
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/simpan"
+            style="@style/ButtonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/buttomnbiru"
+            android:hint="Simpan Perubahan"
+            android:textSize="15dp" />
+
     </LinearLayout>
 
 
-
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
