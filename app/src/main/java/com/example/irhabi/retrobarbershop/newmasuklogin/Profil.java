@@ -1,4 +1,7 @@
 package com.example.irhabi.retrobarbershop.newmasuklogin;
+/**
+ * Created by Programmer Jalanan on 17/07/2018
+ */
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -93,6 +96,8 @@ public class Profil extends Fragment {
                 userretro.setText(response.body().getUser());
                 String[] kf = response.body().getnamefoto().split("\\.");
                 final String first = kf[0];
+                sesi = new SessionManager(getActivity());
+                sesi.createImage(first);
                 Log.d("DEBUG ", "BARU " + first);
                 Glide
                         .with(Profil.this)

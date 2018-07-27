@@ -1,7 +1,7 @@
 package com.example.irhabi.retrobarbershop.rest;
 
 /**
- * Created BY Progrmmer Jalan on January 2018
+ * Created BY Programmer Jalan on January 2018
  */
 
 import com.example.irhabi.retrobarbershop.model.Absen;

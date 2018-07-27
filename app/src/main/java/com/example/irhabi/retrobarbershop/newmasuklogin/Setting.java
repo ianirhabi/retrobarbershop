@@ -1,7 +1,7 @@
 package com.example.irhabi.retrobarbershop.newmasuklogin;
 
 /**
- * Created BY Progrmmer Jalan on January 2018
+ * Created BY Programmer Jalan on January 2018
  */
 
 import android.Manifest;
@@ -17,17 +17,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Upload;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
+import com.github.siyamed.shapeimageview.RoundedImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -55,6 +59,7 @@ public class Setting extends AppCompatActivity {
     private Button upld, tk;
     private EditText ld;
     Router service;
+    private ImageView userfoto;
     private SessionManager sesi;
     private String id;
 
@@ -68,9 +73,22 @@ public class Setting extends AppCompatActivity {
             ActivityCompat.requestPermissions(Setting.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSION_REQUEST);
         }
+        userfoto = (ImageView) findViewById(R.id.lod);
 
         upld = (Button) findViewById(R.id.upload);
         tk = (Button) findViewById(R.id.TAKE);
+
+        sesi = new SessionManager(getApplicationContext());
+        HashMap<String, String> usersesion = sesi.getUserDetails();
+
+        String image = usersesion.get(SessionManager.KEY_IMAGE);
+
+
+        Log.d("DEBUG ", "BARU activity seting " + image);
+        Glide
+                .with(Setting.this)
+                .load(URL + "upload/" + image)
+                .into(userfoto);
 
         upld.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +124,7 @@ public class Setting extends AppCompatActivity {
     }
 
       private void uploadFile(Bitmap gambarbitmap){
+
           HashMap<String, RequestBody> map = new HashMap<>();
           map.put("cycle_time_begin", createPartFromString("2017-07-19"));
           map.put("fish_species", createPartFromString("LELE SUPER"));
@@ -126,18 +145,18 @@ public class Setting extends AppCompatActivity {
                   .build();
 
           service = retrofit.create(Router.class);
-
-          String a = file.getName();
-          ld = (EditText)findViewById(R.id.lod);
-
-
-          sesi = new SessionManager(getApplicationContext());
-          sesi.createImage(a);
           HashMap<String, String> usersesion = sesi.getUserDetails();
           id = usersesion.get(SessionManager.KEY_ID);
-          String image = usersesion.get(SessionManager.KEY_IMAGE);
+
+          String a = file.getName();
+         // ld = (EditText)findViewById(R.id.lod);
+          String[] kf = a.split("\\.");
+          final String first = kf[0];
+          sesi = new SessionManager(getApplicationContext());
+         sesi.createImage(first);
+
           int Barberid = Integer.parseInt(id);
-          ld.setText(image);
+
           Upload upload = new Upload(a, Barberid);
 
           Call<Upload> call2 = service.uploadnameImage(upload);
@@ -255,8 +274,8 @@ public class Setting extends AppCompatActivity {
         service = retrofit.create(Router.class);
 
         String a = file.getName();
-        ld = (EditText)findViewById(R.id.lod);
-        ld.setText(a);
+//        ld = (EditText)findViewById(R.id.lod);
+//        ld.setText(a);
 
         sesi = new SessionManager(getApplicationContext());
         sesi = new SessionManager(getApplicationContext());

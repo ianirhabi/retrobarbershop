@@ -2,13 +2,9 @@ package com.example.irhabi.retrobarbershop.model;
 
 
 /**
- * Created BY Progrmmer Jalan on January 2018
+ * Created By Programmer Jalan on January 2018
  */
 public class User {
-
-    /**
-     * harus sesuaikan dengan jsonnya
-     */
 
     private String username;
     private String password;

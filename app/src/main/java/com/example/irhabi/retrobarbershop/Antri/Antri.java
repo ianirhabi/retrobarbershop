@@ -1,14 +1,12 @@
 package com.example.irhabi.retrobarbershop.Antri;
 
 /**
- * Created by Programmer Jalanan
+ * Created by Programmer Jalanan 15/07/2018
  */
 
 import android.os.Bundle;
-
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;

@@ -1,7 +1,7 @@
 package com.example.irhabi.retrobarbershop.model;
 
 /**
- * Created BY Progrmmer Jalan on January 2018
+ * Created By Programmer Jalan on January 2018
  */
 public class Usr {
     @com.google.gson.annotations.SerializedName("Id")
@@ -21,7 +21,6 @@ public class Usr {
     @com.google.gson.annotations.SerializedName("Longtitude")
     private String longt ;
 
-
     public Usr(int id, String User, String name, String Pass, String usrgrup
     ,String latit, String longt){
         this.Id = id;
@@ -32,6 +31,7 @@ public class Usr {
         this.longt = longt;
         this.name= name;
     }
+
     public int Getid(){
         return Id;
     }

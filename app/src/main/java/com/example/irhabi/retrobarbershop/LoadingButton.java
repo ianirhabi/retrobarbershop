@@ -1,5 +1,9 @@
 package com.example.irhabi.retrobarbershop;
 
+/**
+ * Created By Programmer Jalana on 17/04/2018
+ */
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -32,6 +36,7 @@ public class LoadingButton extends RelativeLayout {
         addView(mProgressBar);
     }
 
+    //untuk start loading
     public void startLoading() {
         mProgressBar.setVisibility(View.VISIBLE);
         mTextView.setVisibility(View.INVISIBLE);
@@ -67,5 +72,4 @@ public class LoadingButton extends RelativeLayout {
         setAttributes(context, attrs);
         init();
     }
-
 }

@@ -1,33 +1,105 @@
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-     <EditText
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:id="@+id/lod"/>
-     <Button
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:hint="upload"
-         android:id="@+id/upload"
-         android:visibility="gone"/>
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+
+
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ff"
+            app:siBorderWidth="6dp"
+            android:id="@+id/lod"
+            android:layout_gravity="center"
+            app:siBorderColor="@color/blue"/>
+        <!---->
+        <!--<ImageView-->
+            <!--android:id="@+id/lod"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height=""-->
+            <!--android:layout_gravity="center"-->
+            <!--android:src="@drawable/ff"/>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loading..."
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loading..."
+            android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/TAKE"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="9dp"
+            android:layout_gravity="center"
+            android:background="@drawable/upload" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Upload Foto Anda"
+            android:layout_marginBottom="34dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/red"
+                android:hint="Masukan Password Lama"
+                android:id="@+id/Password" />
+        <EditText
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:background="@android:drawable/ic_menu_upload"
-            android:hint="upload
-Foto
-Anda" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/red"
+            android:hint="Masukan Password Baru"
+            android:id="@+id/Passwordbaru" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/red"
+            android:hint="Masukan Password Baru Lagi"
+            android:id="@+id/Passwordbarulagi" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/simpan"
+        style="@style/ButtonText"
+        android:textSize="15dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/buttomnbiru"
+        android:hint="Simpan Perubahan"/>
+    </LinearLayout>
+
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

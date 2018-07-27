@@ -1,7 +1,7 @@
 package com.example.irhabi.retrobarbershop;
 
 /**
-*Created by Andrian Latif
+*Created by Programmer Jalanan on 27/07/2017
 */
 
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
@@ -14,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.media.MediaBrowserCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
@@ -30,7 +29,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.irhabi.retrobarbershop.newmasuklogin.MainL;
 import com.example.irhabi.retrobarbershop.rest.Router;
 
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
@@ -38,9 +36,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.HashMap;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -245,7 +240,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                           loading = false;
                         }
                     } else{
-                        Toast.makeText(LoginActivity.this, "Tidak Berhasil Login Status" + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Tidak Berhasil Login Status " + response.body().getStatus(), Toast.LENGTH_SHORT).show();
                         if (loading) {
                           button.stopLoading();
                           loading = false;
