@@ -75,7 +75,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         // set the view now
         setContentView(R.layout.activity_login);
 
-
         //menyimpan sesi dari inputan
         session = new SessionManager(getApplicationContext());
 

@@ -21,6 +21,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
@@ -29,7 +30,9 @@ public interface Router {
 
     @POST("user/login")
     Call<User> Login(@Body User user);
-
+    @PUT("user/{id}")
+    Call<User> Updateuser(@Body User user, @Path("id")
+                String id);
     @GET("user/{id}")
     Call<Usr> retro(@Path("id") int Id);
     @GET("user")

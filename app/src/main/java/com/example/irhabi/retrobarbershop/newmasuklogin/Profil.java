@@ -141,8 +141,7 @@ public class Profil extends Fragment {
 
             @Override
             public void onFailure(Call<Usr> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
-                // Toast.makeText(getActivity(), "Something went wrong...Error message: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
                 barber.setImageResource(R.drawable.retroo);
             }
         });

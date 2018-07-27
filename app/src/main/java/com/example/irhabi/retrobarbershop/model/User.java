@@ -7,6 +7,7 @@ package com.example.irhabi.retrobarbershop.model;
 public class User {
 
     private String username;
+    @com.google.gson.annotations.SerializedName("password")
     private String password;
     @com.google.gson.annotations.SerializedName("status")
     private String status ;

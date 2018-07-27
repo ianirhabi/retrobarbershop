@@ -23,12 +23,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Upload;
+import com.example.irhabi.retrobarbershop.model.User;
+import com.example.irhabi.retrobarbershop.model.Usr;
+import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.github.siyamed.shapeimageview.RoundedImageView;
@@ -56,13 +60,13 @@ public class Setting extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST = 100;
     private int PICK_IMAGE_FROM_GALERY_REQUEST = 1;
     public static final int PICK_IMAGE = 100;
-    private Button upld, tk;
-    private EditText ld;
+    private Button upld, tk, simpan;
+    private EditText ld, passwordlama, passwordbaru, passwordbarulagi;
     Router service;
     private ImageView userfoto;
     private SessionManager sesi;
     private String id;
-
+    private TextView username, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,15 +78,38 @@ public class Setting extends AppCompatActivity {
                     MY_PERMISSION_REQUEST);
         }
         userfoto = (ImageView) findViewById(R.id.lod);
-
         upld = (Button) findViewById(R.id.upload);
         tk = (Button) findViewById(R.id.TAKE);
+        username=(TextView)findViewById(R.id.username);
+        password=(TextView)findViewById(R.id.password) ;
+        passwordlama=(EditText)findViewById(R.id.Passwordlama);
+        passwordbaru=(EditText)findViewById(R.id.Passwordbaru);
+        passwordbarulagi=(EditText)findViewById(R.id.Passwordbarulagi);
+        simpan = (Button)findViewById(R.id.simpan);
+
+        simpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final String lama = password.getText().toString();
+                final String baru = passwordbaru.getText().toString();
+                final String barulagi = passwordbarulagi.getText().toString();
+
+                if(lama.equals(baru)){
+                    Toast.makeText(getApplicationContext(), "Password lama tidak boleh sama dengan baru" , Toast.LENGTH_SHORT).show();
+                }else if(baru.equals(barulagi)) {
+                    User user = new User(lama,baru);
+                    update(user);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Password baru tidak sama " , Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         sesi = new SessionManager(getApplicationContext());
         HashMap<String, String> usersesion = sesi.getUserDetails();
 
         String image = usersesion.get(SessionManager.KEY_IMAGE);
-
 
         Log.d("DEBUG ", "BARU activity seting " + image);
         Glide
@@ -107,7 +134,49 @@ public class Setting extends AppCompatActivity {
             }
         });
 
+        sesi = new SessionManager(getApplicationContext());
+        id = usersesion.get(SessionManager.KEY_ID);
+        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        int idDetail = Integer.parseInt(id);
+        Call<Usr> call = service.retro(idDetail);
+        call.enqueue(new Callback<Usr>() {
+
+                         @Override
+                         public void onResponse(Call<Usr> call, Response<Usr> response) {
+                            username.setText(response.body().getname());
+                            password.setText(response.body().getPass());
+                         }
+
+                         @Override
+                         public void onFailure(Call<Usr> call, Throwable t) {
+                             Toast.makeText(getApplicationContext(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+                         }
+        });
     }
+    public void update(User user) {
+        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+
+        sesi = new SessionManager(getApplicationContext());
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
+        id = usersesion.get(SessionManager.KEY_ID);
+        Call<User> call = service.Updateuser(user,id);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.body().getStatus().equals("sukses")){
+                    Toast.makeText(getApplicationContext(),"Berhasil Update data", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Gagal Update data", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     // Izin Akses Camera
     public void onRequestPermissionsResult(int requestCode,
                                            String permission[], int[] grantResults) {
@@ -152,8 +221,15 @@ public class Setting extends AppCompatActivity {
          // ld = (EditText)findViewById(R.id.lod);
           String[] kf = a.split("\\.");
           final String first = kf[0];
+
+          Log.d("DEBUG ", "BARU activity seting " + first);
+          Glide
+                  .with(Setting.this)
+                  .load(URL + "upload/" + first)
+                  .into(userfoto);
+
           sesi = new SessionManager(getApplicationContext());
-         sesi.createImage(first);
+          sesi.createImage(first);
 
           int Barberid = Integer.parseInt(id);
 
