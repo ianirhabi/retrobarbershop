@@ -192,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
 
                 } else {
                     // Izin ditolak.
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "tidak bisa melanjutkan karena anda tidak memberikan akses aplikasi ini", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

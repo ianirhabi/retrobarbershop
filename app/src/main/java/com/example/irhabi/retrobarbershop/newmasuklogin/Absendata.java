@@ -20,6 +20,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -187,17 +188,29 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
         call.enqueue(new Callback<Usr>() {
             @Override
             public void onResponse(Call<Usr> call, Response<Usr> response) {
-                if(response.body().getUsergrup().equals("2")) {
-                    sendNotification("Notification", "Anda Berhasil Mengambil Absen");
-                    String Id = String.valueOf(response.body().Getid());
-                    sesi = new SessionManager(getActivity());
-                    sesi.createLoginSession(response.body().getUser(),
-                            response.body().getUsergrup(),Id);
-                }else{
-                    String Id = String.valueOf(response.body().Getid());
-                    sesi = new SessionManager(getActivity());
-                    sesi.createLoginSession(response.body().getUser(),
-                            response.body().getUsergrup(),Id);
+                sesi = new SessionManager(getActivity());
+                HashMap<String, String> usersesion = sesi.getUserDetails();
+                String user  = usersesion.get(SessionManager.KEY_USER);
+                if(user.equals("superadmin")){
+                    if (response.body().getNotif().equals("2")){
+                    sendNotification("Notification", "Stylish Berhasil Mengambil Absen");
+                    }
+                }else {
+                    if (response.body().getNotif().equals("2")) {
+                        sendNotification("Notification", "Anda Berhasil Mengambil Absen");
+                        String Id = String.valueOf(response.body().Getid());
+                        sesi = new SessionManager(getActivity());
+                        sesi.createLoginSession(response.body().getUser(),
+                                response.body().getUsergrup(), Id);
+                    } else  {
+                        String Id = String.valueOf(response.body().Getid());
+                        sesi = new SessionManager(getActivity());
+                        sesi.createLoginSession(response.body().getUser(),
+                                response.body().getUsergrup(), Id);
+                    }
+                }
+                if(response.body().getIanmonitor().equals("2")){
+
                 }
             }
             @Override

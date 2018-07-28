@@ -33,9 +33,8 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
     @Override
     public void onBindViewHolder(AbsenViewHolder holder, int position) {
         holder.txtTanggal.setText("Tanggal Pengambilan Absen : "+dataList.get(position).gettangal());
-        holder.txtWaktu.setText("Jam Masuk : " + dataList.get(position).getwaktu());
         holder.txtHari.setText("Hari Masuk : " + dataList.get(position).getHari());
-        holder.txtKehadiran.setText("Kehadiran : " + dataList.get(position).gethadir());
+        holder.txtKehadiran.setText("Status Kehadiran : " + dataList.get(position).gethadir());
     }
 
     @Override

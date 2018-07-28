@@ -6,8 +6,8 @@ package com.example.irhabi.retrobarbershop.model;
 public class Usr {
     @com.google.gson.annotations.SerializedName("Id")
     private int Id;
-    @com.google.gson.annotations.SerializedName("Usergup")
-    private String  usergrup;
+    @com.google.gson.annotations.SerializedName("Notifikasi")
+    private String  notif;
     @com.google.gson.annotations.SerializedName("User")
     private String User;
     @com.google.gson.annotations.SerializedName("Name")
@@ -20,13 +20,17 @@ public class Usr {
     private String lati ;
     @com.google.gson.annotations.SerializedName("Longtitude")
     private String longt ;
+    @com.google.gson.annotations.SerializedName("Usergrup")
+    private String usergrup ;
+    @com.google.gson.annotations.SerializedName("Ianmonitor")
+    private String ianmonitor ;
 
-    public Usr(int id, String User, String name, String Pass, String usrgrup
+    public Usr(int id, String User, String name, String Pass, String notif
     ,String latit, String longt){
         this.Id = id;
         this.User = User;
         this.Pass = Pass;
-        this.usergrup = usrgrup;
+        this.notif = notif;
         this.lati = latit;
         this.longt = longt;
         this.name= name;
@@ -41,8 +45,8 @@ public class Usr {
     public String getPass(){
         return Pass;
     }
-    public String getUsergrup(){
-        return usergrup;
+    public String getNotif(){
+        return notif;
     }
     public String getname(){
         return name;
@@ -55,6 +59,12 @@ public class Usr {
     }
     public String getnamefoto(){
         return foto;
+    }
+    public String getUsergrup(){
+        return usergrup;
+    }
+    public String getIanmonitor(){
+        return ianmonitor;
     }
 
 }
