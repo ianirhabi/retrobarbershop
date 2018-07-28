@@ -1,0 +1,103 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/ff"
+            app:siBorderWidth="6dp"
+            android:id="@+id/fotokaryawan"
+            android:layout_gravity="center"
+            app:siBorderColor="@color/blue"/>
+        <!---->
+        <!--<ImageView-->
+        <!--android:id="@+id/lod"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height=""-->
+        <!--android:layout_gravity="center"-->
+        <!--android:src="@drawable/ff"/>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loading..."
+            android:id="@+id/usernamekaryawan"
+            android:textSize="20dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:textSize="20dp"
+            android:id="@+id/passwordkaryawan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loading..."
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/uploadfoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="9dp"
+            android:layout_gravity="center"
+            android:background="@drawable/upload" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Upload Foto Karyawan"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/black"
+                android:hint="Masukan Password Lama"
+                android:id="@+id/Passwordlamakaryawan" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:hint="Masukan Password Baru"
+                android:id="@+id/Passwordbarukaryawan" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                android:hint="Masukan Password Baru Lagi"
+                android:id="@+id/Passwordbarulagikaryawan" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/simpankaryawan"
+            style="@style/ButtonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/buttomnbiru"
+            android:hint="Simpan Perubahan"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -238,15 +238,15 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                           button.stopLoading();
                           loading = false;
                         }
-                    } else{
-                        Toast.makeText(LoginActivity.this, "Tidak Berhasil Login Status " + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Password atau Username salah status Anda " + response.body().getStatus(), Toast.LENGTH_SHORT).show();
                         if (loading) {
                           button.stopLoading();
                           loading = false;
                         }
                     }
-                } catch (Exception e){
-                    Toast.makeText(LoginActivity.this, "Server Masih Dalam Perbaikan", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){
+                    Toast.makeText(LoginActivity.this, "Device Anda Tidak Bisa Berjalan dengan aplikasi ini", Toast.LENGTH_SHORT).show();
                     if (loading) {
                           button.stopLoading();
                           loading = false;
@@ -255,7 +255,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Server Masih Dalam Perbaikan",Toast.LENGTH_SHORT).show();
                 if (loading) {
                           button.stopLoading();
                           loading = false;

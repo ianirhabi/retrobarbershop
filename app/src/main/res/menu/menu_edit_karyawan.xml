@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/editstylish"
+        android:orderInCategory="101"
+        android:title="@string/editstylish"
+        android:visible="true"/>
+    <item
+        android:id="@+id/hapsustylish"
+        android:orderInCategory="101"
+        android:title="@string/hapuskaryawan"
+        android:visible="true"/>
+</menu>

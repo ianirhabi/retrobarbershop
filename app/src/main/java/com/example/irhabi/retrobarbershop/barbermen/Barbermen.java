@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -157,7 +158,7 @@ public class Barbermen extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<AlluserRespons> call, Throwable t) {
-                Toast.makeText(Barbermen.this, "Something went wrong...Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+                Toast.makeText(Barbermen.this, "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
             }
         });
     }

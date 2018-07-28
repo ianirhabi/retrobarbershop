@@ -26,6 +26,7 @@ import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.example.irhabi.retrobarbershop.rest.AppConfig.URL;
 
@@ -70,16 +71,18 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         final int b = dataList.get(position).Getid();
         final String lat = dataList.get(position).getLat();
         final String lon = dataList.get(position).getLongt();
-
         String[] kf = a.split("\\.");
         final String first = kf[0];
-        Log.d("DEBUG ", "NAMA FOTO USER ADAPTER " + first);
         Glide.with(mContext).load(URL+"upload/"+ first).into(holder.thumbnail);
+
+        session = new SessionManager(mContext);
+        final HashMap<String, String> usersesion = session.getUserDetails();
+        final String karyawan = usersesion.get(SessionManager.KEY_KARYAWAN);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPopupMenu(holder.overflow, b ,lat, lon);
+                showPopupMenu(holder.overflow, b ,lat, lon, karyawan, first);
             }
         });
     }
@@ -95,65 +98,87 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
     /**
      * Showing popup menu when tapping on 3 dots
      */
-    private void showPopupMenu(View view, int b , String lat, String lon) {
+    private void showPopupMenu(View view, int b , String lat, String lon, String karyawn, String filefoto) {
         // inflate menu
         PopupMenu popup = new PopupMenu(mContext, view);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_album, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(b, lat, lon));
-        popup.show();
+        if(karyawn.equals("1")) {
+            inflater.inflate(R.menu.menu_album, popup.getMenu());
+            popup.setOnMenuItemClickListener(new MyMenuItemClickListener(b, lat, lon, karyawn, filefoto));
+            popup.show();
+        }else{
+            inflater.inflate(R.menu.menu_edit_karyawan, popup.getMenu());
+            popup.setOnMenuItemClickListener(new MyMenuItemClickListener(b, lat, lon, karyawn, filefoto));
+            popup.show();
+        }
     }
 
     /**
      * Click listener for popup menu items
      */
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-        private String  lat, lon ;
+        private String  lat, lon, karyawan, fotofile ;
         private int b;
 
-        public MyMenuItemClickListener(int b, String lat, String lon) {
+        public MyMenuItemClickListener(int b, String lat, String lon, String stylish, String filefoto) {
             this.b = b;
             this.lat = lat;
             this.lon = lon;
+            this.fotofile = filefoto;
+            this.karyawan = stylish;
         }
 
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.action_lihat_absen:
-                    try {
-                        session = new SessionManager(mContext);
-                        String id = String.valueOf(b);
-                        session.createidStylish(id);
-                        Log.d("disini ======== ", " " + b);
-                        Toast.makeText(mContext, "id usernya " + b, Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(mContext, LaporanAbsenStylish.class);
-                        Bundle ambil_id = new Bundle();
-                        ambil_id.putInt("parse_id", b);
-                        //b.putString("parse_alamat", var_alamat);
-                        //b.ambilid.putString("parse_tgllahir", var_tgllahir);
-                        i.putExtras(ambil_id);
-                        mContext.startActivity(i);
-                    }catch (Exception e){
-                        Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
-                    }
-                    return true;
-                case R.id.action_play_next:
-                    try {
-                        session = new SessionManager(mContext);
-                        session.createLongtiLatiStylish(lat,lon);
-                        Toast.makeText(mContext, "Lokasi Stylish " + lat + " " + lon, Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(mContext, MapsActivity.class);
-                        mContext.startActivity(i);
-                    }catch (Exception e){
-                        Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
-                    }
-                    return true;
-                default:
-            }
-            return false;
+                switch (menuItem.getItemId()) {
+                    case R.id.action_lihat_absen:
+                        try {
+                            Intent i = new Intent(mContext, LaporanAbsenStylish.class);
+                            Bundle ambil_id = new Bundle();
+                            ambil_id.putInt("parse_id", b);
+                            i.putExtras(ambil_id);
+                            mContext.startActivity(i);
+                        }catch (Exception e){
+                            Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
+                    case R.id.lokasistylish:
+                        try {
+                            session = new SessionManager(mContext);
+                            session.createLongtiLatiStylish(lat,lon);
+                            Toast.makeText(mContext, "Lokasi Stylish " + lat + " " + lon, Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(mContext, MapsActivity.class);
+                            mContext.startActivity(i);
+                        }catch (Exception e){
+                            Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
+                    case R.id.editstylish:
+                        try {
+                            Intent i = new Intent(mContext, EditKaryawan.class);
+                            Bundle ambil_data = new Bundle();
+                            ambil_data.putInt("parse_id", b);
+                            ambil_data.putString("parse_foto", fotofile);
+                            i.putExtras(ambil_data);
+                            mContext.startActivity(i);
+                        }catch (Exception e){
+                            Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
+                    case R.id.hapsustylish:
+                        try {
+                            Intent i = new Intent(mContext, HapusKaryawan.class);
+                            Bundle ambil_data = new Bundle();
+                            ambil_data.putInt("parse_id", b);
+                            i.putExtras(ambil_data);
+                            mContext.startActivity(i);
+                        }catch (Exception e){
+                            Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
+                    default:
+                }
+           return false;
         }
-
     }
-
 }

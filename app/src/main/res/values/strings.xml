@@ -64,6 +64,8 @@
 
     <string name="Lihat_Absen">Lihat Absen</string>
     <string name="maps">Lokasi Terakhir Pengambilan Absen</string>
+    <string name="editstylish">Edit Akun Karyawaan</string>
+    <string name="hapuskaryawan">Hapus Karyawaan Anda</string>
     <string name="masukan_pass">Masukan Password</string>
     <string name="masuka_em">username tidak boleh kosong</string>
     <string name="title_activity_maps">Map</string>
@@ -90,6 +92,7 @@
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
     </style>
+
     <style name="CardView.">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

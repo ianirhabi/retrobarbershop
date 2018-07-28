@@ -18,6 +18,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -37,6 +38,9 @@ public interface Router {
     Call<Usr> retro(@Path("id") int Id);
     @GET("user")
     Call<AlluserRespons> getalluser();
+
+    @DELETE("user/{id}")
+    Call<User> delete(@Path("id")int id);
 
     @GET("absen/{id}")
     Call<Absenarray> absenbarberman(@Path("id") int Id);

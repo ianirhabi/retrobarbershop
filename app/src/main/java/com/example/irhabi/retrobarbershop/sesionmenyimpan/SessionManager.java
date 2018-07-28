@@ -32,6 +32,7 @@ public class SessionManager {
 
     // Shared pref mode
     int PRIVATE_MODE = 0;
+    int employ = 5;
 
     // nama sharedpreference
     private static final String PREF_NAME = "Sesi";
@@ -49,8 +50,9 @@ public class SessionManager {
     public static  final String LONGTITUDEstylish = "nautral";
     public static  final String LATITUDEstylish = "DIS";
     public static  final String KEY_ID_STYLISH = "1";
+    public static  final String KEY_KARYAWAN = "netral" ;
 
-    // Constructor
+    // public Constructor
     public SessionManager(Context context){
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -67,6 +69,11 @@ public class SessionManager {
         editor.putString(KEY_ID, id);
         editor.putString(KEY_USER, user);
         editor.putString(KEY_USERGRUP, usrgrup);
+        editor.commit();
+    }
+    public void createControlKaryawaan(String karyawaan){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(KEY_KARYAWAN, karyawaan);
         editor.commit();
     }
     public void createLongtiLati(String la, String lo){
@@ -125,6 +132,7 @@ public class SessionManager {
         user.put(LATITUDEstylish, pref.getString(LATITUDEstylish, null));
         user.put(KEY_ID_STYLISH,pref.getString(KEY_ID_STYLISH,null));
         user.put(KEY_IMAGE,pref.getString(KEY_IMAGE,null));
+        user.put(KEY_KARYAWAN,pref.getString(KEY_KARYAWAN, null));
         return user;
     }
 

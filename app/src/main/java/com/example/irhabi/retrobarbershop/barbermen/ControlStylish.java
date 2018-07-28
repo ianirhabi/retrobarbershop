@@ -11,11 +11,12 @@ import android.widget.ImageView;
 
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.ResetPasswordActivity;
+import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
 public class ControlStylish extends AppCompatActivity {
     private Button karyawan, Edit, Laporan;
     private ImageView foto;
-
+    private SessionManager sesi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,9 @@ public class ControlStylish extends AppCompatActivity {
         karyawan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sesi = new SessionManager(getApplicationContext());
+                String a = "1" ;
+                sesi.createControlKaryawaan(a);
                 Intent i = new Intent(ControlStylish.this, Barbermen.class);
                 startActivity(i);
                 finish();
@@ -37,7 +41,10 @@ public class ControlStylish extends AppCompatActivity {
         Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ControlStylish.this, ResetPasswordActivity.class);
+                sesi = new SessionManager(getApplicationContext());
+                String a = "2" ;
+                sesi.createControlKaryawaan(a);
+                Intent i = new Intent(ControlStylish.this, Barbermen.class);
                 startActivity(i);
                 finish();
             }

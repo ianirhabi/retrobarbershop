@@ -95,11 +95,18 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Antri.Antri" />
-        <activity android:name=".barbermen.ControlStylish"
-            android:label="Laporan Aktivitas Stylish"/>
-        <activity android:name=".barbermen.LaporanAbsenStylish"
-            android:theme="@style/AppTheme"
-            android:label="Laporan Absen Stylish"></activity>
+        <activity
+            android:name=".barbermen.ControlStylish"
+            android:label="Laporan Aktivitas Stylish" />
+        <activity
+            android:name=".barbermen.LaporanAbsenStylish"
+            android:label="Laporan Absen Stylish"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".barbermen.EditKaryawan"
+            android:label="Edit Data Karyawan"
+            android:screenOrientation="portrait" />
+        <activity android:name=".barbermen.HapusKaryawan"></activity>
     </application>
 
 </manifest>

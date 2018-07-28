@@ -9,7 +9,7 @@
         android:layout_width="300dp"
         android:layout_height="600dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/iconret" />
+        android:src="@drawable/retret" />
 
     <TextView
         android:layout_width="fill_parent"

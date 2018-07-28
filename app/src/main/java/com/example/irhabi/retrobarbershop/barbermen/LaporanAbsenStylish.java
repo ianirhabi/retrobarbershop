@@ -146,7 +146,7 @@ public class LaporanAbsenStylish extends AppCompatActivity implements SwipeRefre
             }
             @Override
             public void onFailure(Call<Absenarray> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Something went wrong...Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
             }
         });
     }
