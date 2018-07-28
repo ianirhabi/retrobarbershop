@@ -97,7 +97,7 @@
         <activity android:name=".Antri.Antri" />
         <activity
             android:name=".barbermen.ControlStylish"
-            android:label="Laporan Aktivitas Stylish" />
+            android:label="Laporan Aktivitas Stylish"/>
         <activity
             android:name=".barbermen.LaporanAbsenStylish"
             android:label="Laporan Absen Stylish"

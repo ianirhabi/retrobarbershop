@@ -80,7 +80,7 @@ public class Barbermen extends AppCompatActivity {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle(getString(R.string.app_name));
+                    collapsingToolbar.setTitle("Daftar Karyawan");
                     isShow = true;
                 } else if (isShow) {
                     collapsingToolbar.setTitle(" ");

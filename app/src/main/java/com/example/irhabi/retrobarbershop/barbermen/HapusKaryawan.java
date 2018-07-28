@@ -1,10 +1,12 @@
 package com.example.irhabi.retrobarbershop.barbermen;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.model.Responhapuskaryawan;
 import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
@@ -24,17 +26,21 @@ public class HapusKaryawan extends AppCompatActivity {
         final int Barberid = b.getInt("parse_id");
 
         Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
-        Call<User> call = service.delete(Barberid);
-        call.enqueue(new Callback<User>() {
+        Call<Responhapuskaryawan> call = service.delete(Barberid);
+        call.enqueue(new Callback<Responhapuskaryawan>() {
 
 
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(getApplicationContext(), "status nya "+ response.body().getStatus(),Toast.LENGTH_LONG ).show();
+            public void onResponse(Call<Responhapuskaryawan> call, Response<Responhapuskaryawan> response) {
+                Toast.makeText(getApplicationContext(), "Anda Berhasil Menghapus Data Karyawan dengan status "+ response.body().getstatus(),Toast.LENGTH_LONG ).show();
+                Intent i = new Intent(HapusKaryawan.this, ControlStylish.class);
+                startActivity(i);
+                finish();
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Responhapuskaryawan> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "gagal " + t,Toast.LENGTH_LONG ).show();
 
             }
         });

@@ -165,7 +165,7 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
 //                android.R.color.holo_orange_dark);
 
         this.mHandler = new Handler();
-        this.mHandler.postDelayed(this.m_Runnable, 5000);
+        this.mHandler.postDelayed(this.m_Runnable, 30000);
         return view;
     }
 
@@ -191,9 +191,11 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
                 sesi = new SessionManager(getActivity());
                 HashMap<String, String> usersesion = sesi.getUserDetails();
                 String user  = usersesion.get(SessionManager.KEY_USER);
+                DateFormat dateFormat = new SimpleDateFormat("H:mm:ss");
+                Date date = new Date();
                 if(user.equals("superadmin")){
                     if (response.body().getNotif().equals("2")){
-                    sendNotification("Notification", "Stylish Berhasil Mengambil Absen");
+                    sendNotification("Notification", "Stylish Berhasil Mengambil absen pada jam " +dateFormat.format(date));
                     }
                 }else {
                     if (response.body().getNotif().equals("2")) {
@@ -226,7 +228,7 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getActivity())
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.iconret)
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)
@@ -273,7 +275,7 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
             }
             @Override
             public void onFailure(Call<Absenarray> call, Throwable t) {
-                Toast.makeText(getActivity(), "Something went wrong...Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
             }
         });
     }

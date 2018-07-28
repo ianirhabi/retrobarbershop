@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".barbermen.ControlStylish">
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".barbermen.ControlStylish"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,5 +70,14 @@
             android:layout_marginTop="70dp"
             android:layout_gravity="center"
             android:src="@drawable/retroo" />
+
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:id="@+id/idTextClock"
+        android:format24Hour="hh:mm:ss"
+        android:layout_centerHorizontal= "true"/>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
