@@ -14,14 +14,31 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
+        <ImageView
+            android:id="@+id/imageseperadmin"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/retroo" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <TextClock
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:textSize="20dp"
+            android:id="@+id/idTextClock"
+            android:format24Hour="hh:mm:ss a"
+            android:layout_centerHorizontal= "true"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp">
 
             <Button
+                android:layout_gravity="center"
                 android:id="@+id/karyawan"
                 android:layout_width="150dp"
                 style="@style/ButtonText"
@@ -34,50 +51,60 @@
 
             <Button
                 android:id="@+id/rubahakun"
-                android:layout_width="150dp"
                 style="@style/ButtonText"
-                android:layout_alignParentRight="true"
+                android:layout_width="150dp"
                 android:layout_height="100dp"
-                android:textSize="17dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
                 android:background="@drawable/buttonhijau"
                 android:drawableLeft="@drawable/settings"
-                android:hint="Edit Akun Stylish" />
+                android:hint="Edit Akun Stylish"
+                android:textSize="17dp" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_gravity="center">
+            <!--android:orientation="horizontal">-->
+            <!--<Button-->
+                <!--android:id="@+id/penjualan"-->
+                <!--android:drawableLeft="@android:drawable/ic_menu_agenda"-->
+                <!--style="@style/ButtonText"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_below="@+id/buttonHijau"-->
+                <!--android:layout_height="150dp"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:textSize="17dp"-->
+                <!--android:background="@drawable/buttonorange"-->
+                <!--android:hint="Laporan Pemasukan Stylish"/>-->
             <Button
                 android:id="@+id/penjualan"
                 android:drawableLeft="@android:drawable/ic_menu_agenda"
                 style="@style/ButtonText"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/buttonHijau"
+                android:layout_width="150dp"
                 android:layout_height="100dp"
-                android:layout_width="300dp"
-                android:layout_marginTop="15dp"
-                android:textSize="17dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
                 android:background="@drawable/buttonorange"
-                android:hint="Laporan Pemasukan Stylish"/>
+                android:hint="Laporan Pemasukan Stylish"
+                android:textSize="17dp" />
+        <Button
+            android:id="@+id/tambahakun"
+            android:drawableLeft="@android:drawable/ic_input_add"
+            style="@style/ButtonText"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonungun"
+            android:hint="Tambah Akun"
+            android:textSize="17dp" />
+
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageseperadmin"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="70dp"
-            android:layout_gravity="center"
-            android:src="@drawable/retroo" />
 
-    <TextClock
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:textSize="20dp"
-        android:id="@+id/idTextClock"
-        android:format24Hour="hh:mm:ss"
-        android:layout_centerHorizontal= "true"/>
     </LinearLayout>
 </ScrollView>

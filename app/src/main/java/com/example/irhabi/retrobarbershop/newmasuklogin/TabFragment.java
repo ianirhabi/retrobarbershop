@@ -39,12 +39,21 @@ public class TabFragment extends Fragment {
 
         viewPager.setAdapter(new MyAdapter( getChildFragmentManager()));
 
+
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
+
                 tabLayout.setupWithViewPager(viewPager);
+                tabLayout.getTabAt(0).setIcon(R.drawable.iconret);
+                tabLayout.getTabAt(1).setIcon(R.drawable.ic_food);
             }
         });
+
+
+
+
+
         return v;
     }
 

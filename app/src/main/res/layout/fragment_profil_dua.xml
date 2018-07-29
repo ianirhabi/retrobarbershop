@@ -1,12 +1,20 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7151515"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f7151515">
+
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:background="#f7151515"
         android:orientation="vertical">
+
+
         <TextView
             android:id="@+id/timer"
             android:layout_width="wrap_content"
@@ -24,6 +32,7 @@
             android:background="#2246e32a"
             android:orientation="horizontal">
 
+                android:fillViewport="true">
             <ImageView
                 android:id="@+id/proffoto"
                 android:layout_width="60dp"
@@ -37,6 +46,7 @@
                 android:layout_height="fill_parent"
                 android:background="#e30b0b09"
                 android:orientation="vertical">
+
 
                 <TextView
                     android:id="@+id/Barbermenname"
@@ -55,6 +65,7 @@
                     android:textSize="14dp" />
 
             </LinearLayout>
+
         </LinearLayout>
 
         <TextView
@@ -72,7 +83,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="2dp"
             android:text="@string/retro_status"
             android:textColor="@color/colorAccent" />
 
@@ -82,7 +93,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:layout_marginTop="20dp"
+
             android:text="SELAMAT BEKERJA"
             android:textColor="@color/red" />
 
@@ -93,18 +104,22 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:src="@drawable/retroo" />
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
         <Button
             android:id="@+id/buttonStart"
-            android:layout_width="fill_parent"
+            android:layout_width="350dp"
+            android:layout_gravity="center"
             style="@style/ButtonText"
-            android:width="300dp"
             android:textSize="15dp"
+            android:layout_marginTop="70dp"
             android:background="@drawable/buttonhijau"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
             android:hint="Start Barcode Lagi" />
+        </LinearLayout>
 
     </LinearLayout>
 <!--<LinearLayout-->
@@ -129,3 +144,4 @@
 <!--</LinearLayout>-->
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

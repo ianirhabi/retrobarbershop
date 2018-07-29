@@ -62,7 +62,8 @@
             android:theme="@style/AppTheme.Fullscreen" />
         <activity
             android:name=".newmasuklogin.Setting"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="Update Akun"/>
         <activity
             android:name=".error.Gagal"
             android:screenOrientation="portrait" />
