@@ -32,15 +32,23 @@ public class HapusKaryawan extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<Responhapuskaryawan> call, Response<Responhapuskaryawan> response) {
-                Toast.makeText(getApplicationContext(), "Anda Berhasil Menghapus Data Karyawan dengan status "+ response.body().getstatus(),Toast.LENGTH_LONG ).show();
-                Intent i = new Intent(HapusKaryawan.this, ControlStylish.class);
-                startActivity(i);
-                finish();
+                if(response.body().getstatus().equals("sukses")) {
+                    Toast.makeText(getApplicationContext(), "Anda Berhasil Menghapus Data Karyawan dengan status " + response.body().getstatus(), Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(HapusKaryawan.this, ControlStylish.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Gagal Menghapus Data Karyawan " + response.body().getstatus(), Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(HapusKaryawan.this, ControlStylish.class);
+                    startActivity(i);
+                    finish();
+                }
+
             }
 
             @Override
             public void onFailure(Call<Responhapuskaryawan> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "gagal " + t,Toast.LENGTH_LONG ).show();
+                Toast.makeText(getApplicationContext(), "Server Masih Dalam Perbaikan " + t,Toast.LENGTH_LONG ).show();
 
             }
         });

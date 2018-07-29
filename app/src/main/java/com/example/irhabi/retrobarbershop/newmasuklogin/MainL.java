@@ -57,6 +57,7 @@ public class MainL extends AppCompatActivity {
         final HashMap<String, String> usersesion = sesi.getUserDetails();
         usr = usersesion.get(SessionManager.KEY_USER);
         String admin = usr;
+        Toast.makeText(getApplicationContext(), "welcome " + admin, Toast.LENGTH_LONG).show();
         if(admin.equals("admin")) {
             Menu scan_Menu = navigationView.getMenu();
             scan_Menu.findItem(R.id.scan).setVisible(true);

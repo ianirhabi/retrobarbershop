@@ -171,7 +171,7 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     private void generateAbsen(ArrayList<Absen> Arrayabsen) {
         recyclerView = getView().findViewById(R.id.recycler_view_notice_list);
-        adapterabsen = new AbsenAdapter(Arrayabsen);
+        adapterabsen = new AbsenAdapter(Arrayabsen, getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterabsen);
@@ -198,21 +198,25 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
                     sendNotification("Notification", "Stylish Berhasil Mengambil absen pada jam " +dateFormat.format(date));
                     }
                 }else {
-                    if (response.body().getNotif().equals("2")) {
+                        if (response.body().getNotif().equals("2")) {
                         sendNotification("Notification", "Anda Berhasil Mengambil Absen");
                         String Id = String.valueOf(response.body().Getid());
                         sesi = new SessionManager(getActivity());
                         sesi.createLoginSession(response.body().getUser(),
                                 response.body().getUsergrup(), Id);
-                    } else  {
-                        String Id = String.valueOf(response.body().Getid());
-                        sesi = new SessionManager(getActivity());
-                        sesi.createLoginSession(response.body().getUser(),
-                                response.body().getUsergrup(), Id);
+                        } else if (response.body().getNotif().equals("")) {
+                            sesi = new SessionManager(getActivity());
+                            sesi.logoutUser();
+                        }else{
+                            String Id = String.valueOf(response.body().Getid());
+                            sesi = new SessionManager(getActivity());
+                            sesi.createLoginSession(response.body().getUser(),
+                                    response.body().getUsergrup(), Id);
                     }
                 }
                 if(response.body().getIanmonitor().equals("2")){
-
+                    sesi = new SessionManager(getActivity());
+                    sesi.logoutUser();
                 }
             }
             @Override

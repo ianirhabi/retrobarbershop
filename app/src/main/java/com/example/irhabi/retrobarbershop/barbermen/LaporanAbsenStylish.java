@@ -153,7 +153,7 @@ public class LaporanAbsenStylish extends AppCompatActivity implements SwipeRefre
 
     private void generateAbsen(ArrayList<Absen> Arrayabsen) {
         recyclerView = findViewById(R.id.recycler_view_notice_list);
-        adapterabsen = new AbsenAdapter(Arrayabsen);
+        adapterabsen = new AbsenAdapter(Arrayabsen, LaporanAbsenStylish.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterabsen);

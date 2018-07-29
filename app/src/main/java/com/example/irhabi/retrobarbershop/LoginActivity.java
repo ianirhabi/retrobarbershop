@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                         button.stopLoading();
                         loading = false;
                     }
-                    inputEmail.setError(getString(R.string.masukan_pass));
+                    inputPassword.setError(getString(R.string.masukan_pass));
                     return;
                 }
                 if (password.length() < 6) {
