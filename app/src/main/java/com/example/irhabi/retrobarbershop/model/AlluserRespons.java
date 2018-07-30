@@ -11,7 +11,6 @@ public class AlluserRespons {
     @SerializedName("data")
         ArrayList<Usr> data;
 
-
     public String getStatus() {
         return status;
     }

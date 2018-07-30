@@ -62,8 +62,8 @@
             android:theme="@style/AppTheme.Fullscreen" />
         <activity
             android:name=".newmasuklogin.Setting"
-            android:screenOrientation="portrait"
-            android:label="Update Akun"/>
+            android:label="Update Akun"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".error.Gagal"
             android:screenOrientation="portrait" />
@@ -98,7 +98,7 @@
         <activity android:name=".Antri.Antri" />
         <activity
             android:name=".barbermen.ControlStylish"
-            android:label="Laporan Aktivitas Stylish"/>
+            android:label="Laporan Aktivitas Stylish" />
         <activity
             android:name=".barbermen.LaporanAbsenStylish"
             android:label="Laporan Absen Stylish"
@@ -107,7 +107,9 @@
             android:name=".barbermen.EditKaryawan"
             android:label="Edit Data Karyawan"
             android:screenOrientation="portrait" />
-        <activity android:name=".barbermen.HapusKaryawan"></activity>
+        <activity android:name=".barbermen.HapusKaryawan" />
+        <activity android:name=".barbermen.TambahKaryawan"
+            android:label="Tambah Data"></activity>
     </application>
 
 </manifest>

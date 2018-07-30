@@ -6,5 +6,4 @@ public class Responsdata {
     public Usr getUsr(){
         return usr;
     }
-
 }

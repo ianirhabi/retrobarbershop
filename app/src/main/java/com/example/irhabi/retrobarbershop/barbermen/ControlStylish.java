@@ -8,13 +8,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.ResetPasswordActivity;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
 public class ControlStylish extends AppCompatActivity {
-    private Button karyawan, Edit, Laporan;
+    private Button karyawan, Edit, Laporan, tambah;
     private ImageView foto;
     private SessionManager sesi;
     @Override
@@ -24,6 +25,16 @@ public class ControlStylish extends AppCompatActivity {
         karyawan = (Button)findViewById(R.id.karyawan);
         Edit = (Button)findViewById(R.id.rubahakun);
         foto =(ImageView)findViewById(R.id.imageseperadmin) ;
+        tambah = (Button)findViewById(R.id.tambahakun);
+        Laporan = (Button)findViewById(R.id.penjualan);
+
+        Laporan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Maaf menu ini masih dalam tahap pengembangan ",Toast.LENGTH_LONG ).show();
+            }
+        });
+
         final Animation rotate = AnimationUtils.loadAnimation(this, R.anim.anim_rotate);
         foto.startAnimation(rotate);
         karyawan.setOnClickListener(new View.OnClickListener() {
@@ -49,5 +60,14 @@ public class ControlStylish extends AppCompatActivity {
                 finish();
             }
         });
+
+        tambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ControlStylish.this, TambahKaryawan.class);
+                startActivity(i);
+            }
+        });
+
     }
 }

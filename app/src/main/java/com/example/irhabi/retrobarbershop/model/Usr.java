@@ -24,6 +24,8 @@ public class Usr {
     private String usergrup ;
     @com.google.gson.annotations.SerializedName("Ianmonitor")
     private String ianmonitor ;
+    @com.google.gson.annotations.SerializedName("status")
+    private String status ;
 
     public Usr(int id, String User, String name, String Pass, String notif
     ,String latit, String longt){
@@ -65,6 +67,9 @@ public class Usr {
     }
     public String getIanmonitor(){
         return ianmonitor;
+    }
+    public String getstatus(){
+        return status;
     }
 
 }

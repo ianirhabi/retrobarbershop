@@ -7,6 +7,7 @@ package com.example.irhabi.retrobarbershop.rest;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.model.AlluserRespons;
+import com.example.irhabi.retrobarbershop.model.ModelTambahAKun;
 import com.example.irhabi.retrobarbershop.model.Responhapuskaryawan;
 import com.example.irhabi.retrobarbershop.model.Upload;
 import com.example.irhabi.retrobarbershop.model.User;
@@ -39,6 +40,8 @@ public interface Router {
     Call<Usr> retro(@Path("id") int Id);
     @GET("user")
     Call<AlluserRespons> getalluser();
+    @POST("user")
+    Call<ModelTambahAKun> Postuser(@Body ModelTambahAKun akun);
 
     @DELETE("user/{id}")
     Call<Responhapuskaryawan> delete(@Path("id")int id);
