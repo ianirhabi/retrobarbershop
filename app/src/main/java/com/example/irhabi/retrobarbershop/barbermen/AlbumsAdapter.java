@@ -4,12 +4,13 @@ package com.example.irhabi.retrobarbershop.barbermen;
  * Created by Programmer Jalanan 26/07/2018 at cengkareng jakarta barat
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -166,19 +167,41 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                         }
                         return true;
                     case R.id.hapsustylish:
-                        try {
-                            Intent i = new Intent(mContext, HapusKaryawan.class);
-                            Bundle ambil_data = new Bundle();
-                            ambil_data.putInt("parse_id", b);
-                            i.putExtras(ambil_data);
-                            mContext.startActivity(i);
-                        }catch (Exception e){
-                            Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
-                        }
+                        exit(b);
                         return true;
                     default:
                 }
            return false;
         }
+    }
+
+    private void exit(final int c) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setMessage("Apakah Anda Benar-Benar ingin Menghapus Data ini?")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        try {
+                            Intent i = new Intent(mContext, HapusKaryawan.class);
+                            Bundle ambil_data = new Bundle();
+                            ambil_data.putInt("parse_id", c);
+                            i.putExtras(ambil_data);
+                            mContext.startActivity(i);
+                        }catch (Exception e){
+                            Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
+                        }
+                       // untuk finish keluar
+                       // LoginActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("Tidak",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int arg1) {
+                                // TODO Auto-generated method stub
+                                dialog.cancel();
+                            }
+                        }).show();
     }
 }

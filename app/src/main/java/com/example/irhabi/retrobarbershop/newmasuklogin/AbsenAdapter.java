@@ -5,6 +5,7 @@ package com.example.irhabi.retrobarbershop.newmasuklogin;
  */
 
 import android.content.Context;
+import android.graphics.Color;
 import android.se.omapi.Session;
 import android.support.v7.widget.RecyclerView;
 
@@ -44,12 +45,20 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
         final HashMap<String, String> usersesion = session.getUserDetails();
         String usr = usersesion.get(SessionManager.KEY_USER);
         holder.txtTanggal.setText("Tanggal Pengambilan Absen : "+dataList.get(position).gettangal());
-  
+
         if(usr.equals("superadmin")) {
             holder.txtWaktu.setText("Jam Masuk : " + dataList.get(position).getwaktu());
         }
         holder.txtHari.setText("Hari Masuk : " + dataList.get(position).getHari());
-        holder.txtKehadiran.setText("Status Kehadiran : " + dataList.get(position).gethadir());
+        holder.txtstatus.setText("Status Kehadiran : " );
+        if(dataList.get(position).gethadir().equals("hadir")) {
+            holder.txtKehadiran.setTextColor(Color.rgb(0, 255, 255));
+            // setBackgroundColor(Color.rgb(126, 190, 80));
+            holder.txtKehadiran.setText(dataList.get(position).gethadir());
+        }else if(dataList.get(position).gethadir().equals("izin")){
+            holder.txtKehadiran.setTextColor(Color.rgb(255, 0, 0));
+            holder.txtKehadiran.setText(dataList.get(position).gethadir());
+        }
     }
 
     @Override
@@ -62,7 +71,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
 
     class AbsenViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtTanggal, txtWaktu, txtKehadiran, txtHari, txtNotif;
+        TextView txtTanggal, txtWaktu, txtKehadiran, txtHari, txtNotif, txtstatus;
 
         AbsenViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +80,8 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
             txtWaktu =  itemView.findViewById(R.id.waktu);
             txtKehadiran =  itemView.findViewById(R.id.kehadiran);
             txtNotif = itemView.findViewById(R.id.notif);
+            txtstatus = itemView.findViewById(R.id.status);
         }
     }
+
 }

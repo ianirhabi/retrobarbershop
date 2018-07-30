@@ -37,7 +37,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
-import java.util.HashMap;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import retrofit2.Call;
 import retrofit2.Retrofit;

@@ -14,6 +14,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
@@ -108,8 +111,10 @@
             android:label="Edit Data Karyawan"
             android:screenOrientation="portrait" />
         <activity android:name=".barbermen.HapusKaryawan" />
-        <activity android:name=".barbermen.TambahKaryawan"
-            android:label="Tambah Data"></activity>
+        <activity
+            android:name=".barbermen.TambahKaryawan"
+            android:label="Tambah Data" />
+        <activity android:name=".download.Download"></activity>
     </application>
 
 </manifest>

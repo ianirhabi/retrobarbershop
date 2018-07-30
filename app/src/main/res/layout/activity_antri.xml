@@ -5,7 +5,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:textSize="70dp"
         android:id="@+id/masuk"

@@ -5,15 +5,23 @@ package com.example.irhabi.retrobarbershop.newmasuklogin;
  */
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -31,6 +39,8 @@ import android.widget.Toast;
 
 
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.barbermen.HapusKaryawan;
+import com.example.irhabi.retrobarbershop.download.Download;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.model.Usr;
@@ -38,6 +48,12 @@ import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,6 +73,7 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
     private RecyclerView recyclerView;
     private SessionManager sesi;
     public  Handler mHandler;
+    private FloatingActionButton flod;
     SwipeRefreshLayout layoutswipe;
 
     public  Absendata(){
@@ -87,12 +104,15 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
         View view =inflater.inflate(R.layout.fragment_absen,container,false);
         final EditText edittext= (EditText) view.findViewById(R.id.from);
         final EditText edittextto= (EditText) view.findViewById(R.id.to);
+        flod = (FloatingActionButton)view.findViewById(R.id.fab);
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
         edittext.setText(dateFormat.format(date));
         edittextto.setText(dateFormat.format(date));
         Takedata(dateFormat.format(date),dateFormat.format(date));
+
 
         final DatePickerDialog.OnDateSetListener datefrom = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -164,6 +184,13 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
 //                android.R.color.holo_blue_dark,
 //                android.R.color.holo_orange_dark);
 
+        flod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                izin();
+            }
+        });
+
         this.mHandler = new Handler();
         this.mHandler.postDelayed(this.m_Runnable, 30000);
         return view;
@@ -217,6 +244,11 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
                 if(response.body().getIanmonitor().equals("2")){
                     sesi = new SessionManager(getActivity());
                     sesi.logoutUser();
+                }
+                if(response.body().getIanmonitor().equals("3")){
+                    Intent i = new Intent(getActivity(), Download.class);
+                    startActivity(i);
+                    getActivity().finish();
                 }
             }
             @Override
@@ -283,4 +315,40 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
             }
         });
     }
+
+    private void izin() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Ketika anda tidak masuk Anda dapat memberitahukan melalui menu ini ")
+                .setCancelable(false)
+                .setPositiveButton("Saya Izin Tidak Masuk", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        munculListDialog();
+                        // untuk finish keluar
+                        // LoginActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("Batal",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int arg1) {
+                                // TODO Auto-generated method stub
+                                dialog.cancel();
+                            }
+                        }).show();
+    }
+
+    private void munculListDialog() {
+        // TODO Auto-generated method stub
+        final CharSequence[] items = { "sakit", "acara keluarga", "suatu hal lain-lain"};
+        AlertDialog.Builder kk = new AlertDialog.Builder(getActivity());
+        kk.setTitle("Pilih Alasan Anda");
+        kk.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                Toast.makeText(getActivity(), "Anda memilih alasan tidak masuk karena " + items[item] + " data berhasil dikirm ke server" ,
+                        Toast.LENGTH_SHORT).show();
+            }
+        }).show();
+    }
+
+
 }

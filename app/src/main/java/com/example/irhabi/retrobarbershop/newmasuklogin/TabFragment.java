@@ -29,7 +29,6 @@ public class TabFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,15 +71,8 @@ public class TabFragment extends Fragment {
 
                     }
                 });
-
-
             }
         });
-
-
-
-
-
         return v;
     }
 

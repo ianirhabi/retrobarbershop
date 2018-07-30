@@ -3,6 +3,7 @@ package com.example.irhabi.retrobarbershop.barbermen;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,9 +11,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.ResetPasswordActivity;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
+
+import java.util.ResourceBundle;
 
 public class ControlStylish extends AppCompatActivity {
     private Button karyawan, Edit, Laporan, tambah;
@@ -68,6 +72,12 @@ public class ControlStylish extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
 
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Intent i = new Intent(ControlStylish.this, KonekMaps.class);
+        startActivity(i);
+        return true;
     }
 }

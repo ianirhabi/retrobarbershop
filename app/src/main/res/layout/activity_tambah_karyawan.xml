@@ -83,25 +83,28 @@
                 android:id="@+id/nikret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nik"/>
+                android:hint="Nik"
+                android:inputType="phone"/>
 
             <EditText
                 android:id="@+id/usergrupret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="Usergrup"/>
 
             <EditText
                 android:id="@+id/usernameret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"/>
+                android:inputType="phone"
+                android:hint="Username Harus Nomor HP Karyawan"/>
 
             <EditText
                 android:id="@+id/passwordret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"/>
+                android:hint="Password "/>
             <Button
                 android:id="@+id/simpandata"
                 style="@style/ButtonText"
