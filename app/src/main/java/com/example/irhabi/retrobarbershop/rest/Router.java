@@ -53,6 +53,12 @@ public interface Router {
     Call<Absenarray> rangedataabsen(@Path("id") int Id, @Path("from") String from ,@Path("to") String to);
     @POST("absen")
     Call<Absen>post(@Body Absen a);
+
+    @POST("absen/izin")
+    Call<Absen>postizin(@Body Absen a);
+
+
+    //upload endpoint
     @Multipart
     @POST("upload/android")
     Call<ResponseBody> uploadImage(@Part MultipartBody.Part photo,

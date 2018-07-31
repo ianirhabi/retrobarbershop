@@ -58,6 +58,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
         }else if(dataList.get(position).gethadir().equals("izin")){
             holder.txtKehadiran.setTextColor(Color.rgb(255, 0, 0));
             holder.txtKehadiran.setText(dataList.get(position).gethadir());
+            holder.txtAlasan.setText("Alasan Tidak Masuk Karena " + dataList.get(position).getPesan());
         }
     }
 
@@ -71,7 +72,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
 
     class AbsenViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtTanggal, txtWaktu, txtKehadiran, txtHari, txtNotif, txtstatus;
+        TextView txtTanggal, txtWaktu, txtKehadiran, txtHari, txtAlasan, txtstatus;
 
         AbsenViewHolder(View itemView) {
             super(itemView);
@@ -79,9 +80,8 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
             txtTanggal =  itemView.findViewById(R.id.tanggal_absen);
             txtWaktu =  itemView.findViewById(R.id.waktu);
             txtKehadiran =  itemView.findViewById(R.id.kehadiran);
-            txtNotif = itemView.findViewById(R.id.notif);
+            txtAlasan = itemView.findViewById(R.id.alasan);
             txtstatus = itemView.findViewById(R.id.status);
         }
     }
-
 }

@@ -64,6 +64,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="6dp"
                 android:textColor="@color/black"
+                android:inputType="text"
                 android:hint="Masukan Password Lama"
                 android:id="@+id/Passwordlamakaryawan" />
             <EditText

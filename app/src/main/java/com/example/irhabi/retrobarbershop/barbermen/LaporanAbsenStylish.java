@@ -5,7 +5,9 @@ package com.example.irhabi.retrobarbershop.barbermen;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.irhabi.retrobarbershop.MapsActivity;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
@@ -29,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -42,6 +46,8 @@ public class LaporanAbsenStylish extends AppCompatActivity implements SwipeRefre
     private RecyclerView recyclerView;
     private EditText editText, editTextto;
     public Handler mHandler;
+    private RetrofitInstance retro;
+    private FloatingActionButton map;
     SwipeRefreshLayout swipeLayout;
 
     @SuppressLint("ResourceAsColor")
@@ -53,6 +59,7 @@ public class LaporanAbsenStylish extends AppCompatActivity implements SwipeRefre
         final Calendar myCalendar = Calendar.getInstance();
          editText= (EditText) findViewById(R.id.stylishfrom);
          editTextto= (EditText) findViewById(R.id.stylishto);
+         map = (FloatingActionButton)findViewById(R.id.map);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -61,6 +68,23 @@ public class LaporanAbsenStylish extends AppCompatActivity implements SwipeRefre
         Bundle b = getIntent().getExtras();
 
         final int get_id = b.getInt("parse_id");
+        final String get_lat = b.getString("parse_lat");
+        final String get_lon = b.getString("parse_lon");
+
+
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                Bundle ambil_lokasi = new Bundle();
+                ambil_lokasi.putString("parse_lat", get_lat);
+                ambil_lokasi.putString("parse_lon", get_lon);
+                i.putExtras(ambil_lokasi);
+                startActivity(i);
+            }
+        });
+
 
         Takedata(dateFormat.format(date),dateFormat.format(date),get_id);
 
@@ -127,8 +151,6 @@ public class LaporanAbsenStylish extends AppCompatActivity implements SwipeRefre
             }
         });
 
-
-
         swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swype);
         swipeLayout.setOnRefreshListener(this);
         swipeLayout.setColorSchemeColors(android.R.color.holo_green_dark);
@@ -136,9 +158,13 @@ public class LaporanAbsenStylish extends AppCompatActivity implements SwipeRefre
     }
 
     public void Takedata(String from, String to, int id){
+        sesi = new SessionManager(getApplicationContext());
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
+        String token = usersesion.get(SessionManager.TOKEN);
+        retro = new RetrofitInstance(token);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
 
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
-        Call<Absenarray> call = service.rangedataabsen(id,from, to );
+        Call<Absenarray> call = service.rangedataabsen(id,from, to);
         call.enqueue(new Callback<Absenarray>() {
             @Override
             public void onResponse(Call<Absenarray> call, Response<Absenarray> response) {

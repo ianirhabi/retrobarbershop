@@ -43,6 +43,7 @@ import com.example.irhabi.retrobarbershop.barbermen.HapusKaryawan;
 import com.example.irhabi.retrobarbershop.download.Download;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
+import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.model.Usr;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
@@ -76,6 +77,7 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
     private FloatingActionButton flod;
     SwipeRefreshLayout layoutswipe;
     private RetrofitInstance retro;
+    private  Absen dataabsen;
 
     public  Absendata(){
         // Required empty public constructor
@@ -307,7 +309,11 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
         HashMap<String, String> usersesion = sesi.getUserDetails();
         id = usersesion.get(SessionManager.KEY_ID);
         int idDetail = Integer.parseInt(id);
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        id = usersesion.get(SessionManager.KEY_ID);
+        String token = usersesion.get(SessionManager.TOKEN);
+        retro = new RetrofitInstance(token);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
+
         Call<Absenarray> call = service.rangedataabsen(idDetail,from, to );
         call.enqueue(new Callback<Absenarray>() {
             @Override
@@ -349,11 +355,51 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
         kk.setTitle("Pilih Alasan Anda");
         kk.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                Toast.makeText(getActivity(), "Anda memilih alasan tidak masuk karena " + items[item] + " data berhasil dikirm ke server" ,
-                        Toast.LENGTH_SHORT).show();
+                String a = (String) items[item];
+                kirimizin(a);
             }
         }).show();
     }
 
+    private void kirimizin(final String a) {
+        sesi = new SessionManager(getActivity());
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
+        String token = usersesion.get(SessionManager.TOKEN);
+        String id = usersesion.get(SessionManager.KEY_ID);
+        String Lat = usersesion.get(SessionManager.LATITUDE);
+        String Lontitude = usersesion.get(SessionManager.LONGTITUDE);
+        String user = usersesion.get(SessionManager.KEY_USER);
 
+        int get_id = Integer.parseInt(id);
+        retro = new RetrofitInstance(token);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
+
+        DateFormat dateFormat = new SimpleDateFormat("EEEE H:mm:ss yyyy-MM-dd");
+        Date date = new Date();
+
+        String waktu = dateFormat.format(date);
+        String[] kf = waktu.split("\\s");
+        String hari = kf[0];
+        String time = kf[1];
+        String tanggal = kf[2];
+        dataabsen = new Absen(hari, tanggal, time, "izin", get_id, Lat, Lontitude, user, a);
+        Call<Absen> call = service.postizin(dataabsen);
+        call.enqueue(new Callback<Absen>() {
+            @Override
+            public void onResponse(Call<Absen> call, Response<Absen> response) {
+                if(response.body().getStatus().equals("berhasil")){
+                    Toast.makeText(getActivity(), "Anda memilih alasan tidak masuk karena " + a + " " +
+                                    "data berhasil dikirm ke server " +
+                                    "dengan status " + response.body().getStatus() ,
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Absen> call, Throwable t) {
+                Toast.makeText(getActivity(), "gagal mengirim ke server",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

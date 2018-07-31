@@ -1,6 +1,8 @@
 package com.example.irhabi.retrobarbershop.barbermen;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -89,24 +92,32 @@ public class EditKaryawan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String lama = password.getText().toString();
+                final String lama = passwordlama.getText().toString();
                 final String baru = passwordbaru.getText().toString();
                 final String barulagi = passwordbarulagi.getText().toString();
-
-                if(lama.equals(baru)){
-                    Toast.makeText(getApplicationContext(), "Password lama tidak boleh sama dengan baru" , Toast.LENGTH_SHORT).show();
-                }else if(baru.equals(barulagi)) {
+                final String pass = password.getText().toString();
+                if (TextUtils.isEmpty(lama)){
+                    passwordlama.setError("kolom inputan Password lama tidak boleh kosong");
+                }else if(TextUtils.isEmpty(baru)){
+                    passwordbaru.setError("kolom inputan password baru tidak boleh kosong");
+                }else if(TextUtils.isEmpty(barulagi)){
+                    passwordbarulagi.setError("kolom inputan konfirmasi password baru tidak boleh kosong ");
+                }else if (baru.length() < 6){
+                    passwordbaru.setError("password baru harus lebih dari 6 karakter");
+                }else if (pass.equals(passwordbaru)){
+                    passwordlama.setError("password lama tidak boleh sama dengan password baru");
+                }else if(baru.equals(barulagi)){
                     User user = new User(lama,baru);
-                    updatekaryawan(user, get_id);
+                    dialog(user, get_id);
                 }else{
-                    Toast.makeText(getApplicationContext(), "Password baru tidak sama " , Toast.LENGTH_SHORT).show();
+                    passwordbarulagi.setError("konfirmasi password tidak sama");
                 }
             }
         });
 
         Glide
                 .with(EditKaryawan.this)
-                .load(URL + "upload/" + get_foto)
+                .load(URL + "getimage/" + get_foto)
                 .into(userfoto);
 
         tk.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +155,6 @@ public class EditKaryawan extends AppCompatActivity {
 
     }
 
-
     public void updatekaryawan(User user, int id){
         sesi = new SessionManager(getApplicationContext());
         final HashMap<String, String> usersesion = sesi.getUserDetails();
@@ -159,8 +169,11 @@ public class EditKaryawan extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.body().getStatus().equals("sukses")){
                     Toast.makeText(getApplicationContext(),"Berhasil Update data", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(EditKaryawan.this, ControlStylish.class);
+                    startActivity(i);
+                    finish();
                 }else{
-                    Toast.makeText(getApplicationContext(),"Gagal Update data", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Gagal Update data mohon ulangi", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -272,7 +285,7 @@ public class EditKaryawan extends AppCompatActivity {
         Log.d("DEBUG ", "BARU activity seting " + first);
         Glide
                 .with(EditKaryawan.this)
-                .load(URL + "upload/" + first)
+                .load(URL + "getimage/" + first)
                 .into(userfoto);
 
         sesi = new SessionManager(getApplicationContext());
@@ -304,6 +317,9 @@ public class EditKaryawan extends AppCompatActivity {
             @Override
             public void onResponse(Call<Upload> call, Response<Upload> response) {
                 Toast.makeText(EditKaryawan.this, response.body().getRespon(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(EditKaryawan.this, ControlStylish.class);
+                startActivity(i);
+                finish();
             }
 
             @Override
@@ -312,4 +328,34 @@ public class EditKaryawan extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+    private void dialog(final User user, final int get_id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditKaryawan.this);
+        builder.setMessage("apakah Anda yakin ingin melakukan perubahan data terhadap akun karyawan")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        try {
+                            updatekaryawan(user, get_id);
+                        }catch (Exception e){
+                            Toast.makeText(EditKaryawan.this, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
+                        }
+                        // untuk finish keluar
+                        // LoginActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("Batal",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int arg1) {
+                                // TODO Auto-generated method stub
+                                dialog.cancel();
+                            }
+                        }).show();
+    }
+
 }

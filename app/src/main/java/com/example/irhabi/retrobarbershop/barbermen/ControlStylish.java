@@ -9,19 +9,27 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.ResetPasswordActivity;
+import com.example.irhabi.retrobarbershop.alert.ViewDialog;
+import com.example.irhabi.retrobarbershop.newmasuklogin.Setting;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ControlStylish extends AppCompatActivity {
     private Button karyawan, Edit, Laporan, tambah;
     private ImageView foto;
     private SessionManager sesi;
+    private ViewDialog alert;
+    private TextView tanggal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +39,15 @@ public class ControlStylish extends AppCompatActivity {
         foto =(ImageView)findViewById(R.id.imageseperadmin) ;
         tambah = (Button)findViewById(R.id.tambahakun);
         Laporan = (Button)findViewById(R.id.penjualan);
+        tanggal = (TextView)findViewById(R.id.date) ;
+        alert = new ViewDialog();
+        alert.showDialog(ControlStylish.this, "Selamat Datang Di Menu SuperAdmin");
 
+        DateFormat dateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
+        Date date = new Date();
+
+        String waktu = dateFormat.format(date);
+        tanggal.setText(waktu);
         Laporan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

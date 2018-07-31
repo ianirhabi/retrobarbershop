@@ -135,9 +135,11 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                     case R.id.action_lihat_absen:
                         try {
                             Intent i = new Intent(mContext, LaporanAbsenStylish.class);
-                            Bundle ambil_id = new Bundle();
-                            ambil_id.putInt("parse_id", b);
-                            i.putExtras(ambil_id);
+                            Bundle ambil_data = new Bundle();
+                            ambil_data.putInt("parse_id", b);
+                            ambil_data.putString("parse_lat", lat);
+                            ambil_data.putString("parse_lon", lon);
+                            i.putExtras(ambil_data);
                             mContext.startActivity(i);
                         }catch (Exception e){
                             Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
@@ -145,10 +147,12 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
                         return true;
                     case R.id.lokasistylish:
                         try {
-                            session = new SessionManager(mContext);
-                            session.createLongtiLatiStylish(lat,lon);
                             Toast.makeText(mContext, "Lokasi Stylish " + lat + " " + lon, Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(mContext, MapsActivity.class);
+                            Bundle ambil_data = new Bundle();
+                            ambil_data.putString("parse_lat", lat);
+                            ambil_data.putString("parse_lon", lon);
+                            i.putExtras(ambil_data);
                             mContext.startActivity(i);
                         }catch (Exception e){
                             Toast.makeText(mContext, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();

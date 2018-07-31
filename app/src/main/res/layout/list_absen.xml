@@ -58,10 +58,10 @@
     </LinearLayout>
 
         <TextView
-            android:id="@+id/notif"
+            android:id="@+id/alasan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="18sp"
             android:padding="3dp"/>
 
     </LinearLayout>

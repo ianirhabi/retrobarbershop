@@ -32,7 +32,7 @@
         <item
             android:id="@+id/style"
             android:icon="@drawable/stylist"
-            android:title="Laporan Absen Stylish"
+            android:title="Super Admin"
             android:visible="false"/>
 
         <item android:title="Logout"

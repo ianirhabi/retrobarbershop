@@ -28,6 +28,7 @@ import com.google.zxing.integration.android.IntentResult;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +39,7 @@ public class ScanFragment extends AppCompatActivity {
     public final static int QRcodeWidth = 350 ;
     private  Absen dataabsen;
     private SessionManager session;
+    private  RetrofitInstance retro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +78,12 @@ public class ScanFragment extends AppCompatActivity {
                 String usr = kf[6];
 
                 int id_user = Integer.parseInt(iduser);
-                dataabsen = new Absen(hari, tanggal, waktu, hadir,id_user , lat, lon, usr);
-                Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+                dataabsen = new Absen(hari, tanggal, waktu, hadir,id_user , lat, lon, usr, "");
+                session = new SessionManager(getApplicationContext());
+                final HashMap<String, String> usersesion = session.getUserDetails();
+                String token = usersesion.get(SessionManager.TOKEN);
+                retro = new RetrofitInstance(token);
+                Router service = retro.getRetrofitInstanceall().create(Router.class);
                 Call<Absen> call = service.post(dataabsen);
                 call.enqueue(new Callback<Absen>() {
                     @Override

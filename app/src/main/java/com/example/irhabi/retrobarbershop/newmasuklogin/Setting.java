@@ -175,8 +175,8 @@ public class Setting extends AppCompatActivity {
         });
     }
     public void update(User user) {
-        final HashMap<String, String> usersesion = sesi.getUserDetails();
         sesi = new SessionManager(getApplicationContext());
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
         id = usersesion.get(SessionManager.KEY_ID);
         String token = usersesion.get(SessionManager.TOKEN);
         retro = new RetrofitInstance(token);

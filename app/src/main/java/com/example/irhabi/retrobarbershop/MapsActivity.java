@@ -3,6 +3,7 @@ package com.example.irhabi.retrobarbershop;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -48,13 +49,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         session = new SessionManager(getApplicationContext());
         HashMap<String, String> usersesion = session.getUserDetails();
 
-        usr = usersesion.get(SessionManager.KEY_USER);
-        if (usr.equals("superadmin")){
+        usr = usersesion.get(SessionManager.KEY_USERGRUP);
+        Log.d("debug ==== usr ", "saya " + usr);
+        if (usr.equals("1")){
             try {
+                Bundle b = getIntent().getExtras();
+                String get_lat = b.getString("parse_lat");
+                String get_lon = b.getString("parse_lon");
                 String la = usersesion.get(SessionManager.LATITUDEstylish);
                 String lo = usersesion.get(SessionManager.LONGTITUDEstylish);
-                Double latude = Double.parseDouble(la);
-                Double lotude = Double.parseDouble(lo);
+                Double latude = Double.parseDouble(get_lat);
+                Double lotude = Double.parseDouble(get_lon);
                 LatLng sydney = new LatLng(latude, lotude);
                 mMap.addMarker(new MarkerOptions().position(sydney).title("Latitude : " + latude + " longtitude : " + lotude));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));

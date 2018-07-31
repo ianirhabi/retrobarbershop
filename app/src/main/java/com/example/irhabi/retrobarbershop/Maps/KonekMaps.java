@@ -170,8 +170,9 @@ public class KonekMaps extends AppCompatActivity {
             sesi.createLongtiLati(la,lo);
             Intent i = new Intent(KonekMaps.this, MainL.class);
             startActivity(i);
+            finish();
         }else{
-
+            //    Toast.makeText(getApplicationContext(),"Tidak bisa melanjutkan something wrong ", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -293,6 +294,7 @@ public class KonekMaps extends AppCompatActivity {
         intent.setData(uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void stopLocationUpdates() {
