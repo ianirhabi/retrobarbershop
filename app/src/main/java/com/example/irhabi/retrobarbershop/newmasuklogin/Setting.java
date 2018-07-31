@@ -19,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -39,7 +40,7 @@ import com.example.irhabi.retrobarbershop.model.Usr;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
-import com.github.siyamed.shapeimageview.RoundedImageView;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -98,11 +99,22 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String lama = password.getText().toString();
+                final String lama = passwordlama.getText().toString();
                 final String baru = passwordbaru.getText().toString();
                 final String barulagi = passwordbarulagi.getText().toString();
 
-                if(lama.equals(baru)){
+                if (TextUtils.isEmpty(lama)) {
+                    passwordlama.setError("password lama tidak boleh kosong");
+                    return;
+                }else if (TextUtils.isEmpty(baru)) {
+                    passwordbaru.setError("password baru tidak boleh kosong");
+                    return;
+                }else if (TextUtils.isEmpty(barulagi)) {
+                    passwordbarulagi.setError("tidak boleh kosong");
+                    return;
+                }else if (barulagi.length() < 6) {
+                   passwordbaru.setError("password baru harus lebih dari 6 karakter");
+                }else if(lama.equals(baru)){
                     alert.showDialog(Setting.this, "Password lama tidak boleh sama dengan baru!!");
                 }else if(baru.equals(barulagi)) {
                     dialog(lama, baru);
@@ -116,13 +128,11 @@ public class Setting extends AppCompatActivity {
 
         sesi = new SessionManager(getApplicationContext());
         HashMap<String, String> usersesion = sesi.getUserDetails();
-
         String image = usersesion.get(SessionManager.KEY_IMAGE);
-
-        Log.d("DEBUG ", "BARU activity seting " + image);
+        Log.d("DEBUG ", "BARU activity setting " + image);
         Glide
                 .with(Setting.this)
-                .load(URL + "upload/" + image)
+                .load(URL + "getimage/" + image)
                 .into(userfoto);
 
         upld.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +252,7 @@ public class Setting extends AppCompatActivity {
           Log.d("DEBUG ", "BARU activity seting " + first);
           Glide
                   .with(Setting.this)
-                  .load(URL + "upload/" + first)
+                  .load(URL + "getimage/" + first)
                   .into(userfoto);
 
           sesi = new SessionManager(getApplicationContext());

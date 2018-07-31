@@ -74,7 +74,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
         final String lon = dataList.get(position).getLongt();
         String[] kf = a.split("\\.");
         final String first = kf[0];
-        Glide.with(mContext).load(URL+"upload/"+ first).into(holder.thumbnail);
+        Glide.with(mContext).load(URL+"getimage/"+ first).into(holder.thumbnail);
 
         session = new SessionManager(mContext);
         final HashMap<String, String> usersesion = session.getUserDetails();

@@ -107,7 +107,7 @@ public class Profil extends Fragment {
                 Log.d("DEBUG ", "BARU " + first);
                 Glide
                         .with(Profil.this)
-                        .load(URL + "upload/" + first)
+                        .load(URL + "getimage/" + first)
                         .into(BarbermenPhoto);
                 String Id = String.valueOf(response.body().Getid());
                 sesi.createLoginSession(response.body().getUser(),
@@ -119,7 +119,7 @@ public class Profil extends Fragment {
                         BarbermenPhoto1.setVisibility(View.VISIBLE);
                         Glide
                                 .with(getActivity())
-                                .load(URL + "upload/" + first)
+                                .load(URL + "getimage/" + first)
                                 .into(BarbermenPhoto1);
                         String Id = String.valueOf(response.body().Getid());
                         sesi.createLoginSession(response.body().getUser(),

@@ -109,10 +109,4 @@
             android:textSize="15dp" />
 
     </LinearLayout>
-
-
-
-
-
-
 </android.support.constraint.ConstraintLayout>

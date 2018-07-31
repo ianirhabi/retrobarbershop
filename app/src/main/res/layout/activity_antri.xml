@@ -2,6 +2,7 @@
 
 <LinearLayout android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <EditText
@@ -10,6 +11,7 @@
         android:textSize="70dp"
         android:id="@+id/masuk"
         android:background="@color/colorPrimaryDark"
+        android:drawableTop="@drawable/iconret"
         android:textColor="@color/colorAccent"/>
 
     <android.support.v4.widget.SwipeRefreshLayout

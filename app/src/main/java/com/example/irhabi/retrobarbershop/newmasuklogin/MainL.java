@@ -84,28 +84,34 @@ public class MainL extends AppCompatActivity {
                 if (item.getItemId() == R.id.set) {
                     Intent i = new Intent(MainL.this,Setting.class);
                     startActivity(i);
+                    finish();
                    // FragmentTransaction fragmentTransaction = FM.beginTransaction();
                    // fragmentTransaction.replace(R.id.containerView, new Setting()).commit();
                 }
                 if (item.getItemId() == R.id.prof) {
                     Intent i = new Intent(getApplicationContext(), KonekMaps.class);
                     startActivity(i);
+                    finish();
                 }
                 if (item.getItemId() == R.id.scan) {
                     Intent gf = new Intent(MainL.this, ScanFragment.class);
                     startActivity(gf);
+                    finish();
                 }
                 if (item.getItemId() == R.id.lokasi) {
                     Intent gf = new Intent(MainL.this, MapsActivity.class);
                     startActivity(gf);
+                    finish();
                 }
                 if (item.getItemId() == R.id.antri) {
                     Intent i = new Intent(MainL.this,Antri.class);
                     startActivity(i);
+                    finish();
                 }
                 if (item.getItemId() == R.id.style) {
                     Intent i = new Intent(MainL.this,ControlStylish.class);
                     startActivity(i);
+                    finish();
                 }
                 if (item.getItemId() == R.id.keluar) {
                     signOut();
@@ -122,6 +128,7 @@ public class MainL extends AppCompatActivity {
     public void signOut() {
         session = new SessionManager(getApplicationContext());
         session.logoutUser();
+        finish();
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK ) {

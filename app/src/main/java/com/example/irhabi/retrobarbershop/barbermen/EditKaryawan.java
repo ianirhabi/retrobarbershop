@@ -256,12 +256,13 @@ public class EditKaryawan extends AppCompatActivity {
         MultipartBody.Part body = MultipartBody.Part.createFormData("cycle", file.getName(), filePart);
         MultipartBody.Part body2 = MultipartBody.Part.createFormData("diran", "andrian", filePart);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
+        sesi = new SessionManager(getApplicationContext());
+        id = usersesion.get(SessionManager.KEY_ID);
+        String token = usersesion.get(SessionManager.TOKEN);
+        retro = new RetrofitInstance(token);
 
-        service = retrofit.create(Router.class);
+        service = retro.getRetrofitInstanceall().create(Router.class);
 
         String a = file.getName();
         // ld = (EditText)findViewById(R.id.lod);
