@@ -59,6 +59,8 @@ public class Profil extends Fragment {
     PhotoViewAttacher photoAttacher;
     private ImageButton close;
     private LinearLayout layout;
+    private RetrofitInstance retro;
+
     public Profil(){
         // Required empty public constructor
     }
@@ -77,7 +79,7 @@ public class Profil extends Fragment {
         lo = usersesion.get(SessionManager.LONGTITUDE);
         final int Barberid = Integer.parseInt(id);
         text = (TextView) view.findViewById(R.id.timer);
-      //  Toast.makeText(getActivity(),usr + " " + usrgrup + " " + Barberid +" " + la + " "+ lo, Toast.LENGTH_LONG).show();
+        // Toast.makeText(getActivity(),usr + " " + usrgrup + " " + Barberid +" " + la + " "+ lo, Toast.LENGTH_LONG).show();
         barber = (ImageView)view.findViewById(R.id.codeQR);
         btnStart = (Button) view.findViewById(R.id.buttonStart);
         countDownTimer = new MyCountDownTimer(startTime, interval);
@@ -86,7 +88,11 @@ public class Profil extends Fragment {
         BarbermenPhoto = (ImageView)view.findViewById(R.id.proffoto);
         BarbermenPhoto1 = (ImageView)view.findViewById(R.id.proffotobesar);
 
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        sesi = new SessionManager(getActivity());
+        String token = usersesion.get(SessionManager.TOKEN);
+        Log.d("debug token ", " : " + token);
+        retro = new RetrofitInstance(token);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
         int idDetail = Integer.parseInt(id);
         Call<Usr> call = service.retro(idDetail);
         call.enqueue(new Callback<Usr>() {

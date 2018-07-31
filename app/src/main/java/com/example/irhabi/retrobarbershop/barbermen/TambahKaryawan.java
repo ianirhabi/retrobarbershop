@@ -4,12 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,14 +16,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.irhabi.retrobarbershop.Manifest;
 import com.example.irhabi.retrobarbershop.R;
-import com.example.irhabi.retrobarbershop.download.Download;
 import com.example.irhabi.retrobarbershop.model.ModelTambahAKun;
-import com.example.irhabi.retrobarbershop.model.User;
-import com.example.irhabi.retrobarbershop.model.Usr;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
+import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +33,8 @@ public class TambahKaryawan extends AppCompatActivity {
     Button simpan ;
     private RadioGroup radioSexGroup;
     private RadioButton radioSexButton;
-
+    private SessionManager sesi;
+    private RetrofitInstance retro;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
 
     @Override
@@ -59,7 +58,6 @@ public class TambahKaryawan extends AppCompatActivity {
             {
                 if(grantResults.length>=0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                     //Name of Method for Calling Message
-
                 }else{
                     Toast.makeText(this,"You dont have required permission to make the Action",Toast.LENGTH_SHORT).show();
                 }
@@ -81,7 +79,6 @@ public class TambahKaryawan extends AppCompatActivity {
             }else{
                 Toast.makeText(this,"Please Enter Integer Only",Toast.LENGTH_SHORT).show();
             }
-
         }
         //End Check for PhoneNumber
    }
@@ -93,8 +90,6 @@ public class TambahKaryawan extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Tambah Data", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
-
                         radioSexGroup = (RadioGroup) findViewById(R.id.radioSex);
                         nama = (EditText)findViewById(R.id.namaret);
 
@@ -103,10 +98,7 @@ public class TambahKaryawan extends AppCompatActivity {
                         usergrup = (EditText)findViewById(R.id.usergrupret);
                         username = (EditText)findViewById(R.id.usernameret);
                         password = (EditText)findViewById(R.id.passwordret);
-
-
                         int selectedId = radioSexGroup.getCheckedRadioButtonId();
-
                         radioSexButton = (RadioButton) findViewById(selectedId);
 
                         final  String Nama = nama.getText().toString();
@@ -119,7 +111,13 @@ public class TambahKaryawan extends AppCompatActivity {
 
                         ModelTambahAKun user = new ModelTambahAKun(Nama, Gender, Alamat, Nik, Usergrup, Username, Password);
                         MyMessage(Password,Username);
-                        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+                        sesi = new SessionManager(getApplicationContext());
+                        final HashMap<String, String> usersesion = sesi.getUserDetails();
+                        String token = usersesion.get(SessionManager.TOKEN);
+                        Log.d("debug token ", " : " + token);
+                        retro = new RetrofitInstance(token);
+
+                        Router service = retro.getRetrofitInstanceall().create(Router.class);
                         Call<ModelTambahAKun> call = service.Postuser(user);
                         call.enqueue(new Callback<ModelTambahAKun>() {
                             @Override
@@ -136,10 +134,8 @@ public class TambahKaryawan extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<ModelTambahAKun> call, Throwable t) {
                                 Toast.makeText(getApplication(), "gagal menghubungi server", Toast.LENGTH_LONG).show();
-
                             }
                         });
-
                         // untuk finish keluar
                         // LoginActivity.this.finish();
                     }

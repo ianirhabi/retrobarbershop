@@ -6,7 +6,8 @@ package com.example.irhabi.retrobarbershop.model;
  */
 public class User {
 
-
+    @com.google.gson.annotations.SerializedName("token")
+    private String token ;
     @com.google.gson.annotations.SerializedName("status")
     private String status ;
     @com.google.gson.annotations.SerializedName("username")
@@ -27,6 +28,10 @@ public class User {
     }
     public Responsdata getResponsdata(){
         return respons;
+    }
+
+    public  String getToken(){
+        return token;
     }
 
 }

@@ -14,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -28,8 +29,10 @@ import com.example.irhabi.retrobarbershop.model.AlluserRespons;
 import com.example.irhabi.retrobarbershop.model.Usr;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
+import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +41,8 @@ public class Barbermen extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AlbumsAdapter adapter;
-
+    private SessionManager sesi;
+    private RetrofitInstance retro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,9 +153,14 @@ public class Barbermen extends AppCompatActivity {
     }
 
     public void getResponall(){
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
-        Call<AlluserRespons> call = service.getalluser();
-        call.enqueue(new Callback<AlluserRespons>() {
+         sesi = new SessionManager(getApplicationContext());
+         HashMap<String, String> usersesion = sesi.getUserDetails();
+         String token = usersesion.get(SessionManager.TOKEN);
+         Log.d("debug token ", " : " + token);
+         retro = new RetrofitInstance(token);
+         Router service = retro.getRetrofitInstanceall().create(Router.class);
+         Call<AlluserRespons> call = service.getalluser();
+         call.enqueue(new Callback<AlluserRespons>() {
             @Override
             public void onResponse(Call<AlluserRespons> call, retrofit2.Response<AlluserRespons> response) {
                 Generatealluser(response.body().getALluser());

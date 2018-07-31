@@ -3,19 +3,24 @@ package com.example.irhabi.retrobarbershop.barbermen;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Responhapuskaryawan;
-import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
+import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HapusKaryawan extends AppCompatActivity {
+    private SessionManager sesi;
+    private RetrofitInstance retro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +30,15 @@ public class HapusKaryawan extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         final int Barberid = b.getInt("parse_id");
 
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        sesi = new SessionManager(getApplicationContext());
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
+        String token = usersesion.get(SessionManager.TOKEN);
+        Log.d("debug token ", " : " + token);
+        retro = new RetrofitInstance(token);
+
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
         Call<Responhapuskaryawan> call = service.delete(Barberid);
         call.enqueue(new Callback<Responhapuskaryawan>() {
-
-
             @Override
             public void onResponse(Call<Responhapuskaryawan> call, Response<Responhapuskaryawan> response) {
                 if(response.body().getstatus().equals("sukses")) {
@@ -43,13 +52,10 @@ public class HapusKaryawan extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }
-
             }
-
             @Override
             public void onFailure(Call<Responhapuskaryawan> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Server Masih Dalam Perbaikan " + t,Toast.LENGTH_LONG ).show();
-
             }
         });
     }

@@ -1,7 +1,7 @@
 package com.example.irhabi.retrobarbershop.sesionmenyimpan;
 
 /**
- * Created by irhabi on 10/31/2017.
+ * Modified by irhabi on 10/31/2017.
  */
 
 
@@ -36,11 +36,8 @@ public class SessionManager {
 
     // nama sharedpreference
     private static final String PREF_NAME = "Sesi";
-
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
-
-
     public static final String KEY_USER = "nama";
     public static final String KEY_ID = "id";
     public  static  final  String KEY_USERGRUP = "grup";
@@ -51,7 +48,7 @@ public class SessionManager {
     public static  final String LATITUDEstylish = "DIS";
     public static  final String KEY_ID_STYLISH = "1";
     public static  final String KEY_KARYAWAN = "netral" ;
-
+    public static  final String TOKEN = "token";
     // public Constructor
     public SessionManager(Context context){
         this._context = context;
@@ -69,6 +66,11 @@ public class SessionManager {
         editor.putString(KEY_ID, id);
         editor.putString(KEY_USER, user);
         editor.putString(KEY_USERGRUP, usrgrup);
+        editor.commit();
+    }
+    public void createToken(String token){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(TOKEN, token);
         editor.commit();
     }
     public void createControlKaryawaan(String karyawaan){
@@ -133,6 +135,7 @@ public class SessionManager {
         user.put(KEY_ID_STYLISH,pref.getString(KEY_ID_STYLISH,null));
         user.put(KEY_IMAGE,pref.getString(KEY_IMAGE,null));
         user.put(KEY_KARYAWAN,pref.getString(KEY_KARYAWAN, null));
+        user.put(TOKEN,pref.getString(TOKEN,null));
         return user;
     }
 

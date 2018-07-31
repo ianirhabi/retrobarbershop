@@ -75,6 +75,7 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
     public  Handler mHandler;
     private FloatingActionButton flod;
     SwipeRefreshLayout layoutswipe;
+    private RetrofitInstance retro;
 
     public  Absendata(){
         // Required empty public constructor
@@ -209,8 +210,12 @@ public class Absendata extends Fragment implements SwipeRefreshLayout.OnRefreshL
         sesi = new SessionManager(getActivity());
         HashMap<String, String> usersesion = sesi.getUserDetails();
         id = usersesion.get(SessionManager.KEY_ID);
+        String token = usersesion.get(SessionManager.TOKEN);
+        Log.d("debug token ", " : " + token);
+        retro = new RetrofitInstance(token);
+
         int idDetail = Integer.parseInt(id);
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
         Call<Usr> call = service.retro(idDetail);
         call.enqueue(new Callback<Usr>() {
             @Override

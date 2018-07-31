@@ -60,6 +60,8 @@ public class EditKaryawan extends AppCompatActivity {
     private SessionManager sesi;
     private String id;
     private TextView username, password;
+    private RetrofitInstance retro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +119,13 @@ public class EditKaryawan extends AppCompatActivity {
             }
         });
 
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        sesi = new SessionManager(getApplicationContext());
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
+        String token = usersesion.get(SessionManager.TOKEN);
+        Log.d("debug token ", " : " + token);
+        retro = new RetrofitInstance(token);
+
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
 
         Call<Usr> call = service.retro(get_id);
         call.enqueue(new Callback<Usr>() {
@@ -138,7 +146,12 @@ public class EditKaryawan extends AppCompatActivity {
 
 
     public void updatekaryawan(User user, int id){
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        sesi = new SessionManager(getApplicationContext());
+        final HashMap<String, String> usersesion = sesi.getUserDetails();
+        String token = usersesion.get(SessionManager.TOKEN);
+        Log.d("debug token ", " : " + token);
+        retro = new RetrofitInstance(token);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
         String iduser = String.valueOf(id);
         Call<User> call = service.Updateuser(user,iduser);
         call.enqueue(new Callback<User>() {
@@ -150,16 +163,12 @@ public class EditKaryawan extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Gagal Update data", Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-
 
     // Izin Akses Camera
     public void onRequestPermissionsResult(int requestCode,
@@ -175,7 +184,6 @@ public class EditKaryawan extends AppCompatActivity {
             }
         }
     }
-
 
     //untuk mengambil gambar hasil capture camera tadi kita harus override onActivityResult dan membaca resultCode apakah sukses dan requestCode apakah dari Camera_Request
     @Override
@@ -231,10 +239,6 @@ public class EditKaryawan extends AppCompatActivity {
         return RequestBody.create(
                 okhttp3.MultipartBody.FORM, descriptionString);
     }
-
-
-
-
 
     private void uploadFile(Bitmap gambarbitmap){
 

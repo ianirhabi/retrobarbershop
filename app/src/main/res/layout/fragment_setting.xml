@@ -73,6 +73,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="6dp"
                 android:textColor="@color/black"
+                android:inputType="textPassword"
                 android:hint="Masukan Password Lama"
                 android:id="@+id/Passwordlama" />
         <EditText
@@ -108,6 +109,10 @@
             android:textSize="15dp" />
 
     </LinearLayout>
+
+
+
+
 
 
 </android.support.constraint.ConstraintLayout>

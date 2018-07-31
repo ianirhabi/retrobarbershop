@@ -231,7 +231,8 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                         String di = id.toString();
                         session.createLoginSession(response.body().getResponsdata().getUsr().getUser(),
                                 response.body().getResponsdata().getUsr().getUsergrup(), di);
-                        Intent v = new Intent(LoginActivity.this, KonekMaps.class);
+                        session.createToken(response.body().getToken());
+                       Intent v = new Intent(LoginActivity.this, KonekMaps.class);
                         startActivity(v);
                         if (loading) {
                           button.stopLoading();

@@ -5,6 +5,8 @@ package com.example.irhabi.retrobarbershop.newmasuklogin;
  */
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -29,6 +31,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.alert.ViewDialog;
+import com.example.irhabi.retrobarbershop.barbermen.HapusKaryawan;
 import com.example.irhabi.retrobarbershop.model.Upload;
 import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.model.Usr;
@@ -67,6 +71,9 @@ public class Setting extends AppCompatActivity {
     private SessionManager sesi;
     private String id;
     private TextView username, password;
+    private RetrofitInstance retro;
+    private ViewDialog alert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,12 +103,13 @@ public class Setting extends AppCompatActivity {
                 final String barulagi = passwordbarulagi.getText().toString();
 
                 if(lama.equals(baru)){
-                    Toast.makeText(getApplicationContext(), "Password lama tidak boleh sama dengan baru" , Toast.LENGTH_SHORT).show();
+                    alert.showDialog(Setting.this, "Password lama tidak boleh sama dengan baru!!");
                 }else if(baru.equals(barulagi)) {
-                    User user = new User(lama,baru);
-                    update(user);
+                    dialog(lama, baru);
+
                 }else{
-                    Toast.makeText(getApplicationContext(), "Password baru tidak sama " , Toast.LENGTH_SHORT).show();
+                    alert = new ViewDialog();
+                    alert.showDialog(Setting.this, "Password Baru Tidak Sama Mohon Ulangi !!");
                 }
             }
         });
@@ -136,7 +144,10 @@ public class Setting extends AppCompatActivity {
 
         sesi = new SessionManager(getApplicationContext());
         id = usersesion.get(SessionManager.KEY_ID);
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
+        String token = usersesion.get(SessionManager.TOKEN);
+        Log.d("debug token ", " : " + token);
+        retro = new RetrofitInstance(token);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
         int idDetail = Integer.parseInt(id);
         Call<Usr> call = service.retro(idDetail);
         call.enqueue(new Callback<Usr>() {
@@ -154,10 +165,13 @@ public class Setting extends AppCompatActivity {
         });
     }
     public void update(User user) {
-        Router service = RetrofitInstance.getRetrofitInstance().create(Router.class);
-
-        sesi = new SessionManager(getApplicationContext());
         final HashMap<String, String> usersesion = sesi.getUserDetails();
+        sesi = new SessionManager(getApplicationContext());
+        id = usersesion.get(SessionManager.KEY_ID);
+        String token = usersesion.get(SessionManager.TOKEN);
+        retro = new RetrofitInstance(token);
+        Router service = retro.getRetrofitInstanceall().create(Router.class);
+
         id = usersesion.get(SessionManager.KEY_ID);
         Call<User> call = service.Updateuser(user,id);
         call.enqueue(new Callback<User>() {
@@ -165,6 +179,9 @@ public class Setting extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.body().getStatus().equals("sukses")){
                     Toast.makeText(getApplicationContext(),"Berhasil Update data", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(Setting.this,Setting.class);
+                    startActivity(i);
+                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(),"Gagal Update data", Toast.LENGTH_LONG).show();
                 }
@@ -204,17 +221,17 @@ public class Setting extends AppCompatActivity {
 
           RequestBody filePart =RequestBody.create(MediaType.parse("image/*"), file);
 
-
           MultipartBody.Part body = MultipartBody.Part.createFormData("cycle", file.getName(), filePart);
           MultipartBody.Part body2 = MultipartBody.Part.createFormData("diran", "andrian", filePart);
 
-          Retrofit retrofit = new Retrofit.Builder()
-                  .baseUrl(URL)
-                  .addConverterFactory(GsonConverterFactory.create())
-                  .build();
 
-          service = retrofit.create(Router.class);
-          HashMap<String, String> usersesion = sesi.getUserDetails();
+          final HashMap<String, String> usersesion = sesi.getUserDetails();
+          sesi = new SessionManager(getApplicationContext());
+          id = usersesion.get(SessionManager.KEY_ID);
+          String token = usersesion.get(SessionManager.TOKEN);
+          retro = new RetrofitInstance(token);
+
+          service = retro.getRetrofitInstanceall().create(Router.class);
           id = usersesion.get(SessionManager.KEY_ID);
 
           String a = file.getName();
@@ -257,6 +274,9 @@ public class Setting extends AppCompatActivity {
               @Override
               public void onResponse(Call<Upload> call, Response<Upload> response) {
                   Toast.makeText(Setting.this, response.body().getRespon(), Toast.LENGTH_SHORT).show();
+                  Intent i=new Intent(Setting.this, Setting.class);
+                  startActivity(i);
+                  finish();
               }
 
               @Override
@@ -404,4 +424,37 @@ public class Setting extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    private void dialog(final String lama, final String baru) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Setting.this);
+        builder.setMessage("Password baru anda adalah " + baru + " apakah Anda yakin ingin melakukan perubahan password")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        try {
+                            User user = new User(lama,baru);
+                            update(user);
+                        }catch (Exception e){
+                            Toast.makeText(Setting.this, "Ada Masalah dengan Server", Toast.LENGTH_SHORT).show();
+                        }
+                        // untuk finish keluar
+                        // LoginActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("Tidak",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int arg1) {
+                                // TODO Auto-generated method stub
+                                dialog.cancel();
+                            }
+                        }).show();
+    }
+
+
+
+
+
+
 }

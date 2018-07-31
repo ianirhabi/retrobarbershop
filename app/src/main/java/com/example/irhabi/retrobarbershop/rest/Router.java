@@ -31,6 +31,7 @@ import retrofit2.http.Path;
 
 public interface Router {
 
+    //user endpoint
     @POST("user/login")
     Call<User> Login(@Body User user);
     @PUT("user/{id}")
@@ -42,19 +43,16 @@ public interface Router {
     Call<AlluserRespons> getalluser();
     @POST("user")
     Call<ModelTambahAKun> Postuser(@Body ModelTambahAKun akun);
-
     @DELETE("user/{id}")
     Call<Responhapuskaryawan> delete(@Path("id")int id);
 
+    //absen endpoint
     @GET("absen/{id}")
     Call<Absenarray> absenbarberman(@Path("id") int Id);
-
     @GET("absen/{id}/{from}/{to}")
     Call<Absenarray> rangedataabsen(@Path("id") int Id, @Path("from") String from ,@Path("to") String to);
-
     @POST("absen")
     Call<Absen>post(@Body Absen a);
-
     @Multipart
     @POST("upload/android")
     Call<ResponseBody> uploadImage(@Part MultipartBody.Part photo,
