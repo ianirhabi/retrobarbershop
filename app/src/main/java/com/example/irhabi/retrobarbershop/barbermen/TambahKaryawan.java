@@ -42,10 +42,40 @@ public class TambahKaryawan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_karyawan);
         simpan = (Button)findViewById(R.id.simpandata);
+        nama = (EditText)findViewById(R.id.namaret);
+        alamat=(EditText)findViewById(R.id.alamatret);
+        nik = (EditText)findViewById(R.id.nikret);
+        usergrup = (EditText)findViewById(R.id.usergrupret);
+        username = (EditText)findViewById(R.id.usernameret);
+        password = (EditText)findViewById(R.id.passwordret);
+
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tambahdata();
+                final  String Nama = nama.getText().toString();
+                final  String Alamat = alamat.getText().toString();
+                final  String Nik = nik.getText().toString();
+                final  String Grup = usergrup.getText().toString();
+                final  String Username = username.getText().toString();
+                final  String Password = password.getText().toString();
+
+                if (TextUtils.isEmpty(Nama)) {
+                    nama.setError("inputan nama tidak boleh kosong");
+                    return;
+                }else if (TextUtils.isEmpty(Alamat)){
+                    alamat.setError("inputan Alamat tidak boleh kosong");
+                }else if (TextUtils.isEmpty(Nik)){
+                    nik.setError("inputan Nik tidak boleh kosong");
+                }else if (TextUtils.isEmpty(Grup)){
+                    usergrup.setError("inputan usergrup tidak boleh kosong");
+                }else if (TextUtils.isEmpty(Username)){
+                    username.setError("inputan username tidak boleh kosong");
+                }else if (Password.length() < 6){
+                    password.setError("password harus lebih dari 6 karakter");
+                }
+                else {
+                    Tambahdata(Username);
+                }
             }
         });
     }
@@ -83,10 +113,14 @@ public class TambahKaryawan extends AppCompatActivity {
         //End Check for PhoneNumber
    }
 
-    private void Tambahdata() {
+    private void Tambahdata(String usernameinput) {
         AlertDialog.Builder builder = new AlertDialog.Builder(TambahKaryawan.this);
-        builder.setMessage("data username dan password akan di kirim ke karyawaan anda melalui " +
-                "pemberitahuan sms dan pastikan anda memiliki pulsa. Nomor tujuan adalah username yang anda input ")
+        builder.setMessage("Perhatian !!! data yang telah anda input akan dikirm melalui " +
+                "pemberitahuan sms ke nomor tujuan karyawaan anda dan karyawaan anda akan menerima data berupa " +
+                "username dan password yang nantinya akan dipakai saat login ke aplikasi retrobarbershop" +
+                " dan pastikan anda memiliki pulsa yang cukup untuk mengirim data ini. " +
+                "Nomor tujuan adalah data username yang anda input yaitu " + usernameinput +
+                " jika Nomor tujuan yang Anda input salah data tidak akan dikirim ")
                 .setCancelable(false)
                 .setPositiveButton("Tambah Data", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

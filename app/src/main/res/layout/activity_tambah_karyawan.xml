@@ -29,7 +29,7 @@
 
             <EditText
                 android:id="@+id/namaret"
-
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nama">
@@ -74,6 +74,7 @@
             </LinearLayout>
 
             <EditText
+                android:inputType="text"
                 android:id="@+id/alamatret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,6 +103,7 @@
 
             <EditText
                 android:id="@+id/passwordret"
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password "/>
