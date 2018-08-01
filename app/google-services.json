@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "223654999093",
-    "firebase_url": "https://retro-barbershop.firebaseio.com",
-    "project_id": "retro-barbershop",
-    "storage_bucket": "retro-barbershop.appspot.com"
+    "project_number": "1011072749021",
+    "firebase_url": "https://notifikasiretro.firebaseio.com",
+    "project_id": "notifikasiretro",
+    "storage_bucket": "notifikasiretro.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:223654999093:android:3bb86ec4ca54afb0",
+        "mobilesdk_app_id": "1:1011072749021:android:3bb86ec4ca54afb0",
         "android_client_info": {
           "package_name": "com.example.irhabi.retrobarbershop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "223654999093-ekbt2e8sqgolgvrnr28dfvlbp6nq7h6o.apps.googleusercontent.com",
+          "client_id": "1011072749021-9m542suis3i26gfsc7v9lkchds0e3acm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.irhabi.retrobarbershop",
-            "certificate_hash": "cf376438a0c0698f2daef9368e6d0b68f8c014a5"
+            "certificate_hash": "1c37dcc591db9211e9164156f8d0747211903147"
           }
         },
         {
-          "client_id": "223654999093-rl4shdbuj7l687ufltv6tkpeqg3ee120.apps.googleusercontent.com",
+          "client_id": "1011072749021-dtf5p8rmdvsoe761nqci5r5thhomemb3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCtNAaat3dYAYIURsu_hN1qvSP8I1VPy0c"
+          "current_key": "AIzaSyBmo_uBFYRJG-zWnrWdgu6hP17f9RXsgco"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "223654999093-rl4shdbuj7l687ufltv6tkpeqg3ee120.apps.googleusercontent.com",
+              "client_id": "1011072749021-dtf5p8rmdvsoe761nqci5r5thhomemb3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

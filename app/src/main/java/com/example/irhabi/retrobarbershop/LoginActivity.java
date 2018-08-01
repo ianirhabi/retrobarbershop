@@ -5,8 +5,14 @@ package com.example.irhabi.retrobarbershop;
 */
 
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
+import com.example.irhabi.retrobarbershop.fcm.Config;
 import com.example.irhabi.retrobarbershop.model.User;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,10 +20,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -29,6 +37,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.irhabi.retrobarbershop.notifikasi.NotificationUtils;
 import com.example.irhabi.retrobarbershop.rest.Router;
 
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
@@ -38,6 +47,8 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -55,11 +66,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
     private Button btnSignup, btnLogin, btnReset;
     private String kau;
     private TextView IMEI;
-    TelephonyManager telephonyManager;
-    SessionManager session;
+    private TelephonyManager telephonyManager;
+    private SessionManager session;
     private LoadingButton button;
     private boolean loading = false;
     private java.util.ArrayList<com.example.irhabi.retrobarbershop.model.Usr> data;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     // Google client to interact with Google API
     private GoogleApiClient mGoogleApiClient;
@@ -87,6 +99,32 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         button = (LoadingButton) findViewById(R.id.loading_button);
         btnReset = (Button) findViewById(R.id.btn_reset_password);
         checkLocationPermission();
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // gcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+
+                    displayFirebaseRegId();
+
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+
+                    String message = intent.getStringExtra("message");
+
+                    Toast.makeText(getApplicationContext(), "Push notification: " + message, Toast.LENGTH_LONG).show();
+
+                }
+            }
+        };
+
+        displayFirebaseRegId();
+
 
 
 
@@ -283,5 +321,34 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
     public void onLocationChanged(Location location) {
 
     }
+
+
+    // Fetches reg id from shared preferences
+    // and displays on the screen
+    private void displayFirebaseRegId() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+        Log.e("debug", "Firebase reg id: " + regId);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationUtils.clearNotifications(getApplicationContext());
+    }
+
 }
 

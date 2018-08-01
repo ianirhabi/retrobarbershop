@@ -11,9 +11,10 @@ public class AppConfig {
 	//public static  String URL = "http://programmerjalanancom-at.cloud.revoluz.io:50406/retrobarbershop/";
 	// Server user register url
 	public static String URL_REGISTER = "http://bimsalabim.xyz/retrobarbershop/";
-	//public static  String URL = "http://54.169.207.119:4500/retrobarbershop/";
+
 	//public static  String URL = "http://10.10.7.67:4500/retrobarbershop/";
-	public static  String URL = "http://192.168.88.252:4500/retrobarbershop/";
+	//public static  String URL = "http://192.168.88.252:4500/retrobarbershop/";
 
-
+	//Serverku AWS Light
+	public static  String URL = "http://54.169.207.119:4500/retrobarbershop/";
 }
