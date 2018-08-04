@@ -100,6 +100,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         btnReset = (Button) findViewById(R.id.btn_reset_password);
         checkLocationPermission();
 
+        if (session.isLoggedIn()== true)
+        {
+            Intent i = new Intent(LoginActivity.this, KonekMaps.class);
+            startActivity(i);
+        }
+
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -124,9 +130,6 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         };
 
         displayFirebaseRegId();
-
-
-
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -222,6 +225,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                             android.Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
+
                         if (mGoogleApiClient == null) {
                             buildGoogleApiClient();
                         }
@@ -266,6 +270,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
                 try {
                    if(response.body().getStatus().equals("sukses")){
                         Integer id = new Integer(response.body().getResponsdata().getUsr().Getid());
+                        Log.d("Login", "disini  ===== "+ response.body().getResponsdata().getUsr().getUsergrup());
                         String di = id.toString();
                         session.createLoginSession(response.body().getResponsdata().getUsr().getUser(),
                                 response.body().getResponsdata().getUsr().getUsergrup(), di);

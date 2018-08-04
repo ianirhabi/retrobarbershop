@@ -13,11 +13,10 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.irhabi.retrobarbershop.fcm.Config;
 import com.example.irhabi.retrobarbershop.notifikasi.NotificationUtils;
 
 /**
- * Created by Ravi Tamada on 08/08/16.
+ * Created by andrian on 08/08/16.
  * www.androidhive.info
  */
 public class MyFirebaseMessagingService extends FirebaseMessagingService {

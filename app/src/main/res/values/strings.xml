@@ -78,6 +78,7 @@
     <string name="oranye">Orannye</string>
     <string name="ungu">Ungu</string>
     <string name="hitam">Hitam</string>
+    <string name="my_cart">Catalog</string>
 
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
@@ -104,6 +105,7 @@
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">2</item>
-    </style>
 
+    </style>
+    <string name="order">ORDER</string>
 </resources>

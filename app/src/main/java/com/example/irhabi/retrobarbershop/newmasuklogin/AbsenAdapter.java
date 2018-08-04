@@ -5,7 +5,9 @@ package com.example.irhabi.retrobarbershop.newmasuklogin;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.se.omapi.Session;
 import android.support.v7.widget.RecyclerView;
 
@@ -13,7 +15,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.irhabi.retrobarbershop.MapsActivity;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
@@ -39,7 +45,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
     }
 
     @Override
-    public void onBindViewHolder(AbsenViewHolder holder, int position) {
+    public void onBindViewHolder(AbsenViewHolder holder, final int position) {
 
         session = new SessionManager(mContext);
         final HashMap<String, String> usersesion = session.getUserDetails();
@@ -48,6 +54,17 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
 
         if(usr.equals("superadmin")) {
             holder.txtWaktu.setText("Jam Masuk : " + dataList.get(position).getwaktu());
+            holder.lokasi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(mContext, MapsActivity.class);
+                    Bundle ambil_lokasi = new Bundle();
+                    ambil_lokasi.putString("parse_lat", dataList.get(position).getLat());
+                    ambil_lokasi.putString("parse_lon", dataList.get(position).getLon());
+                    i.putExtras(ambil_lokasi);
+                    mContext.startActivity(i);
+                }
+            });
         }
         holder.txtHari.setText("Hari Masuk : " + dataList.get(position).getHari());
         holder.txtstatus.setText("Status Kehadiran : " );
@@ -73,6 +90,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
     class AbsenViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtTanggal, txtWaktu, txtKehadiran, txtHari, txtAlasan, txtstatus;
+        ImageView lokasi;
 
         AbsenViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +100,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
             txtKehadiran =  itemView.findViewById(R.id.kehadiran);
             txtAlasan = itemView.findViewById(R.id.alasan);
             txtstatus = itemView.findViewById(R.id.status);
+            lokasi = itemView.findViewById(R.id.lokasi);
         }
     }
 }

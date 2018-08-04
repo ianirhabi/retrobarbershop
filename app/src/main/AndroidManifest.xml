@@ -16,9 +16,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
+        android:name=".pembayaran.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/iconret"
         android:label="@string/app_name"
@@ -51,7 +52,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".fcm.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -63,7 +63,14 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Maps.KonekMaps"
+            android:exported="true"
+            android:label="Retro Barbershop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Fullscreen" />
+        <activity
             android:name=".newmasuklogin.MainL"
+            android:exported="true"
             android:label="Retro Barbershop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -73,10 +80,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Maps.KonekMaps"
-            android:label="Retro Barbershop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Fullscreen" />
+            android:name=".barbermen.ControlStylish"
+            android:exported="true"
+            android:label="Dashboard"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".newmasuklogin.Setting"
             android:label="Update Akun"
@@ -114,12 +121,10 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".Antri.Antri" />
         <activity
-            android:name=".barbermen.ControlStylish"
-            android:label="Laporan Aktivitas Stylish" />
-        <activity
             android:name=".barbermen.LaporanAbsenStylish"
             android:label="Laporan Absen Stylish"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".barbermen.EditKaryawan"
             android:label="Edit Data Karyawan"
@@ -127,8 +132,14 @@
         <activity android:name=".barbermen.HapusKaryawan" />
         <activity
             android:name=".barbermen.TambahKaryawan"
-            android:label="Tambah Data" />
-        <activity android:name=".download.Download"></activity>
+            android:label="Tambah Data"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".download.Download" />
+        <activity
+            android:name=".pembayaran.Pembayaran"
+            android:label="Catalog"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

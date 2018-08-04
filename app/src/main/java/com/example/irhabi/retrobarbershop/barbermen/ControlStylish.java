@@ -14,9 +14,9 @@ import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
-import com.example.irhabi.retrobarbershop.ResetPasswordActivity;
 import com.example.irhabi.retrobarbershop.alert.ViewDialog;
 import com.example.irhabi.retrobarbershop.newmasuklogin.Setting;
+import com.example.irhabi.retrobarbershop.pembayaran.Pembayaran;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
 import java.text.DateFormat;
@@ -25,8 +25,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ControlStylish extends AppCompatActivity {
-    private Button karyawan, Edit, Laporan, tambah;
-    private ImageView foto;
+    private Button karyawan, Edit, Laporan, tambah, order;
+    private ImageView foto, shutdown;
     private SessionManager sesi;
     private ViewDialog alert;
     private TextView tanggal;
@@ -40,8 +40,28 @@ public class ControlStylish extends AppCompatActivity {
         tambah = (Button)findViewById(R.id.tambahakun);
         Laporan = (Button)findViewById(R.id.penjualan);
         tanggal = (TextView)findViewById(R.id.date) ;
+        shutdown = (ImageView)findViewById(R.id.logout) ;
+        order = (Button)findViewById(R.id.Order);
+
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ControlStylish.this, Pembayaran.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        shutdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sesi = new SessionManager(getApplicationContext());
+                sesi.logoutUser();
+                finish();
+            }
+        });
+
         alert = new ViewDialog();
-        alert.showDialog(ControlStylish.this, "Selamat Datang Di Menu SuperAdmin");
+        alert.showDialog(ControlStylish.this, "Welcome SuperAdmin");
 
         DateFormat dateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
         Date date = new Date();

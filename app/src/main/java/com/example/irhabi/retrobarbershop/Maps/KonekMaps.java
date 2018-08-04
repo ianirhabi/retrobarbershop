@@ -1,8 +1,7 @@
 package com.example.irhabi.retrobarbershop.Maps;
 
-
 /**
- * Created BY Progrmmer Jalan on January 2018
+ * Created BY Programmer Jalan on January 2018
  */
 
 import android.Manifest;
@@ -29,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.barbermen.ControlStylish;
 import com.example.irhabi.retrobarbershop.error.Gagal;
 import com.example.irhabi.retrobarbershop.newmasuklogin.MainL;
 import com.example.irhabi.retrobarbershop.newmasuklogin.ScanFragment;
@@ -56,8 +56,10 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Reference: https://github.com/googlesamples/android-play-location/tree/master/LocationUpdates
@@ -151,26 +153,45 @@ public class KonekMaps extends AppCompatActivity {
                 mLastUpdateTime = savedInstanceState.getString("last_updated_on");
             }
         }
-
-
     }
-
 
     /**
      * Update the UI displaying the location data
      * and toggling the buttons
      */
+
     private void updateLocationUI() {
         if (mCurrentLocation != null) {
-
             sesi = new SessionManager(getApplicationContext());
+            final HashMap<String, String> usersesion = sesi.getUserDetails();
+            String usrgrup = usersesion.get(SessionManager.KEY_USERGRUP);
 
-            String la = String.valueOf(mCurrentLocation.getLatitude());
-            String lo = String.valueOf(mCurrentLocation.getLongitude());
-            sesi.createLongtiLati(la,lo);
-            Intent i = new Intent(KonekMaps.this, MainL.class);
-            startActivity(i);
-            finish();
+            if(usrgrup.equals("1")){
+                String la = String.valueOf(mCurrentLocation.getLatitude());
+                String lo = String.valueOf(mCurrentLocation.getLongitude());
+                sesi.createLongtiLati(la,lo);
+                Log.d("debug usr grup", "usergrup ====== " + usrgrup);
+                Intent i = new Intent(KonekMaps.this, ControlStylish.class);
+                startActivity(i);
+                finish();
+            }else if(usrgrup.equals("2")){
+                String la = String.valueOf(mCurrentLocation.getLatitude());
+                String lo = String.valueOf(mCurrentLocation.getLongitude());
+                sesi.createLongtiLati(la,lo);
+                Log.d("debug usr grup", "usergrup ====== " + usrgrup);
+                Intent i = new Intent(KonekMaps.this, ControlStylish.class);
+                startActivity(i);
+                finish();
+            }else {
+
+                String la = String.valueOf(mCurrentLocation.getLatitude());
+                String lo = String.valueOf(mCurrentLocation.getLongitude());
+                sesi.createLongtiLati(la, lo);
+                Log.d("debug usr grup", "usergrup ====== " + usrgrup);
+                Intent i = new Intent(KonekMaps.this, MainL.class);
+                startActivity(i);
+                finish();
+            }
         }else{
             //    Toast.makeText(getApplicationContext(),"Tidak bisa melanjutkan something wrong ", Toast.LENGTH_LONG).show();
         }
@@ -182,7 +203,6 @@ public class KonekMaps extends AppCompatActivity {
         outState.putBoolean("is_requesting_updates", mRequestingLocationUpdates);
         outState.putParcelable("last_known_location", mCurrentLocation);
         outState.putString("last_updated_on", mLastUpdateTime);
-
     }
 
     /**
@@ -190,6 +210,7 @@ public class KonekMaps extends AppCompatActivity {
      * Check whether location settings are satisfied and then
      * location updates will be requested
      */
+
     private void startLocationUpdates() {
         mSettingsClient
                 .checkLocationSettings(mLocationSettingsRequest)
@@ -280,8 +301,6 @@ public class KonekMaps extends AppCompatActivity {
                     public void onPermissionRationaleShouldBeShown(com.karumi.dexter.listener.PermissionRequest permission, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
-
-
                 }).check();
     }
 
