@@ -53,6 +53,14 @@ public class Pembayaran extends AppCompatActivity implements RecyclerItemTouchHe
         getSupportActionBar().setTitle(getString(R.string.my_cart));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Pembayaran.this, ControlStylish.class);
+                startActivity(i);
+                finish();
+            }
+        });
         recyclerView = findViewById(R.id.recycler_view);
         coordinatorLayout = findViewById(R.id.coordinator_layout);
         cartList = new ArrayList<>();

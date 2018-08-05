@@ -7,6 +7,8 @@ package com.example.irhabi.retrobarbershop.rest;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.model.AlluserRespons;
+import com.example.irhabi.retrobarbershop.model.Barang;
+import com.example.irhabi.retrobarbershop.model.BarangArray;
 import com.example.irhabi.retrobarbershop.model.ModelTambahAKun;
 import com.example.irhabi.retrobarbershop.model.Responhapuskaryawan;
 import com.example.irhabi.retrobarbershop.model.Upload;
@@ -66,4 +68,23 @@ public interface Router {
                                    @PartMap Map<String,RequestBody> text);
     @POST("upload/namephoto")
     Call<Upload> uploadnameImage(@Body Upload upload);
+
+
+    //barang endpoin
+    @POST("barang/{usergrup}/{id}")
+    Call<Barang>postbarang(@Body Barang a,
+                           @Path("usergrup") String usergrup,
+                           @Path("id") String id);
+
+    @PUT("barang/{usergrup}/{id}/{idbarang}")
+    Call<Barang>Updatebarang(@Body Barang a,
+                           @Path("usergrup") String usergrup,
+                           @Path("id") String id,
+                             @Path("idbarang") int idbarang);
+
+    @GET("barang/{usergrup}")
+    Call<BarangArray>Getbarang(@Path("usergrup") String usergrup);
+
+    @DELETE("barang/{usergrup}/delete/{idbarang}")
+    Call<Barang>Deletebarang(@Path("usergrup") String usergrup, @Path("idbarang") int idbarang );
 }

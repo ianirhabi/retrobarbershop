@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.alert.ViewDialog;
+import com.example.irhabi.retrobarbershop.barang.BarangActivity;
 import com.example.irhabi.retrobarbershop.newmasuklogin.Setting;
 import com.example.irhabi.retrobarbershop.pembayaran.Pembayaran;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
@@ -93,7 +94,7 @@ public class ControlStylish extends AppCompatActivity {
         });
 
         alert = new ViewDialog();
-        alert.showDialog(ControlStylish.this, "Welcome SuperAdmin");
+        alert.showDialog(ControlStylish.this, "Welcome SuperAdmin", ControlStylish.this);
 
         DateFormat dateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd");
         Date date = new Date();
@@ -115,11 +116,9 @@ public class ControlStylish extends AppCompatActivity {
 //                sesi = new SessionManager(getApplicationContext());
 //                String a = "1" ;
 //                sesi.createControlKaryawaan(a);
-//                Intent i = new Intent(ControlStylish.this, Barbermen.class);
-//                startActivity(i);
-//                finish();
-
-
+                Intent i = new Intent(ControlStylish.this, BarangActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 

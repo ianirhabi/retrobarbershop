@@ -2,16 +2,19 @@ package com.example.irhabi.retrobarbershop.alert;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
 
 public class ViewDialog {
 
-    public void showDialog(Activity activity, String msg){
+    public void showDialog(Activity activity, String msg, final Context mContext){
+
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -24,6 +27,7 @@ public class ViewDialog {
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(mContext, "Anda menekan ok", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
         });

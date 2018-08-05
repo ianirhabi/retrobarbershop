@@ -140,6 +140,17 @@
             android:label="Catalog"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".barang.BarangActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
     </application>
 
 </manifest>

@@ -49,6 +49,8 @@ public class SessionManager {
     public static  final String KEY_ID_STYLISH = "1";
     public static  final String KEY_KARYAWAN = "netral" ;
     public static  final String TOKEN = "token";
+    public static  final String STATUS_BARANG = "00";
+
     // public Constructor
     public SessionManager(Context context){
         this._context = context;
@@ -98,6 +100,12 @@ public class SessionManager {
         editor.putString(LATITUDEstylish, la);
         editor.commit();
     }
+
+    public void Statusbarang(String status){
+        editor.putBoolean(IS_LOGIN, true);
+        editor.putString(STATUS_BARANG, status);
+        editor.commit();
+    }
     // hanya menyimpan email
     public void createImage(String image){
         // Storing login value as TRUE
@@ -136,6 +144,7 @@ public class SessionManager {
         user.put(KEY_IMAGE,pref.getString(KEY_IMAGE,null));
         user.put(KEY_KARYAWAN,pref.getString(KEY_KARYAWAN, null));
         user.put(TOKEN,pref.getString(TOKEN,null));
+        user.put(STATUS_BARANG,pref.getString(STATUS_BARANG,null));
         return user;
     }
 

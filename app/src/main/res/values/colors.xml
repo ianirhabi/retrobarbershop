@@ -79,4 +79,7 @@
     <color name="item_name">#535353</color>
     <color name="description">#a9a9a9</color>
 
+    <color name="barang_name">#333333</color>
+    <color name="barang_number">#8c8c8c</color>
+
 </resources>

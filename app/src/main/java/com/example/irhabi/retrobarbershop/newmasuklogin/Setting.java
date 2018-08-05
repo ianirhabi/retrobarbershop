@@ -115,13 +115,13 @@ public class Setting extends AppCompatActivity {
                 }else if (barulagi.length() < 6) {
                    passwordbaru.setError("password baru harus lebih dari 6 karakter");
                 }else if(lama.equals(baru)){
-                    alert.showDialog(Setting.this, "Password lama tidak boleh sama dengan baru!!");
+                    alert.showDialog(Setting.this, "Password lama tidak boleh sama dengan baru!!", Setting.this);
                 }else if(baru.equals(barulagi)) {
                     dialog(lama, baru);
 
                 }else{
                     alert = new ViewDialog();
-                    alert.showDialog(Setting.this, "Password Baru Tidak Sama Mohon Ulangi !!");
+                    alert.showDialog(Setting.this, "Password Baru Tidak Sama Mohon Ulangi !!", Setting.this);
                 }
             }
         });
