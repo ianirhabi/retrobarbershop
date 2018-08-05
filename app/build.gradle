@@ -85,5 +85,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'com.karumi:dexter:4.2.0'
     implementation 'com.github.delight-im:Android-AdvancedWebView:v3.0.0'
+    implementation 'com.github.Hitomis:CircleMenu:v1.0.2'
 }
 apply plugin: 'com.google.gms.google-services'

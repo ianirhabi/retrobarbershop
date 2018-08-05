@@ -51,20 +51,22 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/karyawan"
+                android:id="@+id/inputbarang"
                 style="@style/ButtonText"
+                android:textColorHint="@color/white"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center"
                 android:background="@drawable/button_merah"
-                android:drawableLeft="@android:drawable/ic_partial_secure"
-                android:hint="Stylish Absen"
+                android:drawableLeft="@drawable/barang"
+                android:hint="Input Barang/Service"
                 android:textSize="17dp" />
 
             <Button
                 android:id="@+id/rubahakun"
                 style="@style/ButtonText"
+                android:textColorHint="@color/white"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:layout_alignParentRight="true"
@@ -74,8 +76,10 @@
                 android:hint="Edit Akun Stylish"
                 android:textSize="17dp" />
 
+
             <Button
                 android:id="@+id/Order"
+                android:textColorHint="@color/white"
                 style="@style/ButtonText"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
@@ -91,7 +95,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_gravity="center">
             <!--android:orientation="horizontal">-->
             <!--<Button-->
@@ -108,6 +112,7 @@
             <!--android:hint="Laporan Pemasukan Stylish"/>-->
             <Button
                 android:id="@+id/penjualan"
+                android:textColorHint="@color/white"
                 style="@style/ButtonText"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
@@ -123,6 +128,7 @@
                 style="@style/ButtonText"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
+                android:textColorHint="@color/white"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center"
                 android:background="@drawable/buttonungun"
@@ -130,12 +136,20 @@
                 android:hint="Tambah Akun"
                 android:textSize="17dp" />
 
+            <com.hitomi.cmlibrary.CircleMenu
+                android:scaleX="1.7"
+                android:scaleY="1.7"
+                android:id="@+id/menucircle"
+                android:layout_height="match_parent"
+                android:layout_width="150dp"/>
+
         </LinearLayout>
 
         <com.github.siyamed.shapeimageview.CircularImageView
             android:id="@+id/logout"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:src="@drawable/shutdown"
             app:siBorderColor="@color/blue"

@@ -54,6 +54,7 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
 
         if(usr.equals("superadmin")) {
             holder.txtWaktu.setText("Jam Masuk : " + dataList.get(position).getwaktu());
+            holder.lokasi.setVisibility(View.VISIBLE);
             holder.lokasi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
