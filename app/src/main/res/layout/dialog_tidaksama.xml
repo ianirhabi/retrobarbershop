@@ -13,7 +13,7 @@
         android:id="@+id/a"
         android:gravity="center"
         android:background="@color/black"
-        android:src="@drawable/retret"
+        android:src="@drawable/icon"
         android:scaleType="fitCenter" />
 
     <TextView

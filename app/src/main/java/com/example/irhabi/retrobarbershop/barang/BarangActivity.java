@@ -1,4 +1,5 @@
 package com.example.irhabi.retrobarbershop.barang;
+
 /**
  * Created By Programmer Jalanan 05/08/2018
  */
@@ -17,32 +18,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.alert.Inputbarang;
 import com.example.irhabi.retrobarbershop.barbermen.ControlStylish;
-import com.example.irhabi.retrobarbershop.model.Absen;
-import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.model.Barang;
 import com.example.irhabi.retrobarbershop.model.BarangArray;
-import com.example.irhabi.retrobarbershop.newmasuklogin.AbsenAdapter;
-import com.example.irhabi.retrobarbershop.pembayaran.Pembayaran;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +48,7 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
     private RetrofitInstance retrofit;
     private FloatingActionButton tambah;
     private Inputbarang inputbarangdialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +56,6 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tambah = (FloatingActionButton)findViewById(R.id.tambahbarang);
-
 
         tambah.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +76,9 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
             }
         });
 
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Category Item");
-
         Getbarang();
-
     }
 
     private void generateBarang(ArrayList<Barang> Arraybarang, String a) {
@@ -155,7 +139,6 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         if (id == R.id.action_search) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

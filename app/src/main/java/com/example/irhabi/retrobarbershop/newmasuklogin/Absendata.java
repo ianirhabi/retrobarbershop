@@ -7,19 +7,14 @@ package com.example.irhabi.retrobarbershop.newmasuklogin;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -39,22 +34,14 @@ import android.widget.Toast;
 
 
 import com.example.irhabi.retrobarbershop.R;
-import com.example.irhabi.retrobarbershop.barbermen.HapusKaryawan;
 import com.example.irhabi.retrobarbershop.download.Download;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Absenarray;
-import com.example.irhabi.retrobarbershop.model.User;
 import com.example.irhabi.retrobarbershop.model.Usr;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
-import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,7 +49,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.zip.Inflater;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;

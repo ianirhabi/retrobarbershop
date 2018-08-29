@@ -6,7 +6,6 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
-        google()
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {

@@ -95,9 +95,9 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         logingambar = (ImageView)findViewById(R.id.imagelogin);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
+//        btnSignup = (Button) findViewById(R.id.btn_signup);
         button = (LoadingButton) findViewById(R.id.loading_button);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
+//        btnReset = (Button) findViewById(R.id.btn_reset_password);
         checkLocationPermission();
 
         if (session.isLoggedIn()== true)
@@ -139,21 +139,21 @@ public class LoginActivity extends AppCompatActivity implements ConnectionCallba
         logingambar.startAnimation(rotate);
 
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-            }
-        });
+//        btnSignup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                v.startAnimation(animAlpha);
+//                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+//            }
+//        });
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.startAnimation(animAlpha);
-                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
-            }
-        });
+//        btnReset.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                v.startAnimation(animAlpha);
+//                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+//            }
+//        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

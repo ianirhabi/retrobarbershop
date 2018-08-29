@@ -27,7 +27,6 @@ import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.barbermen.ControlStylish;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import org.json.JSONArray;
 
 import java.util.ArrayList;
@@ -66,7 +65,9 @@ public class Pembayaran extends AppCompatActivity implements RecyclerItemTouchHe
         cartList = new ArrayList<>();
         mAdapter = new CartListAdapter(this, cartList);
 
+       // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -78,7 +79,6 @@ public class Pembayaran extends AppCompatActivity implements RecyclerItemTouchHe
         // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-
 
         // making http call and fetching menu json
         prepareCart();

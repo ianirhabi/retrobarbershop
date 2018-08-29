@@ -3,7 +3,7 @@ package com.example.irhabi.retrobarbershop.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by ravi on 16/11/17.
+ * Created by programmer jalanan on 16/11/17.
  */
 
 public class Barang {

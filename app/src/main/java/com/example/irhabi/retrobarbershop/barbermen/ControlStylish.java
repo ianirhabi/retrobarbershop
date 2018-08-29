@@ -113,9 +113,6 @@ public class ControlStylish extends AppCompatActivity {
         inputbarang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                sesi = new SessionManager(getApplicationContext());
-//                String a = "1" ;
-//                sesi.createControlKaryawaan(a);
                 Intent i = new Intent(ControlStylish.this, BarangActivity.class);
                 startActivity(i);
                 finish();
@@ -142,7 +139,6 @@ public class ControlStylish extends AppCompatActivity {
             }
         });
     }
-
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Intent i = new Intent(ControlStylish.this, KonekMaps.class);

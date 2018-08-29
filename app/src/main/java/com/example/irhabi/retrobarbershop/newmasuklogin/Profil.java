@@ -56,7 +56,7 @@ public class Profil extends Fragment {
     private final long interval = 1 * 1000;
     private Button btnStart;
     private TextView text, nameretro, userretro;
-    PhotoViewAttacher photoAttacher;
+    private  PhotoViewAttacher photoAttacher;
     private ImageButton close;
     private LinearLayout layout;
     private RetrofitInstance retro;

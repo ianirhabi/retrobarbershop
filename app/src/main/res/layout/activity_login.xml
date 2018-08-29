@@ -63,27 +63,27 @@
             android:background="@color/colorAccent"
             app:text="Masuk"/>
 
-        <Button
-            android:id="@+id/btn_reset_password"
-            android:layout_width="fill_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="20dip"
-            android:background="@null"
-            android:text="@string/btn_forgot_password"
-            android:textAllCaps="false"
-            android:textColor="@color/input_login_hint"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/btn_reset_password"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_marginTop="20dip"-->
+            <!--android:background="@null"-->
+            <!--android:text="@string/btn_forgot_password"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@color/input_login_hint"-->
+            <!--/>-->
 
-        <!-- Link to Login Screen -->
+        <!--&lt;!&ndash; Link to Login Screen &ndash;&gt;-->
 
-        <Button
-            android:id="@+id/btn_signup"
-            android:layout_width="fill_parent"
-            android:layout_height="20dp"
-            android:background="@null"
-            android:text="@string/btn_link_to_register"
-            android:textAllCaps="false"
-            android:textColor="@color/black"></Button>
+        <!--<Button-->
+            <!--android:id="@+id/btn_signup"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:background="@null"-->
+            <!--android:text="@string/btn_link_to_register"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@color/black"></Button>-->
 
         <LinearLayout
             android:layout_width="match_parent"

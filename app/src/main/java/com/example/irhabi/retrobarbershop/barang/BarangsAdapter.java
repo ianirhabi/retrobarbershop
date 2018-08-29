@@ -9,11 +9,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.irhabi.retrobarbershop.R;
-import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.model.Barang;
 
 import java.util.ArrayList;
@@ -51,7 +47,6 @@ public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHo
         }
     }
 
-
     public BarangsAdapter(Context context, ArrayList<Barang> dataList, BarangAdapterListener listener) {
         this.mContext = context;
         this.dataList = dataList;
@@ -82,6 +77,7 @@ public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
+        //kalau data tidak ada di database tidak akan null pointer
         if (barangListFiltered == null){
             return 0;
         }else {
@@ -107,7 +103,6 @@ public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHo
                             filteredList.add(row);
                         }
                     }
-
                     barangListFiltered = filteredList;
                 }
 

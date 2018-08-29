@@ -83,7 +83,7 @@
             android:name=".barbermen.ControlStylish"
             android:exported="true"
             android:label="Dashboard"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".newmasuklogin.Setting"
             android:label="Update Akun"
@@ -123,8 +123,8 @@
         <activity
             android:name=".barbermen.LaporanAbsenStylish"
             android:label="Laporan Absen Stylish"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".barbermen.EditKaryawan"
             android:label="Edit Data Karyawan"
@@ -133,24 +133,30 @@
         <activity
             android:name=".barbermen.TambahKaryawan"
             android:label="Tambah Data"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity android:name=".download.Download" />
         <activity
             android:name=".pembayaran.Pembayaran"
             android:label="Catalog"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".barang.BarangActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="android.app.searchable"
             android:resource="@xml/searchable" />
+
+        <activity
+            android:name=".barangdetail.barangdetailactivity"
+            android:label="@string/title_activity_barangdetailactivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

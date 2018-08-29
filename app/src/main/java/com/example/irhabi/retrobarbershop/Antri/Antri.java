@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import im.delight.android.webview.AdvancedWebView;
 
-public class Antri  extends Activity implements AdvancedWebView.Listener,SwipeRefreshLayout.OnRefreshListener{
+public class Antri extends Activity implements AdvancedWebView.Listener,SwipeRefreshLayout.OnRefreshListener{
 
     private AdvancedWebView mWebView;
     SwipeRefreshLayout layoutswipe;

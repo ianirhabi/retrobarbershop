@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#392929"
+        android:background="@drawable/buttonhitam"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
@@ -22,7 +22,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginTop="70dp"
-            android:src="@drawable/iconret" />
+            android:src="@drawable/icon" />
 
         <TextClock
             android:id="@+id/idTextClock"
@@ -31,7 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:format24Hour="hh:mm:ss a"
-            android:textColor="@color/hitam"
+            android:textColor="@color/white"
             android:textSize="20dp" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:textColor="@color/hitam"
+            android:textColor="@color/white"
             android:textSize="20dp" />
 
         <LinearLayout
@@ -75,7 +75,6 @@
                 android:drawableLeft="@drawable/settings"
                 android:hint="Edit Akun Stylish"
                 android:textSize="17dp" />
-
 
             <Button
                 android:id="@+id/Order"

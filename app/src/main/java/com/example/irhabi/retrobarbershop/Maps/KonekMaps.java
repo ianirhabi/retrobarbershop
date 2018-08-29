@@ -20,18 +20,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Window;
-import android.view.WindowManager;
-import android.webkit.PermissionRequest;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.barbermen.ControlStylish;
-import com.example.irhabi.retrobarbershop.error.Gagal;
 import com.example.irhabi.retrobarbershop.newmasuklogin.MainL;
-import com.example.irhabi.retrobarbershop.newmasuklogin.ScanFragment;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -44,7 +37,6 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -81,7 +73,6 @@ public class KonekMaps extends AppCompatActivity {
 
     private static final int REQUEST_CHECK_SETTINGS = 100;
 
-
     // bunch of location related apis
     private FusedLocationProviderClient mFusedLocationClient;
     private SettingsClient mSettingsClient;
@@ -100,9 +91,8 @@ public class KonekMaps extends AppCompatActivity {
         setContentView(R.layout.activity_konekmas);
 
         // initialize the necessary libraries
+        // hanya membutuhkan 3 fungsi saja
         init();
-
-        // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
         startLocationButtonClick();
     }
@@ -179,7 +169,7 @@ public class KonekMaps extends AppCompatActivity {
                 String lo = String.valueOf(mCurrentLocation.getLongitude());
                 sesi.createLongtiLati(la,lo);
                 Log.d("debug usr grup", "usergrup ====== " + usrgrup);
-                Intent i = new Intent(KonekMaps.this, ControlStylish.class);
+                Intent i = new Intent(KonekMaps.this, MainL.class);
                 startActivity(i);
                 finish();
             }else {
@@ -348,7 +338,6 @@ public class KonekMaps extends AppCompatActivity {
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -358,6 +347,7 @@ public class KonekMaps extends AppCompatActivity {
             stopLocationUpdates();
         }
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -371,6 +361,4 @@ public class KonekMaps extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
 }

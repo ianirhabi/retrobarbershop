@@ -107,10 +107,12 @@
         <item name="android:shadowRadius">2</item>
 
     </style>
+
     <string name="order">ORDER</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
     <string name="search_hint">Type name…</string>
+    <string name="title_activity_barangdetailactivity">barangdetailactivity</string>
 
 </resources>

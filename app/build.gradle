@@ -18,7 +18,7 @@ android {
     }
 
     signingConfigs {
-        debug {
+        release {
             keyAlias 'key2'
             keyPassword 'ian123456'
             storeFile file('/home/programmerjalanan/AndroidStudioProjects/retrobarbershop/programerjalanan.jks')
@@ -69,6 +69,7 @@ dependencies {
 
     //maps
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
 
     // Rx
     implementation 'io.reactivex:rxandroid:1.2.1'
@@ -78,8 +79,7 @@ dependencies {
 
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
-    implementation 'com.google.android.gms:play-services-location:15.0.1'
+
     implementation "commons-io:commons-io:+"
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
