@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/buttonhitam"
+        android:background="@color/white"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
@@ -61,7 +61,8 @@
                 android:background="@drawable/button_merah"
                 android:drawableLeft="@drawable/barang"
                 android:hint="Input Barang/Service"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/rubahakun"
@@ -74,7 +75,8 @@
                 android:background="@drawable/buttonhijau"
                 android:drawableLeft="@drawable/settings"
                 android:hint="Edit Akun Stylish"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/Order"
@@ -87,13 +89,14 @@
                 android:background="@drawable/buttonhitam"
                 android:drawableLeft="@drawable/keranjang"
                 android:hint="Order"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:visibility="gone"/>
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_gravity="center">
             <!--android:orientation="horizontal">-->
@@ -120,7 +123,8 @@
                 android:background="@drawable/buttonorange"
                 android:drawableLeft="@android:drawable/ic_menu_agenda"
                 android:hint="Laporan Pembukuan"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/tambahakun"
@@ -133,17 +137,16 @@
                 android:background="@drawable/buttonungun"
                 android:drawableLeft="@android:drawable/ic_input_add"
                 android:hint="Tambah Akun"
-                android:textSize="17dp" />
+                android:textSize="17dp"
+                android:visibility="gone"/>
 
             <com.hitomi.cmlibrary.CircleMenu
-                android:scaleX="1.7"
-                android:scaleY="1.7"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
                 android:id="@+id/menucircle"
                 android:layout_height="match_parent"
-                android:layout_width="150dp"/>
-
+                android:layout_width="match_parent"/>
         </LinearLayout>
-
         <com.github.siyamed.shapeimageview.CircularImageView
             android:id="@+id/logout"
             android:layout_width="70dp"

@@ -31,7 +31,6 @@ import com.example.irhabi.retrobarbershop.model.BarangArray;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -81,7 +80,7 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         Getbarang();
     }
 
-    private void generateBarang(ArrayList<Barang> Arraybarang, String a) {
+    private void generateBarang(List<Barang> Arraybarang, String a) {
         recyclerView = findViewById(R.id.recycler_view_barang);
         mAdapter = new BarangsAdapter(BarangActivity.this, Arraybarang,this);
         // white background notification bar

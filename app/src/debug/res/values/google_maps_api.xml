@@ -4,7 +4,7 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=%3Bcom.example.irhabi.retrobarbershop
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=1C:37:DC:C5:91:DB:92:11:E9:16:41:56:F8:D0:74:72:11:90:31:47%3Bcom.example.irhabi.retrobarbershop
 
     You can also add your credentials to an existing key, using these values:
 
@@ -12,7 +12,7 @@
     
 
     SHA-1 certificate fingerprint:
-    1C:37:DC:C5:91:DB:92:11:E9:16:41:56:F8:D0:74:72:11:90:31:47
+    89:1F:AB:6F:FF:E8:4D:23:95:A6:B6:F5:F2:2F:B8:A0:C1:49:D5:9B
 
     Alternatively, follow the directions here:
     https://developers.google.com/maps/documentation/android/start#get-key

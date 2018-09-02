@@ -40,6 +40,9 @@
     <color name="hitam">#FF080809</color>
     <color name="merah">#FFBA0202</color>
     <color name="biru">#00bcd4</color>
+    <color name="circleBorder">#50FFFFFF</color>
+    <color name="circleBorder2">#50FF4FFF</color>
+    <color name="circleBorder3">#76FF4F6F</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#d1395c</color>

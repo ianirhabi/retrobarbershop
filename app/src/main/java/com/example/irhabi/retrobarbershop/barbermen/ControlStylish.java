@@ -2,6 +2,7 @@ package com.example.irhabi.retrobarbershop.barbermen;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -17,7 +18,7 @@ import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.alert.ViewDialog;
 import com.example.irhabi.retrobarbershop.barang.BarangActivity;
-import com.example.irhabi.retrobarbershop.newmasuklogin.Setting;
+import com.example.irhabi.retrobarbershop.newmasuklogin.ScanFragment;
 import com.example.irhabi.retrobarbershop.pembayaran.Pembayaran;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 import com.hitomi.cmlibrary.CircleMenu;
@@ -26,7 +27,6 @@ import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 public class ControlStylish extends AppCompatActivity {
     private Button inputbarang, Edit, Laporan, tambah, order;
@@ -34,7 +34,13 @@ public class ControlStylish extends AppCompatActivity {
     private SessionManager sesi;
     private ViewDialog alert;
     private TextView tanggal;
-    private  String arrayName []= {"Absen Karyawan", "Edit Akun"};
+    private boolean timerHasStarted = false;
+    private CountDownTimer countDownTimer;
+    private final long startTime = 1 * 1000;
+    private final long interval = 1 * 1000;
+
+    private  String arrayName []= {"Absen Karyawan", "Edit Akun",
+            "tambah", "scan", "barang", "order"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,27 +58,18 @@ public class ControlStylish extends AppCompatActivity {
         order = (Button)findViewById(R.id.Order);
 
         circleMenu.setMainMenu(Color.parseColor("#CDCDCD"),R.drawable.iconret, R.drawable.ic_settings_white_24dp)
-                .addSubMenu(Color.parseColor("#258cff"),R.drawable.buttomnbiru)
-                .addSubMenu(Color.parseColor("#6d4c41"),R.drawable.button_merah)
+                .addSubMenu(Color.parseColor("#258CFF"),R.drawable.anggota)
+                .addSubMenu(Color.parseColor("#8B0000"),R.drawable.edit)
+                .addSubMenu(Color.parseColor("#FF8C00"),R.drawable.ic_add)
+                .addSubMenu(Color.parseColor("#53933f"),R.drawable.scan)
+                .addSubMenu(Color.parseColor("#43923f"),R.drawable.baranginput)
+                .addSubMenu(Color.parseColor("#54733f"),R.drawable.order)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
                     @Override
                     public void onMenuSelected(int i) {
-                        Toast.makeText(getApplicationContext(),"Anda memilih menu " + arrayName[i], Toast.LENGTH_LONG).show();
-                        if(arrayName[i].equals("Absen Karyawan")){
-                            sesi = new SessionManager(getApplicationContext());
-                            String a = "1" ;
-                            sesi.createControlKaryawaan(a);
-                            Intent pindah = new Intent(ControlStylish.this, Barbermen.class);
-                            startActivity(pindah);
-                            finish();
-                        }else if((arrayName[i].equals("Edit Akun"))){
-                            sesi = new SessionManager(getApplicationContext());
-                            String a = "2" ;
-                            sesi.createControlKaryawaan(a);
-                            Intent pindah = new Intent(ControlStylish.this, Barbermen.class);
-                            startActivity(pindah);
-                            finish();
-                        }
+                        countDownTimer = new MyCountDownTimer(startTime, interval, arrayName[i]);
+                        countDownTimer.start();
+                        timerHasStarted = true;
                     }
                 });
 
@@ -84,6 +81,7 @@ public class ControlStylish extends AppCompatActivity {
                 finish();
             }
         });
+
         shutdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,5 +142,53 @@ public class ControlStylish extends AppCompatActivity {
         Intent i = new Intent(ControlStylish.this, KonekMaps.class);
         startActivity(i);
         return true;
+    }
+
+    class MyCountDownTimer extends CountDownTimer {
+        String status;
+        public MyCountDownTimer(long startTime, long interval, String status) {
+            super(startTime, interval);
+            this.status = status;
+        }
+
+        @Override
+        public void onFinish() {
+            if(status.equals("Absen Karyawan")){
+                sesi = new SessionManager(getApplicationContext());
+                String a = "1" ;
+                sesi.createControlKaryawaan(a);
+                Intent pindah = new Intent(ControlStylish.this, Barbermen.class);
+                startActivity(pindah);
+                finish();
+            }else if((status.equals("Edit Akun"))){
+                sesi = new SessionManager(getApplicationContext());
+                String a = "2" ;
+                sesi.createControlKaryawaan(a);
+                Intent pindah = new Intent(ControlStylish.this, Barbermen.class);
+                startActivity(pindah);
+                finish();
+            }else if((status.equals("tambah"))){
+                Intent pindah = new Intent(ControlStylish.this, TambahKaryawan.class);
+                startActivity(pindah);
+                finish();
+            }else if((status.equals("scan"))){
+                Intent pindah = new Intent(ControlStylish.this, ScanFragment.class);
+                startActivity(pindah);
+                finish();
+            }else if(status.equals("barang")){
+                Intent pindah = new Intent(ControlStylish.this, BarangActivity.class);
+                startActivity(pindah);
+                finish();
+            }else if(status.equals("order")){
+                Intent pindah = new Intent(ControlStylish.this, Pembayaran.class);
+                startActivity(pindah);
+                finish();
+            }
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+           //give the code
+        }
     }
 }

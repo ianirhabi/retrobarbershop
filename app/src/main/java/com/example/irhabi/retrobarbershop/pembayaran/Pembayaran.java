@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.barbermen.ControlStylish;
 import com.google.gson.Gson;
@@ -164,8 +163,6 @@ public class Pembayaran extends AppCompatActivity implements RecyclerItemTouchHe
           final  Snackbar snackbardua =  Snackbar
                     .make(coordinatorLayout, "", Snackbar.LENGTH_INDEFINITE);//Snackbar.LENGTH_LONG
 
-
-
             snackbar.setAction("tambah ",  new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -185,17 +182,10 @@ public class Pembayaran extends AppCompatActivity implements RecyclerItemTouchHe
                     });
                     snackbardua.setActionTextColor(Color.YELLOW);
                     snackbardua.show();
-
-
                 }
             });
-
             snackbar.setActionTextColor(Color.RED);
             snackbar.show();
-//            snackbarr.setActionTextColor(Color.YELLOW);
-//            snackbarr.show();
-
-
         }
     }
 

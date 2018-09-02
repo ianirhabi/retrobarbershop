@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.MapsActivity;
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.dbretro.DBRetro;
 import com.example.irhabi.retrobarbershop.model.Absen;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
 
@@ -42,12 +44,10 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
 
     @Override
     public void onBindViewHolder(AbsenViewHolder holder, final int position) {
-
         session = new SessionManager(mContext);
         final HashMap<String, String> usersesion = session.getUserDetails();
         String usr = usersesion.get(SessionManager.KEY_USER);
         holder.txtTanggal.setText("Tanggal Pengambilan Absen : "+dataList.get(position).gettangal());
-
         if(usr.equals("superadmin")) {
             holder.txtWaktu.setText("Jam Masuk : " + dataList.get(position).getwaktu());
             holder.lokasi.setVisibility(View.VISIBLE);
@@ -73,6 +73,13 @@ public class AbsenAdapter extends RecyclerView.Adapter<AbsenAdapter.AbsenViewHol
             holder.txtKehadiran.setTextColor(Color.rgb(255, 0, 0));
             holder.txtKehadiran.setText(dataList.get(position).gethadir());
             holder.txtAlasan.setText("Alasan Tidak Masuk Karena " + dataList.get(position).getPesan());
+        }
+        DBRetro dbretro = new DBRetro(mContext, 1);
+        if(!dbretro.checkDataAbsenIsavalable(dataList.get(position).gettangal())){
+            dbretro.insertAbsen(dataList.get(position).gettangal(), dataList.get(position).getwaktu(), dataList.get(position).getHari(),
+                    dataList.get(position).gethadir(), dataList.get(position).getLat(), dataList.get(position).getLon(), mContext);
+        }else {
+            Toast.makeText(mContext,"Data sudah ada", Toast.LENGTH_LONG).show();
         }
     }
 

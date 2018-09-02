@@ -47,7 +47,7 @@ public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHo
         }
     }
 
-    public BarangsAdapter(Context context, ArrayList<Barang> dataList, BarangAdapterListener listener) {
+    public BarangsAdapter(Context context, List<Barang> dataList, BarangAdapterListener listener) {
         this.mContext = context;
         this.dataList = dataList;
         this.listener = listener;

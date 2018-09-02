@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
@@ -49,13 +50,13 @@ public class Inputbarang {
 
         final EditText kategory = (EditText) dialog.findViewById(R.id.kategory);
         final EditText code = (EditText) dialog.findViewById(R.id.kode);
-        final Button Batal = (Button) dialog.findViewById(R.id.batal);
-        final Button Submit = (Button) dialog.findViewById(R.id.Submit);
+        final RelativeLayout Batal = (RelativeLayout) dialog.findViewById(R.id.batal);
+        final RelativeLayout Submit = (RelativeLayout) dialog.findViewById(R.id.submit);
 
-        final Button edit = (Button) dialog.findViewById(R.id.Edit);
-        final Button hapus = (Button) dialog.findViewById(R.id.delete);
-        final Button lihat = (Button) dialog.findViewById(R.id.lihatdetail);
-        final Button batal2 = (Button) dialog.findViewById(R.id.batal2);
+        final RelativeLayout edit = (RelativeLayout) dialog.findViewById(R.id.Edit);
+        final RelativeLayout hapus = (RelativeLayout) dialog.findViewById(R.id.delete);
+        final RelativeLayout lihat = (RelativeLayout) dialog.findViewById(R.id.lihatdetail);
+        final RelativeLayout batal2 = (RelativeLayout) dialog.findViewById(R.id.batal2);
 
         final String status ;
         sesi = new SessionManager(mContext);

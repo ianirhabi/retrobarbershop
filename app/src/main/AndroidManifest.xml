@@ -79,11 +79,28 @@
             android:label="Retro Barbershop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Antri.Antri" />
+
         <activity
             android:name=".barbermen.ControlStylish"
             android:exported="true"
             android:label="Dashboard"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".newmasuklogin.Setting"
             android:label="Update Akun"
@@ -104,45 +121,32 @@
             android:name=".barbermen.Barbermen"
             android:label="Stylish"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".Antri.Antri" />
-        <activity
             android:name=".barbermen.LaporanAbsenStylish"
-            android:label="Laporan Absen Stylish"
-            android:screenOrientation="landscape"
+            android:label="Laporan Absen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".barbermen.EditKaryawan"
             android:label="Edit Data Karyawan"
             android:screenOrientation="portrait" />
         <activity android:name=".barbermen.HapusKaryawan" />
+
         <activity
             android:name=".barbermen.TambahKaryawan"
             android:label="Tambah Data"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity android:name=".download.Download" />
+
         <activity
             android:name=".pembayaran.Pembayaran"
             android:label="Catalog"
-            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".barang.BarangActivity"
-            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
