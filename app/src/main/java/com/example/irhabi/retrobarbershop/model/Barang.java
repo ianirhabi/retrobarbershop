@@ -9,7 +9,6 @@ import com.google.gson.annotations.SerializedName;
 public class Barang {
     @SerializedName("status")
     String status;
-
     @SerializedName("id")
     int id;
     @SerializedName("item_category")
@@ -20,9 +19,6 @@ public class Barang {
     String created;
     @SerializedName("user_id")
     int user_id ;
-
-
-
 
     public Barang(String namekategori, String code, String created, int user_id) {
 
@@ -50,4 +46,7 @@ public class Barang {
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

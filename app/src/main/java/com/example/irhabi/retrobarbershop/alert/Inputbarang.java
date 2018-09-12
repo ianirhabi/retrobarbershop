@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.media.MediaMetadata;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -34,14 +33,14 @@ import retrofit2.Response;
 
 
 public class Inputbarang {
-
-    MediaMetadata musicMetadata;
     private RetrofitInstance retrofit;
     private SessionManager sesi;
     private Barang goods;
     private BarangActivity getbarang;
+    private String category, kode;
 
-    public void showinput(Activity activity, String msg, final Context mContext, final int idbarang){
+    public void showinput(Activity activity, String msg, final Context mContext, final int idbarang,
+                          final String category, final String kode){
 
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -59,6 +58,8 @@ public class Inputbarang {
         final RelativeLayout batal2 = (RelativeLayout) dialog.findViewById(R.id.batal2);
 
         final String status ;
+        this.category = category;
+        this.kode = kode;
         sesi = new SessionManager(mContext);
         HashMap<String, String> statussesi = sesi.getUserDetails();
         status = statussesi.get(SessionManager.STATUS_BARANG);
@@ -125,6 +126,8 @@ public class Inputbarang {
                     kategory.setVisibility(View.VISIBLE);
                     code.setVisibility(View.VISIBLE);
 
+                    kategory.setText(category);
+                    code.setText(kode);
                     Submit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -148,7 +151,6 @@ public class Inputbarang {
     }
 
     public void hapuscategory(final Context mContext, int idbarang){
-
         String usergrup,  token;
         sesi = new SessionManager(mContext);
         HashMap<String, String> usersesi = sesi.getUserDetails();
@@ -160,7 +162,6 @@ public class Inputbarang {
         getbarang = new BarangActivity();
 
         call.enqueue(new Callback<Barang>() {
-
             @Override
             public void onResponse(Call<Barang> call, Response<Barang> response) {
                 Toast.makeText(mContext,"status " + response.body().getStatus(), Toast.LENGTH_LONG);
@@ -176,7 +177,6 @@ public class Inputbarang {
     }
 
     public void kirimdata(final Context mContext, String namecategory, String Code){
-
           String usergrup, id, token;
           sesi = new SessionManager(mContext);
           HashMap<String, String> usersesi = sesi.getUserDetails();
@@ -210,7 +210,6 @@ public class Inputbarang {
     }
 
     public void update(final Context mContext, String namecategory, String Code, int idbarang){
-
         String usergrup, id, token;
         sesi = new SessionManager(mContext);
         HashMap<String, String> usersesi = sesi.getUserDetails();
@@ -239,7 +238,6 @@ public class Inputbarang {
             @Override
             public void onFailure(Call<Barang> call, Throwable t) {
                 Toast.makeText(mContext,"gagal update data", Toast.LENGTH_LONG);
-
             }
         });
     }

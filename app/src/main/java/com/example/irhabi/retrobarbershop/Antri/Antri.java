@@ -4,6 +4,8 @@ package com.example.irhabi.retrobarbershop.Antri;
  * Created by Programmer Jalanan 15/07/2018
  */
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import com.example.irhabi.retrobarbershop.Maps.KonekMaps;
 import com.example.irhabi.retrobarbershop.R;
@@ -33,6 +35,8 @@ public class Antri extends Activity implements AdvancedWebView.Listener,SwipeRef
     private CountDownTimer countDownTimer;
     private final long startTime = 3 * 1000;
     private final long interval = 1 * 1000;
+    private AudioManager myAudioManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,7 @@ public class Antri extends Activity implements AdvancedWebView.Listener,SwipeRef
         masukan = (EditText)findViewById(R.id.masuk);
         String mas = masukan.getText().toString();
         onLoadweb("http://google.com");
+        myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
     }
 
     @SuppressLint("NewApi")
@@ -127,6 +132,24 @@ public class Antri extends Activity implements AdvancedWebView.Listener,SwipeRef
         return true;
     }
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int action = event.getAction();
+        int keyCode = event.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    myAudioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+                }
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    myAudioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);           }
+                return true;
+            default:
+                return super.dispatchKeyEvent(event);
+        }
+    }
 
     class MyCountDownTimer extends CountDownTimer {
         public MyCountDownTimer(long startTime, long interval) {

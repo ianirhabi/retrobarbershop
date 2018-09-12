@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
@@ -47,6 +48,7 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
     private RetrofitInstance retrofit;
     private FloatingActionButton tambah;
     private Inputbarang inputbarangdialog;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
              sesi = new SessionManager(getApplicationContext());
              sesi.Statusbarang("10");
              inputbarangdialog = new Inputbarang();
-             inputbarangdialog.showinput(BarangActivity.this, "Input Item", BarangActivity.this, 0);
+             inputbarangdialog.showinput(BarangActivity.this, "Input Item", BarangActivity.this, 0,"","");
             }
         });
 
@@ -165,11 +167,13 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         sesi = new SessionManager(getApplicationContext());
         sesi.Statusbarang("12");
         inputbarangdialog = new Inputbarang();
-        inputbarangdialog.showinput(BarangActivity.this, "Input Item", BarangActivity.this, barang.getId());
+        inputbarangdialog.showinput(BarangActivity.this, "Input Item", BarangActivity.this, barang.getId(),
+                barang.getItem_catagory(),barang.getItem_code());
        // Toast.makeText(getApplicationContext(), "Selected: " + barang.getItem_catagory() + ", " + barang.getItem_code() + "id " + barang.getId(), Toast.LENGTH_LONG).show();
     }
 
     public void Getbarang(){
+        progressBar = (ProgressBar)findViewById(R.id.main_progress);
         String usergrup;
         sesi = new SessionManager(getApplicationContext());
         HashMap<String, String> usersesion = sesi.getUserDetails();
@@ -184,6 +188,7 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
             @Override
             public void onResponse(Call<BarangArray> call, retrofit2.Response<BarangArray> response) {
                 generateBarang(response.body().getBarangarray(), response.body().getRespons());
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<BarangArray> call, Throwable t) {
