@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -32,6 +33,9 @@ import com.example.irhabi.retrobarbershop.model.BarangArray;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
+import com.example.irhabi.retrobarbershop.utils.MyDividerItemDecoration;
+import com.example.irhabi.retrobarbershop.utils.PaginationScrollListener;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,6 +53,14 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
     private FloatingActionButton tambah;
     private Inputbarang inputbarangdialog;
     private ProgressBar progressBar;
+
+    //pagination
+    private static final int PAGE_START = 1;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    // limiting to 5 for this tutorial, since total pages in actual API is very large. Feel free to modify.
+    private int TOTAL_PAGES = 5;
+    private int currentPage = PAGE_START;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,21 +94,85 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         Getbarang();
     }
 
-    private void generateBarang(List<Barang> Arraybarang, String a) {
+    private void generateBarang(List<Barang> Arraybarang, String a, final String page) {
         recyclerView = findViewById(R.id.recycler_view_barang);
         mAdapter = new BarangsAdapter(BarangActivity.this, Arraybarang,this);
         // white background notification bar
         whiteNotificationBar(recyclerView);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
-
         recyclerView.setAdapter(mAdapter);
+        recyclerView.addOnScrollListener(new PaginationScrollListener((LinearLayoutManager) mLayoutManager) {
+            @Override
+            protected void loadMoreItems() {
+
+                // mocking network delay for API call
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadNext(page);
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public int getTotalPageCount() {
+                return TOTAL_PAGES;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
     }
 
+    private void loadNext(String page) {
+        int hal = Integer.parseInt(page);
+        int total = hal + 25;
+        String totalPage = String.valueOf(total);
+        progressBar = (ProgressBar)findViewById(R.id.main_progress);
+        progressBar.setVisibility(View.VISIBLE);
 
+        //usergrup
+        String usergrup;
+        sesi = new SessionManager(getApplicationContext());
+        HashMap<String, String> usersesion = sesi.getUserDetails();
+        usergrup = usersesion.get(SessionManager.KEY_USERGRUP);
+
+        String token = usersesion.get(SessionManager.TOKEN);
+        retrofit = new RetrofitInstance(token);
+        Router service = retrofit.getRetrofitInstanceall().create(Router.class);
+
+        Call<BarangArray> call = service.Getbarang(usergrup,totalPage);
+        call.enqueue(new Callback<BarangArray>() {
+            @Override
+            public void onResponse(Call<BarangArray> call, retrofit2.Response<BarangArray> response) {
+                if(response.body().getBarangarray() == null){
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(),"belum ada data ", Toast.LENGTH_SHORT).show();
+                }else {
+                    generateBarang(response.body().getBarangarray(),
+                            response.body().getRespons(),response.body().getTotal());
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onFailure(Call<BarangArray> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -169,11 +245,13 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         inputbarangdialog = new Inputbarang();
         inputbarangdialog.showinput(BarangActivity.this, "Input Item", BarangActivity.this, barang.getId(),
                 barang.getItem_catagory(),barang.getItem_code());
-       // Toast.makeText(getApplicationContext(), "Selected: " + barang.getItem_catagory() + ", " + barang.getItem_code() + "id " + barang.getId(), Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(), "Selected id : " + barang.getId(), Toast.LENGTH_LONG).show();
     }
 
     public void Getbarang(){
         progressBar = (ProgressBar)findViewById(R.id.main_progress);
+
+        //untuk mendapatkan usergrup
         String usergrup;
         sesi = new SessionManager(getApplicationContext());
         HashMap<String, String> usersesion = sesi.getUserDetails();
@@ -183,15 +261,22 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         retrofit = new RetrofitInstance(token);
         Router service = retrofit.getRetrofitInstanceall().create(Router.class);
 
-        Call<BarangArray> call = service.Getbarang(usergrup);
+        Call<BarangArray> call = service.Getbarang(usergrup,"25");
         call.enqueue(new Callback<BarangArray>() {
             @Override
             public void onResponse(Call<BarangArray> call, retrofit2.Response<BarangArray> response) {
-                generateBarang(response.body().getBarangarray(), response.body().getRespons());
-                progressBar.setVisibility(View.GONE);
+                if(response.body().getBarangarray() == null){
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(),"belum ada data ", Toast.LENGTH_SHORT).show();
+                }else {
+                    generateBarang(response.body().getBarangarray(),
+                            response.body().getRespons(),response.body().getTotal());
+                    progressBar.setVisibility(View.GONE);
+                }
             }
             @Override
             public void onFailure(Call<BarangArray> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Gagal Mengambil Data Dari Server Pastikan Anda Terhubung Dengan Internet " , Toast.LENGTH_SHORT).show();
             }
         });

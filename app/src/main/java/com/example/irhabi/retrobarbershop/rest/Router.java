@@ -9,6 +9,8 @@ import com.example.irhabi.retrobarbershop.model.Absenarray;
 import com.example.irhabi.retrobarbershop.model.AlluserRespons;
 import com.example.irhabi.retrobarbershop.model.Barang;
 import com.example.irhabi.retrobarbershop.model.BarangArray;
+import com.example.irhabi.retrobarbershop.model.BarangDetail;
+import com.example.irhabi.retrobarbershop.model.BarangDetailArray;
 import com.example.irhabi.retrobarbershop.model.ModelTambahAKun;
 import com.example.irhabi.retrobarbershop.model.Responhapuskaryawan;
 import com.example.irhabi.retrobarbershop.model.Upload;
@@ -82,9 +84,17 @@ public interface Router {
                            @Path("id") String id,
                              @Path("idbarang") int idbarang);
 
-    @GET("barang/{usergrup}")
-    Call<BarangArray>Getbarang(@Path("usergrup") String usergrup);
+    @GET("barang/{usergrup}/{page}")
+    Call<BarangArray>Getbarang(@Path("usergrup") String usergrup, @Path("page") String page);
 
     @DELETE("barang/{usergrup}/delete/{idbarang}")
     Call<Barang>Deletebarang(@Path("usergrup") String usergrup, @Path("idbarang") int idbarang );
+
+    @GET("barangdetail/{usergrup}/{page}/detail/{code_category}")
+    Call<BarangDetailArray> Get_Barang_Detail(@Path("usergrup") String usergrup,
+                                              @Path("page") String s,
+                                              @Path("code_category") int kt);
+    @POST("barangdetail/{usergrup}")
+    Call<BarangDetail> PostBarangDetail(@Body BarangDetail s,
+                                        @Path("usergrup") String usergrup);
 }

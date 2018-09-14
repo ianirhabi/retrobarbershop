@@ -11,6 +11,9 @@ public class BarangArray {
     @SerializedName("data")
     private ArrayList<Barang> data;
 
+    @SerializedName("total")
+    String total;
+
 
     public String getRespons(){
         return status;
@@ -20,9 +23,7 @@ public class BarangArray {
         return data;
     }
 
-    public void setBarangArrayList(ArrayList<Barang> BarangArrayList) {
-        this.data = BarangArrayList;
+    public  String getTotal(){
+        return total;
     }
-
-
 }

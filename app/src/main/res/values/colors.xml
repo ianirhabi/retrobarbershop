@@ -19,8 +19,8 @@
     <color name="btn_logut_bg">#ff6861</color>
     <color name="black">#000000</color>
     <color name="album_title">#4c4c4c</color>
+    <color name="rocker">#FF1D0D0D</color>
     <color name="viewBg">#f1f5f8</color>
-
     <color name="bgBottomNavigation">#000000</color>
 
     <item name="blue" type="color">#FF33B5E5</item>

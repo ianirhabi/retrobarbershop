@@ -8,7 +8,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaMetadata;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.barang.BarangActivity;
+import com.example.irhabi.retrobarbershop.barangdetail.BarangDetailActivity;
 import com.example.irhabi.retrobarbershop.model.Barang;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
@@ -102,6 +104,21 @@ public class Inputbarang {
                 }
             });
 
+            lihat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent i = new Intent(mContext, BarangDetailActivity.class);
+                    Bundle ambil_data = new Bundle();
+                    ambil_data.putString("kode",kode);
+                    ambil_data.putInt("idbarang", idbarang);
+                    Log.e("Lagi", "==== "+ idbarang);
+                    i.putExtras(ambil_data);
+                    mContext.startActivity(i);
+                    dialog.dismiss();
+                }
+            });
+
             hapus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -156,11 +173,10 @@ public class Inputbarang {
         HashMap<String, String> usersesi = sesi.getUserDetails();
         usergrup = usersesi.get(SessionManager.KEY_USERGRUP);
         token = usersesi.get(SessionManager.TOKEN);
+
         retrofit = new RetrofitInstance(token);
         Router service = retrofit.getRetrofitInstanceall().create(Router.class);
         Call<Barang> call =service.Deletebarang(usergrup, idbarang);
-        getbarang = new BarangActivity();
-
         call.enqueue(new Callback<Barang>() {
             @Override
             public void onResponse(Call<Barang> call, Response<Barang> response) {
@@ -182,16 +198,19 @@ public class Inputbarang {
           HashMap<String, String> usersesi = sesi.getUserDetails();
           usergrup = usersesi.get(SessionManager.KEY_USERGRUP);
           id = usersesi.get(SessionManager.KEY_ID);
+
           Integer user_id = Integer.parseInt(id);
           token = usersesi.get(SessionManager.TOKEN);
+
           DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
           Date date = new Date();
+
           goods = new Barang(namecategory, Code, dateFormat.format(date),user_id);
           retrofit = new RetrofitInstance(token);
 
           Router service = retrofit.getRetrofitInstanceall().create(Router.class);
           Call<Barang> call =service.postbarang(goods, usergrup, id);
-          getbarang = new BarangActivity();
+//          getbarang = new BarangActivity();
 
           call.enqueue(new Callback<Barang>() {
 
@@ -223,9 +242,9 @@ public class Inputbarang {
 
         retrofit = new RetrofitInstance(token);
         Router service = retrofit.getRetrofitInstanceall().create(Router.class);
+
         Call<Barang> call =service.Updatebarang(goods, usergrup, id, idbarang);
         getbarang = new BarangActivity();
-
         call.enqueue(new Callback<Barang>() {
 
             @Override

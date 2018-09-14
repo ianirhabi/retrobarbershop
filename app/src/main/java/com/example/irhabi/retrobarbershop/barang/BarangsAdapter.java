@@ -37,6 +37,7 @@ public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHo
             Code = view.findViewById(R.id.code);
             created = view.findViewById(R.id.created);
 
+            //untuk klik detailnya
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

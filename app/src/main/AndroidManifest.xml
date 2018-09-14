@@ -158,7 +158,7 @@
             android:resource="@xml/searchable" />
 
         <activity
-            android:name=".barangdetail.barangdetailactivity"
+            android:name=".barangdetail.BarangDetailActivity"
             android:label="@string/title_activity_barangdetailactivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
