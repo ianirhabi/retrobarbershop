@@ -27,7 +27,6 @@ public class ViewDialog {
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Anda menekan ok", Toast.LENGTH_LONG).show();
                 dialog.dismiss();
             }
         });

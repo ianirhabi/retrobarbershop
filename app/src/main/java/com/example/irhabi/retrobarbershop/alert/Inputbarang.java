@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
@@ -51,6 +52,7 @@ public class Inputbarang {
 
         final EditText kategory = (EditText) dialog.findViewById(R.id.kategory);
         final EditText code = (EditText) dialog.findViewById(R.id.kode);
+        final TextView statuscode = (TextView)dialog.findViewById(R.id.statuscodebarang);
         final RelativeLayout Batal = (RelativeLayout) dialog.findViewById(R.id.batal);
         final RelativeLayout Submit = (RelativeLayout) dialog.findViewById(R.id.submit);
 
@@ -73,13 +75,26 @@ public class Inputbarang {
             Submit.setVisibility(View.VISIBLE);
             kategory.setVisibility(View.VISIBLE);
             code.setVisibility(View.VISIBLE);
+
             Submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final String namecategory = kategory.getText().toString();
                     final String codename = code.getText().toString();
-                    kirimdata(mContext, namecategory, codename);
-                    dialog.dismiss();
+
+                    if (namecategory.isEmpty()){
+                        kategory.setError("tidak boleh kosong");
+                        statuscode.setVisibility(View.VISIBLE);
+                        statuscode.setText("tekan tanda seru untuk melihat errornya");
+                    }
+
+                    if (codename.isEmpty()){
+                        code.setError("tidak boleh kosong");
+                        statuscode.setVisibility(View.VISIBLE);
+                        statuscode.setText("tekan tanda seru untuk melihat errornya");
+                    }else {
+                        kirimdata(mContext, namecategory, codename, code, statuscode, dialog);
+                    }
                 }
             });
 
@@ -150,8 +165,8 @@ public class Inputbarang {
                         public void onClick(View view) {
                             final String namecategoryupdate = kategory.getText().toString();
                             final String codenameupdate = code.getText().toString();
-                            update(mContext, namecategoryupdate, codenameupdate, idbarang);
-                            dialog.dismiss();
+                            update(mContext, namecategoryupdate, codenameupdate,
+                                    idbarang, dialog, statuscode,code);
                         }
                     });
 
@@ -192,7 +207,9 @@ public class Inputbarang {
         });
     }
 
-    public void kirimdata(final Context mContext, String namecategory, String Code){
+    public void kirimdata(final Context mContext, String namecategory, String Code,
+                          final EditText ts,final TextView st,final Dialog dialog){
+          st.setVisibility(View.GONE);
           String usergrup, id, token;
           sesi = new SessionManager(mContext);
           HashMap<String, String> usersesi = sesi.getUserDetails();
@@ -216,19 +233,29 @@ public class Inputbarang {
 
               @Override
               public void onResponse(Call<Barang> call, Response<Barang> response) {
-                Toast.makeText(mContext,"status " + response.body().getStatus(), Toast.LENGTH_LONG);
-                Intent i = new Intent(mContext, BarangActivity.class);
-                mContext.startActivity(i);
+
+                  if(response.body().getStatus().equals("sukses")) {
+                      Toast.makeText(mContext, "status " + response.body().getStatus() + " memasukan data", Toast.LENGTH_LONG);
+                      Intent i = new Intent(mContext, BarangActivity.class);
+                      mContext.startActivity(i);
+                      dialog.dismiss();
+                  }else if (response.body().getStatus().equals("false")){
+                      ts.setError("kode sudah ada ! silahkan masukan kode yang lain !");
+                      st.setVisibility(View.VISIBLE);
+                      st.setText("tekan tombol tanda seru untuk melihat errornya !");
+                  }
               }
 
               @Override
               public void onFailure(Call<Barang> call, Throwable t) {
-                Toast.makeText(mContext,"gagal memasukan data", Toast.LENGTH_LONG);
+                  Toast.makeText(mContext,"upssS.. !!something wrong ", Toast.LENGTH_LONG);
               }
           });
     }
 
-    public void update(final Context mContext, String namecategory, String Code, int idbarang){
+    public void update(final Context mContext, String namecategory,
+                       String Code, int idbarang, final Dialog dialog,
+                       final TextView ts, final EditText st){
         String usergrup, id, token;
         sesi = new SessionManager(mContext);
         HashMap<String, String> usersesi = sesi.getUserDetails();
@@ -249,14 +276,21 @@ public class Inputbarang {
 
             @Override
             public void onResponse(Call<Barang> call, Response<Barang> response) {
-                Toast.makeText(mContext,"status " + response.body().getStatus(), Toast.LENGTH_LONG);
-                Intent i = new Intent(mContext, BarangActivity.class);
-                mContext.startActivity(i);
+                if(response.body().getStatus().equals("berhasil")){
+                    Toast.makeText(mContext,"status " + response.body().getStatus() + " update data" , Toast.LENGTH_LONG);
+                    dialog.dismiss();
+                    Intent i = new Intent(mContext, BarangActivity.class);
+                    mContext.startActivity(i);
+                } else if (response.body().getStatus().equals("false")){
+                    st.setError("kode sudah ada ! silahkan masukan kode yang lain");
+                    ts.setVisibility(View.VISIBLE);
+                    ts.setText("tekan tanda seru untuk melihat errornya !");
+                }
             }
 
             @Override
             public void onFailure(Call<Barang> call, Throwable t) {
-                Toast.makeText(mContext,"gagal update data", Toast.LENGTH_LONG);
+                Toast.makeText(mContext,"upssS.. !!something wrong ", Toast.LENGTH_LONG);
             }
         });
     }

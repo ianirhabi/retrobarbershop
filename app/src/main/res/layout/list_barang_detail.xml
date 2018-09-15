@@ -62,5 +62,9 @@
             android:layout_below="@id/pricepokok"
             android:textStyle="bold"
             android:text="stock 100"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
     </RelativeLayout>
 </FrameLayout>

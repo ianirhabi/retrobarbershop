@@ -3,9 +3,11 @@ package com.example.irhabi.retrobarbershop.pembayaran;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -17,6 +19,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -50,7 +54,7 @@ public class Pembayaran extends AppCompatActivity implements RecyclerItemTouchHe
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getString(R.string.my_cart));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        Statusbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +141,16 @@ public class Pembayaran extends AppCompatActivity implements RecyclerItemTouchHe
         });
 
         MyApplication.getInstance().addToRequestQueue(request);
+    }
+
+    public void Statusbar(){
+        Window window = Pembayaran.this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(ContextCompat.getColor(Pembayaran.this,R.color.redd));
+        }
     }
 
     /**

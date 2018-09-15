@@ -24,6 +24,7 @@ public class BarangDetailAdapter extends RecyclerView.Adapter<BarangDetailAdapte
     private Context mContext ;
     private BarangDetailAdapterListener listener;
     private List<BarangDetail> barangdetailListFiltered;
+    private boolean isLoadingAdded = false;
 
     public BarangDetailAdapter(Context context, List<BarangDetail> dataList, BarangDetailAdapterListener listener) {
         this.dataList = dataList;
@@ -115,5 +116,10 @@ public class BarangDetailAdapter extends RecyclerView.Adapter<BarangDetailAdapte
     }
     public interface BarangDetailAdapterListener{
         void onBarangdetailSelected(BarangDetail barangDetail);
+    }
+
+    public void addLoadingFooter() {
+        isLoadingAdded = true;
+        notifyItemInserted(dataList.size() - 1);
     }
 }

@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -22,6 +23,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -91,6 +94,7 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Category Item");
+        Statusbar();
         Getbarang();
     }
 
@@ -174,6 +178,16 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
         });
     }
 
+    public void Statusbar(){
+        Window window = BarangActivity.this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(ContextCompat.getColor(BarangActivity.this,R.color.redd));
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -191,14 +205,24 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // filter recycler view when query submitted
-                mAdapter.getFilter().filter(query);
+                // filter recycler view when text is changed
+                try {
+                    mAdapter.getFilter().filter(query);
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"Anda belum memasukan data", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
-                mAdapter.getFilter().filter(query);
+               try {
+                   mAdapter.getFilter().filter(query);
+
+               }catch (Exception e){
+                   Toast.makeText(getApplicationContext(),"Anda belum memasukan data", Toast.LENGTH_SHORT).show();
+               }
                 return false;
             }
         });

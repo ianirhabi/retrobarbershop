@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
@@ -51,6 +52,7 @@ public class InputBarangDetail {
         final EditText Stock = (EditText) dialog.findViewById(R.id.stok);
         final RelativeLayout Batal = (RelativeLayout) dialog.findViewById(R.id.batalbarang);
         final RelativeLayout Submit = (RelativeLayout) dialog.findViewById(R.id.tambahbarang);
+        final TextView statuscode = (TextView)dialog.findViewById(R.id.statuscode);
 
         sesi = new SessionManager(mContext);
         HashMap<String, String> statussesi = sesi.getUserDetails();
@@ -71,13 +73,43 @@ public class InputBarangDetail {
                     String jual= HargaJual.getText().toString();
                     String pokok = HargaPokok.getText().toString();
                     final String stock = Stock.getText().toString();
-                    final String namebarang = namabarang.getText().toString();
+                    final String Namebarang = namabarang.getText().toString();
                     final  String kode = code.getText().toString();
-                    final int hj = Integer.parseInt(jual);
-                    final int hp = Integer.parseInt(pokok);
+                    if (Namebarang.isEmpty()){
+                        namabarang.setError("tidak boleh kosong");
+                        statuscode.setVisibility(view.VISIBLE);
+                        statuscode.setText("Tekan tanda seru untuk melihat status errornya !");
+                    }
+                    if (kode.isEmpty()){
+                        code.setError("tidak boleh kosong");
+                        statuscode.setVisibility(view.VISIBLE);
+                        statuscode.setText("Tekan tanda seru untuk melihat status errornya !");
+                    }
+                    if(jual.isEmpty()){
+                        HargaJual.setError("tidak boleh kosong");
+                        statuscode.setVisibility(view.VISIBLE);
+                        statuscode.setText("Tekan tanda seru untuk melihat status errornya !");
+                    }
+                    if(pokok.isEmpty()){
+                        HargaPokok.setError("tidak boleh kosong");
+                        statuscode.setVisibility(view.VISIBLE);
+                        statuscode.setText("Tekan tanda seru untuk melihat status errornya !");
+                    }
+                    if(stock.isEmpty()){
+                        Stock.setError("tidak boleh kosong");
+                        statuscode.setVisibility(view.VISIBLE);
+                        statuscode.setText("Tekan tanda seru untuk melihat status errornya !");
+                    }else {
+                        try {
+                            final int hj = Integer.parseInt(jual);
+                            final int hp = Integer.parseInt(pokok);
+                            kirimdata(Namebarang, kode, hj, hp, stock, dialog, code, statuscode);
+                        }catch (Exception e){
+                            HargaPokok.setError("panjang karakter melebihi jumlah maximum");
+                            HargaJual.setError("panjang karakter melebihi jumlah maximum");
+                        }
+                    }
 
-                    kirimdata(namebarang,kode, hj,hp,stock);
-                    dialog.dismiss();
                 }
             });
 
@@ -92,7 +124,8 @@ public class InputBarangDetail {
     }
 
     private void kirimdata(String namebarang, String kode,
-                           int hj, int hp, String stock) {
+                           int hj, int hp, String stock,
+                           final Dialog dialog, final EditText st, final TextView ts) {
         String usergrup,  token;
         sesi = new SessionManager(mContext);
         HashMap<String, String> usersesi = sesi.getUserDetails();
@@ -113,12 +146,17 @@ public class InputBarangDetail {
         call.enqueue(new Callback<BarangDetail>() {
             @Override
             public void onResponse(Call<BarangDetail> call, Response<BarangDetail> response) {
+                Log.e("debug e", "=== " + response.body().getStatus());
                 if(response.body().getStatus().equals("sukses")){
                     Toast.makeText(mContext,"berhasil Memasukan Data",Toast.LENGTH_SHORT).show();
-                }else if (response.body().getStatusData()  > 0){
-                    Toast.makeText(mContext,"kode barang sudah ada! harap masukan yang lain!",Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }else if (response.body().getStatus().equals("false")){
+                    st.setError("kode sudah ada !! silahkan masukan kode yang lain");
+                    ts.setVisibility(View.VISIBLE);
+                    ts.setText("Tekan tanda seru untuk melihat status errornya !");
                 }else if(response.body().getStatus().equals("gagal")){
                     Toast.makeText(mContext,"harus membuat data category terlebih dahulu",Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
             }
 

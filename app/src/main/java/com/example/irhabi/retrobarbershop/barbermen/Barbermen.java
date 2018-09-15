@@ -6,9 +6,11 @@ package com.example.irhabi.retrobarbershop.barbermen;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,8 +19,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -49,9 +52,8 @@ public class Barbermen extends AppCompatActivity {
         setContentView(R.layout.activity_barbermain);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Statusbar();
         initCollapsingToolbar();
-
         getResponall();
 
         try {
@@ -176,5 +178,16 @@ public class Barbermen extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), KonekMaps.class);
         startActivity(i);
         return true;
+    }
+
+    //untuk status bar
+    public void Statusbar(){
+        Window window = Barbermen.this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(ContextCompat.getColor(Barbermen.this,R.color.redd));
+        }
     }
 }

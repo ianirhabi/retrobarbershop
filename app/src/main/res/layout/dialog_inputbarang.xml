@@ -43,6 +43,15 @@
             android:textColor="@color/input_login"
             android:textColorHint="@color/description"
             android:visibility="gone"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/statuscodebarang"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="kode sudah ada mohon masukan kode yang lain!"
+            android:textColor="@color/merah"
+            android:visibility="gone"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linlay1"

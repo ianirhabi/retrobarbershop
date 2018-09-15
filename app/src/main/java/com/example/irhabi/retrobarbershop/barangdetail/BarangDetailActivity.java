@@ -4,11 +4,13 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,12 +21,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.alert.InputBarangDetail;
 import com.example.irhabi.retrobarbershop.barang.BarangActivity;
+import com.example.irhabi.retrobarbershop.barbermen.Barbermen;
 import com.example.irhabi.retrobarbershop.model.BarangDetail;
 import com.example.irhabi.retrobarbershop.model.BarangDetailArray;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
@@ -50,6 +55,8 @@ public class BarangDetailActivity extends AppCompatActivity
     private SearchView searchView;
     private InputBarangDetail dl;
     private int idbarang;
+    private static final int PAGE_START = 1;
+    private int currentPage = PAGE_START;
 
 
     private int TOTAL_PAGES = 5;
@@ -60,6 +67,7 @@ public class BarangDetailActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barangdetailactivity);
+        Statusbar();
         widget();
         GetBaraNgdetail();
     }
@@ -113,7 +121,7 @@ public class BarangDetailActivity extends AppCompatActivity
         retrofit = new RetrofitInstance(token);
         Router service = retrofit.getRetrofitInstanceall().create(Router.class);
 
-        Call<BarangDetailArray> call = service.Get_Barang_Detail(usergrup,"100",idbarang);
+        Call<BarangDetailArray> call = service.Get_Barang_Detail(usergrup,"25",idbarang);
         call.enqueue(new Callback<BarangDetailArray>() {
             @Override
             public void onResponse(Call<BarangDetailArray> call, Response<BarangDetailArray> response) {
@@ -145,11 +153,17 @@ public class BarangDetailActivity extends AppCompatActivity
                 LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
+            // menjadikan scroll view selalu dibawah
+       // recyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+        //recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
         recyclerView.setAdapter(mAdapter);
+        //recyclerView.scrollBy(0, 2);
         recyclerView.addOnScrollListener(new PaginationScrollListener((LinearLayoutManager) mLayoutManager) {
             @Override
             protected void loadMoreItems() {
+                isLoading = true;
+                currentPage += 1;
+
                 // mocking network delay for API call
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -246,14 +260,26 @@ public class BarangDetailActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // filter recycler view when query submitted
-                mAdapter.getFilter().filter(query);
+                // filter recycler view when text is changed
+                try {
+                    mAdapter.getFilter().filter(query);
+
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"Anda belum memasukan data", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
                 // filter recycler view when text is changed
-                mAdapter.getFilter().filter(query);
+                // filter recycler view when text is changed
+                try {
+                    mAdapter.getFilter().filter(query);
+
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"Anda belum memasukan data", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
@@ -262,15 +288,20 @@ public class BarangDetailActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Statusbar(){
+        Window window = BarangDetailActivity.this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(ContextCompat.getColor(BarangDetailActivity.this,R.color.redd));
+        }
     }
 }
