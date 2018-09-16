@@ -62,6 +62,12 @@ public class InputBarangDetail {
         final RelativeLayout delete = (RelativeLayout)dialog.findViewById(R.id.delete2);
         final RelativeLayout batal3 = (RelativeLayout) dialog.findViewById(R.id.batal3);
 
+        final TextView namab = (TextView)dialog.findViewById(R.id.namab);
+        final TextView kodeb = (TextView)dialog.findViewById(R.id.kodeb);
+        final TextView hargaj = (TextView)dialog.findViewById(R.id.hjb);
+        final TextView hargap = (TextView)dialog.findViewById(R.id.hpp);
+        final TextView stock = (TextView)dialog.findViewById(R.id.stokb);
+
         sesi = new SessionManager(mContext);
         HashMap<String, String> statussesi = sesi.getUserDetails();
         status = statussesi.get(SessionManager.STATUS_BARANG);
@@ -74,6 +80,12 @@ public class InputBarangDetail {
             HargaJual.setVisibility(View.VISIBLE);
             HargaPokok.setVisibility(View.VISIBLE);
             Stock.setVisibility(View.VISIBLE);
+
+            namab.setVisibility(View.VISIBLE);
+            kodeb.setVisibility(View.VISIBLE);
+            hargaj.setVisibility(View.VISIBLE);
+            hargap.setVisibility(View.VISIBLE);
+            stock.setVisibility(View.VISIBLE);
 
             Submit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,6 +160,12 @@ public class InputBarangDetail {
                         HargaJual.setVisibility(View.VISIBLE);
                         HargaPokok.setVisibility(View.VISIBLE);
                         Stock.setVisibility(View.VISIBLE);
+
+                        namab.setVisibility(View.VISIBLE);
+                        kodeb.setVisibility(View.VISIBLE);
+                        hargaj.setVisibility(View.VISIBLE);
+                        hargap.setVisibility(View.VISIBLE);
+                        stock.setVisibility(View.VISIBLE);
 
                         delete.setVisibility(View.GONE);
                         update.setVisibility(View.GONE);

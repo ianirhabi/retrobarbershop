@@ -11,7 +11,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.irhabi.retrobarbershop.R;
-import com.example.irhabi.retrobarbershop.alert.InputBarangDetail;
 import com.example.irhabi.retrobarbershop.model.BarangDetail;
 
 import java.util.ArrayList;

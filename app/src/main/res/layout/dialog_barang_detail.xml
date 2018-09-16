@@ -15,6 +15,13 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
 
+        <TextView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Barang atau Service"
+            android:id="@+id/namab"/>
+
         <EditText
             android:visibility="gone"
             android:id="@+id/namabarang"
@@ -28,9 +35,14 @@
             android:singleLine="true"
             android:textColor="@color/input_login"
             android:textColorHint="@color/description"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="2dp"
            />
-
+        <TextView
+            android:id="@+id/kodeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kode Barang"
+            android:visibility="gone"/>
         <EditText
             android:visibility="gone"
             android:id="@+id/kodebarang"
@@ -45,6 +57,13 @@
             android:textColor="@color/input_login"
             android:textColorHint="@color/description"
            />
+        <TextView
+            android:id="@+id/hjb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harga Jual Barang"
+            android:visibility="gone"/>
+
         <EditText
             android:visibility="gone"
             android:id="@+id/HargaJual"
@@ -58,6 +77,14 @@
             android:singleLine="true"
             android:textColor="@color/input_login"
             android:textColorHint="@color/description" />
+
+        <TextView
+            android:id="@+id/hpp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harga Pokok Penjualan"
+            android:visibility="gone"/>
+
         <EditText
             android:visibility="gone"
             android:id="@+id/HargaPokok"
@@ -71,6 +98,13 @@
             android:singleLine="true"
             android:textColor="@color/input_login"
             android:textColorHint="@color/description" />
+
+        <TextView
+            android:id="@+id/stokb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="stock"
+            android:visibility="gone"/>
         <EditText
             android:visibility="gone"
             android:id="@+id/stok"
@@ -173,7 +207,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text="update"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -197,31 +231,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text="delete"
                     android:textColor="@color/white"
-                    android:textSize="15sp" />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/lihatdetail2"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/circleBorder"
-            android:gravity="center"
-            android:visibility="gone">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="lihat detail"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
