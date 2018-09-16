@@ -28,7 +28,8 @@ public class BarangDetail {
     @SerializedName("userid")
     int userid;
 
-    public BarangDetail(String kode, String stock, int hp, int hj, int cate_code, String desc,
+    public BarangDetail(String kode, String stock,
+                        int hp, int hj, int cate_code, String desc,
                         String created, String updateDate, int userid) {
         this.kode = kode;
         this.stock = stock;

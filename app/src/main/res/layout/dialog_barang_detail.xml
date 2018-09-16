@@ -94,6 +94,7 @@
             android:textColor="@color/merah"
             android:visibility="gone"/>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linlay1"
         android:layout_width="match_parent"
@@ -153,7 +154,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/Edit1"
+            android:id="@+id/update"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -170,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Edit Category"
+                    android:text="update"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </LinearLayout>

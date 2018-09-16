@@ -90,6 +90,8 @@ public interface Router {
     @DELETE("barang/{usergrup}/delete/{idbarang}")
     Call<Barang>Deletebarang(@Path("usergrup") String usergrup, @Path("idbarang") int idbarang );
 
+
+   //barangdetail
     @GET("barangdetail/{usergrup}/{page}/detail/{code_category}")
     Call<BarangDetailArray> Get_Barang_Detail(@Path("usergrup") String usergrup,
                                               @Path("page") String s,
@@ -97,4 +99,13 @@ public interface Router {
     @POST("barangdetail/{usergrup}")
     Call<BarangDetail> PostBarangDetail(@Body BarangDetail s,
                                         @Path("usergrup") String usergrup);
+
+    @DELETE("barangdetail/{usergrup}/delete/{idbarang}")
+    Call<BarangDetail> DeleteBarangDetail(@Path("usergrup") String usergrup,
+                                    @Path("idbarang") int idbarang);
+
+    @PUT("barangdetail/{usergrup}/update/{idbarang}")
+    Call<BarangDetail> UpdateBarangDetail(@Body BarangDetail barangDetail ,
+                                          @Path("usergrup")String usergrup,
+                                          @Path("idbarang") int idbarang);
 }

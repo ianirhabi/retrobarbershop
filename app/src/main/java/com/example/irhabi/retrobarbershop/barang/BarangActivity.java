@@ -272,6 +272,11 @@ public class BarangActivity extends AppCompatActivity implements BarangsAdapter.
        // Toast.makeText(getApplicationContext(), "Selected id : " + barang.getId(), Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onBarangLongSelected(Barang barang) {
+        Toast.makeText(getApplicationContext(), "Ini adalah Long listener : " + barang.getId(), Toast.LENGTH_LONG).show();
+    }
+
     public void Getbarang(){
         progressBar = (ProgressBar)findViewById(R.id.main_progress);
 

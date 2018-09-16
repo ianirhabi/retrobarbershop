@@ -11,6 +11,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.irhabi.retrobarbershop.R;
+import com.example.irhabi.retrobarbershop.alert.InputBarangDetail;
 import com.example.irhabi.retrobarbershop.model.BarangDetail;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.List;
 
 
 public class BarangDetailAdapter extends RecyclerView.Adapter<BarangDetailAdapter.MyViewHolder>
-        implements Filterable {
+        implements Filterable, View.OnLongClickListener {
 
     private List<BarangDetail>dataList;
     private Context mContext ;
@@ -96,8 +97,15 @@ public class BarangDetailAdapter extends RecyclerView.Adapter<BarangDetailAdapte
         };
     }
 
+    @Override
+    public boolean onLongClick(View view) {
+        return false;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
+
         public TextView namabarang, kodenya, hargapokok, hargaajual, stock;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             namabarang = itemView.findViewById(R.id.namabarang);
@@ -105,6 +113,14 @@ public class BarangDetailAdapter extends RecyclerView.Adapter<BarangDetailAdapte
             hargaajual = itemView.findViewById(R.id.pricejual);
             hargapokok = itemView.findViewById(R.id.pricepokok);
             stock = itemView.findViewById(R.id.stok);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onBarangdetailLongSelected(barangdetailListFiltered.get(getAdapterPosition()));
+                    return true;
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,8 +130,10 @@ public class BarangDetailAdapter extends RecyclerView.Adapter<BarangDetailAdapte
             });
         }
     }
+
     public interface BarangDetailAdapterListener{
         void onBarangdetailSelected(BarangDetail barangDetail);
+        void onBarangdetailLongSelected(BarangDetail barangDetail);
     }
 
     public void addLoadingFooter() {

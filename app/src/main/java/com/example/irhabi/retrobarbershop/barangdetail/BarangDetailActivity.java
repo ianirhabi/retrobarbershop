@@ -4,7 +4,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,11 +12,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,13 +28,11 @@ import android.widget.Toast;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.alert.InputBarangDetail;
 import com.example.irhabi.retrobarbershop.barang.BarangActivity;
-import com.example.irhabi.retrobarbershop.barbermen.Barbermen;
 import com.example.irhabi.retrobarbershop.model.BarangDetail;
 import com.example.irhabi.retrobarbershop.model.BarangDetailArray;
 import com.example.irhabi.retrobarbershop.rest.RetrofitInstance;
 import com.example.irhabi.retrobarbershop.rest.Router;
 import com.example.irhabi.retrobarbershop.sesionmenyimpan.SessionManager;
-import com.example.irhabi.retrobarbershop.utils.MyDividerItemDecoration;
 import com.example.irhabi.retrobarbershop.utils.PaginationScrollListener;
 
 import java.util.ArrayList;
@@ -46,7 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BarangDetailActivity extends AppCompatActivity
-        implements BarangDetailAdapter.BarangDetailAdapterListener {
+        implements BarangDetailAdapter.BarangDetailAdapterListener{
     private ProgressBar progressBar;
     private SessionManager sesi;
     private RetrofitInstance retrofit;
@@ -63,6 +60,8 @@ public class BarangDetailActivity extends AppCompatActivity
     private boolean isLastPage = false;
     private boolean isLoading = false;
     private String kode_kategory;
+    private InputBarangDetail showDialog ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,10 +152,12 @@ public class BarangDetailActivity extends AppCompatActivity
                 LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
             // menjadikan scroll view selalu dibawah
        // recyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
         //recyclerView.addItemDecoration(new MyDividerItemDecoration(this, DividerItemDecoration.VERTICAL, 36));
         recyclerView.setAdapter(mAdapter);
+        registerForContextMenu(recyclerView);
         //recyclerView.scrollBy(0, 2);
         recyclerView.addOnScrollListener(new PaginationScrollListener((LinearLayoutManager) mLayoutManager) {
             @Override
@@ -240,7 +241,24 @@ public class BarangDetailActivity extends AppCompatActivity
 
     @Override
     public void onBarangdetailSelected(BarangDetail barangDetail) {
-        Toast.makeText(getApplicationContext(),"INI ADALAH " +barangDetail.getDesc() , Toast.LENGTH_SHORT).show();
+        showDialog  = new InputBarangDetail();
+        sesi = new SessionManager(getApplicationContext());
+        HashMap<String, String > usersesi = sesi.getUserDetails();
+        String userid = usersesi.get(SessionManager.KEY_ID);
+        int id = Integer.parseInt(userid);
+
+        sesi.Statusbarang("12");
+        showDialog.showinput(BarangDetailActivity.this,"",getApplicationContext(),
+                barangDetail.getId(),
+                barangDetail.getCate_code(),barangDetail.getKode(),
+                barangDetail.getStock(),barangDetail.getHp(),
+                barangDetail.getHj(),barangDetail.getDesc() ,
+                id);
+        }
+
+    @Override
+    public void onBarangdetailLongSelected(BarangDetail barangDetail) {
+        Toast.makeText(getApplicationContext(),"INI ADALAH TEKAN PANJANG DENGAN ID" +barangDetail.getId() , Toast.LENGTH_SHORT).show();
     }
 
     @Override

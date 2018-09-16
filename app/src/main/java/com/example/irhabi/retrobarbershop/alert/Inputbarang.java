@@ -233,17 +233,18 @@ public class Inputbarang {
 
               @Override
               public void onResponse(Call<Barang> call, Response<Barang> response) {
-
-                  if(response.body().getStatus().equals("sukses")) {
+                    if(response.body().getStatus() == null){
+                        Toast.makeText(mContext,"Data NUll",Toast.LENGTH_SHORT).show();
+                    }else if(response.body().getStatus().equals("sukses")) {
                       Toast.makeText(mContext, "status " + response.body().getStatus() + " memasukan data", Toast.LENGTH_LONG);
                       Intent i = new Intent(mContext, BarangActivity.class);
                       mContext.startActivity(i);
                       dialog.dismiss();
-                  }else if (response.body().getStatus().equals("false")){
+                    }else if (response.body().getStatus().equals("false")){
                       ts.setError("kode sudah ada ! silahkan masukan kode yang lain !");
                       st.setVisibility(View.VISIBLE);
                       st.setText("tekan tombol tanda seru untuk melihat errornya !");
-                  }
+                    }
               }
 
               @Override
@@ -276,7 +277,9 @@ public class Inputbarang {
 
             @Override
             public void onResponse(Call<Barang> call, Response<Barang> response) {
-                if(response.body().getStatus().equals("berhasil")){
+                if(response.body().getStatus() == null) {
+                    Toast.makeText(mContext,"Data NUll",Toast.LENGTH_SHORT).show();
+                }else if(response.body().getStatus().equals("berhasil")){
                     Toast.makeText(mContext,"status " + response.body().getStatus() + " update data" , Toast.LENGTH_LONG);
                     dialog.dismiss();
                     Intent i = new Intent(mContext, BarangActivity.class);
@@ -285,6 +288,8 @@ public class Inputbarang {
                     st.setError("kode sudah ada ! silahkan masukan kode yang lain");
                     ts.setVisibility(View.VISIBLE);
                     ts.setText("tekan tanda seru untuk melihat errornya !");
+                }else{
+                    Toast.makeText(mContext,"status :ada yang salah" , Toast.LENGTH_LONG);
                 }
             }
 

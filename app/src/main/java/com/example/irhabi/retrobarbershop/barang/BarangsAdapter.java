@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.irhabi.retrobarbershop.R;
 import com.example.irhabi.retrobarbershop.model.Barang;
+import com.example.irhabi.retrobarbershop.model.BarangDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,17 @@ import java.util.List;
  */
 
 public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHolder>
-        implements Filterable {
+        implements Filterable, View.OnLongClickListener {
 
     private Context mContext;
     private List<Barang> dataList;
     private List<Barang> barangListFiltered;
     private BarangAdapterListener listener;
+
+    @Override
+    public boolean onLongClick(View view) {
+        return false;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, Code, created;
@@ -43,6 +49,14 @@ public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHo
                 public void onClick(View view) {
                     // send selected contact in callback
                     listener.onBarangSelected(barangListFiltered.get(getAdapterPosition()));
+                }
+            });
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onBarangLongSelected(barangListFiltered.get(getAdapterPosition()));
+                    return true;
                 }
             });
         }
@@ -122,5 +136,6 @@ public class BarangsAdapter extends RecyclerView.Adapter<BarangsAdapter.MyViewHo
 
     public interface BarangAdapterListener {
         void onBarangSelected(Barang barang);
+        void onBarangLongSelected(Barang barang);
     }
 }
